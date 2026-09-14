@@ -1,0 +1,7 @@
+Put photos of your work in this folder.
+
+Then open js/photos.js and add a line for each photo with its file name,
+a title, the town, and which type of work it is.
+
+Example:
+  { file: "back-deck.jpg", title: "Back deck", town: "Jackson", type: "decks", featured: true },
