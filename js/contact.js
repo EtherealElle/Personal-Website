@@ -1,6 +1,6 @@
 (() => {
-  // Where form submissions are sent. Replace with your real address.
-  const TO_EMAIL = "[Email Address]";
+  // Where the email-app fallback sends form submissions.
+  const TO_EMAIL = "cleo@cleovalentinebuilds.com";
 
   const form = document.getElementById("contact-form");
   if (!form) return;

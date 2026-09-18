@@ -10,7 +10,6 @@ Search all files for these placeholders and replace them:
 | Placeholder       | Where                                                       |
 | ----------------- | ----------------------------------------------------------- |
 | `[Phone Number]`  | About section, contact page, footers (also `tel:` links)    |
-| `[Email Address]` | About section, contact page, footers, and `js/contact.js`   |
 | `[Formspree Endpoint URL]` | `action` of the form in `contact.html` (see Contact form below) |
 
 For `tel:` and `sms:` links, use digits only, e.g. `href="tel:7705551234"`.
