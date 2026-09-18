@@ -10,7 +10,6 @@ Search all files for these placeholders and replace them:
 | Placeholder       | Where                                                       |
 | ----------------- | ----------------------------------------------------------- |
 | `[Phone Number]`  | About section, contact page, footers (also `tel:` links)    |
-| `[Formspree Endpoint URL]` | `action` of the form in `contact.html` (see Contact form below) |
 
 For `tel:` and `sms:` links, use digits only, e.g. `href="tel:7705551234"`.
 
@@ -37,7 +36,7 @@ Out of the box, sending the form opens the visitor's email app with the details 
 To receive requests directly (works on phones with no email app set up):
 1. Create a free form at [formspree.io](https://formspree.io) and verify your email.
 2. Copy the form's endpoint (it looks like `https://formspree.io/f/abcd1234`).
-3. In `contact.html`, replace `[Formspree Endpoint URL]` in the form's `action` with it.
+3. In `contact.html`, put it in the form's `action` (currently `https://formspree.io/f/xvkgglnj`).
 
 Keep `js/contact.js`: it validates the form, sends it to Formspree, and falls back to the email app if Formspree is unreachable.
 The free Formspree plan doesn't accept file uploads, so the site asks people to text photos instead.
