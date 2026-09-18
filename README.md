@@ -15,7 +15,7 @@ Search all files for these placeholders and replace them:
 
 For `tel:` and `sms:` links, use digits only, e.g. `href="tel:7705551234"`.
 
-Link previews (Facebook, Nextdoor, texts) use absolute URLs for `https://etherealelle.github.io/Personal-Website/`. If the site moves to a custom domain, search for that address and replace it.
+The site is served at `https://cleovalentinebuilds.com/` (set by the `CNAME` file). Link previews (Facebook, Nextdoor, texts) use absolute URLs on that domain; if the domain ever changes, update `CNAME` and search-and-replace the old address.
 
 ## Add your photos
 
