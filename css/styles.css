@@ -386,6 +386,35 @@ section { position: relative; }
 }
 
 /* ==========================================================================
+   Pricing (small-jobs page) — same layout and collapse as .principles__grid
+   ========================================================================== */
+.pricing { padding: 0 0 clamp(6rem, 14vh, 10rem); }
+.pricing__grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
+.price-card { padding: 2.5rem 2rem 2.5rem 0; border-right: 1px solid var(--line); display: flex; flex-direction: column; gap: 1rem; }
+.price-card + .price-card { padding-left: 2rem; }
+.price-card:last-child { border-right: 0; }
+.price-card__label { font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft); }
+.price-card__amount { font-family: var(--font-display); font-size: clamp(3.4rem, 7vw, 6rem); line-height: 1; letter-spacing: -0.03em; }
+.price-card__from { font-family: var(--font-sans); font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-ink); vertical-align: top; margin-right: 0.5rem; }
+.price-card--featured .price-card__amount { color: var(--accent-ink); }
+.price-card p { margin: 0; color: var(--ink-soft); max-width: 34ch; }
+.pricing .badges { margin-top: 2rem; }
+@media (max-width: 860px) {
+  .pricing__grid { grid-template-columns: 1fr; }
+  .price-card, .price-card + .price-card { padding: 2rem 0; border-right: 0; border-bottom: 1px solid var(--line); }
+}
+
+/* Proof strip (small-jobs page) */
+.proof { padding: 0 0 clamp(6rem, 14vh, 10rem); }
+.proof__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(0.75rem, 1.6vw, 1.5rem); }
+.proof__item { margin: 0; }
+.proof__item .media { aspect-ratio: 4 / 5; }
+.proof__item [data-wipe] img { transform: scale(1.2); transition: transform 2s var(--ease); }
+.proof__item [data-wipe].is-in img { transform: none; }
+.proof__item figcaption { padding-top: 0.8rem; font-size: 0.88rem; }
+@media (max-width: 860px) { .proof__grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ==========================================================================
    About
    ========================================================================== */
 .about { padding: 0 0 clamp(6rem, 14vh, 10rem); }

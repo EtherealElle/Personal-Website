@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contact — Elle Valentine</title>
   <meta name="description" content="Request a free estimate for carpentry and construction work in Jackson, GA and 50 miles around.">
+  <link rel="canonical" href="https://etherealelle.github.io/Personal-Website/contact.html">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Elle Valentine Carpentry">
+  <meta property="og:title" content="Contact — Elle Valentine Carpentry">
+  <meta property="og:description" content="Request a free written estimate for carpentry work in Jackson, GA and 50 miles around.">
+  <meta property="og:url" content="https://etherealelle.github.io/Personal-Website/contact.html">
+  <meta property="og:image" content="https://etherealelle.github.io/Personal-Website/images/work/timber-pavilion-and-carport.jpg">
+  <meta name="twitter:card" content="summary_large_image">
   <script>document.documentElement.classList.replace("no-js", "js");</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,6 +33,7 @@
       <button class="nav__toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
       <nav class="nav__links">
         <a href="index.html">Home</a>
+        <a href="small-jobs.html">Small Jobs</a>
         <a href="gallery.html">Gallery</a>
         <a href="contact.html" aria-current="page">Contact</a>
       </nav>
@@ -47,6 +57,7 @@
           <div data-reveal>
             <div class="info__label">Call or text</div>
             <div class="info__value"><a href="tel:[Phone Number]">[Phone Number]</a></div>
+            <p class="info__note">Fastest quote: text a photo of the job to this number.</p>
           </div>
           <div data-reveal>
             <div class="info__label">Email</div>
@@ -59,7 +70,10 @@
           </div>
         </div>
 
-        <form class="form" id="contact-form" novalidate data-stagger="0.07">
+        <!-- Paste your Formspree endpoint (https://formspree.io/f/...) into action. Until then, sending opens the visitor's email app. -->
+        <form class="form" id="contact-form" action="[Formspree Endpoint URL]" method="POST" novalidate data-stagger="0.07">
+          <input type="hidden" name="_subject" value="New job request from the website">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
           <div class="field" data-reveal>
             <input id="name" name="name" type="text" placeholder=" " autocomplete="name" required>
             <label for="name">Your name</label>
@@ -76,10 +90,31 @@
             <input id="town" name="town" type="text" placeholder=" " autocomplete="address-level2">
             <label for="town">Town / city</label>
           </div>
+          <div class="field" data-reveal>
+            <select id="size" name="size">
+              <option value="">Not sure yet</option>
+              <option>Quick fix (a couple of hours)</option>
+              <option>Half day</option>
+              <option>Full day</option>
+              <option>Bigger project</option>
+            </select>
+            <label for="size">Job size</label>
+          </div>
+          <div class="field" data-reveal>
+            <select id="timeframe" name="timeframe">
+              <option value="">Flexible</option>
+              <option>As soon as possible</option>
+              <option>This week</option>
+              <option>Next couple of weeks</option>
+              <option>Just planning</option>
+            </select>
+            <label for="timeframe">Timeframe</label>
+          </div>
 
           <fieldset class="field--full chip-group" data-reveal style="border:0;margin:0;padding:0">
             <legend>What do you need? (select any)</legend>
             <div class="chips">
+              <label class="chip"><input type="checkbox" name="service" value="Small repair"><span>Small repair</span></label>
               <label class="chip"><input type="checkbox" name="service" value="Framing"><span>Framing</span></label>
               <label class="chip"><input type="checkbox" name="service" value="Sheetrock"><span>Sheetrock</span></label>
               <label class="chip"><input type="checkbox" name="service" value="Doors & Trim"><span>Doors &amp; Trim</span></label>
@@ -97,7 +132,7 @@
           </div>
 
           <div class="form__foot" data-reveal>
-            <small>Sending opens your email app with the details filled in.</small>
+            <small data-form-note>Sending opens your email app with the details filled in.</small>
             <button type="submit" class="btn btn--solid">Send message
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </button>

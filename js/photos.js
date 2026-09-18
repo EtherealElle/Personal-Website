@@ -35,7 +35,6 @@ window.PHOTOS = [
   { file: "bathroom-remodel-glass-shower.jpg",       title: "Bathroom remodel with glass shower",          town: "", type: "remodels" },
   { file: "mudroom-bench-coat-hooks.webp",           title: "Mudroom bench with coat hooks",               town: "", type: "woodwork" },
   { file: "screened-porch-corner-view.jpg",          title: "Screened porch, corner view",                 town: "", type: "porches" },
-  { file: "timber-pavilion-finished.jpg",            title: "Finished timber pavilion",                    town: "", type: "carports" },
   { file: "outdoor-grill-station-shelf-wall.jpg",    title: "Outdoor grill station with shelf wall",       town: "", type: "woodwork" },
   { file: "deck-stairs-to-walkway.webp",             title: "Deck stairs down to the walkway",             town: "", type: "decks" },
   { file: "bathroom-plank-ceiling-tile-shower.jpg",  title: "Bathroom with plank ceiling and tile shower", town: "", type: "remodels" },
