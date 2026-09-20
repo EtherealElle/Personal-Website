@@ -3,15 +3,11 @@
 A static four-page site: `index.html` (home), `small-jobs.html`, `gallery.html`, `contact.html`.
 No build step. Open `index.html` in a browser, or upload the whole folder to any static host (Netlify, GitHub Pages, Cloudflare Pages).
 
-## Fill in your details
+## Contact details
 
-Search all files for these placeholders and replace them:
-
-| Placeholder       | Where                                                       |
-| ----------------- | ----------------------------------------------------------- |
-| `[Phone Number]`  | About section, contact page, footers (also `tel:` links)    |
-
-For `tel:` and `sms:` links, use digits only, e.g. `href="tel:7705551234"`.
+Phone (470) 301-9576, email cleo@cleovalentinebuilds.com, and the Formspree form are already filled in.
+To change the phone number, search every `.html` file for `4703019576` (the `tel:` and `sms:` links, digits only) and `(470) 301-9576` (the visible text).
+To change the email, search the `.html` files and `js/contact.js` for `cleo@cleovalentinebuilds.com`.
 
 The site is served at `https://cleovalentinebuilds.com/` (set by the `CNAME` file). Link previews (Facebook, Nextdoor, texts) use absolute URLs on that domain; if the domain ever changes, update `CNAME` and search-and-replace the old address.
 
