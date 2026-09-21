@@ -19,6 +19,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <!-- Start the first gallery photo downloading right away. Keep this in sync with the first entry in js/photos.js. -->
+  <link rel="preload" as="image" href="images/work/whole-home-remodel-front-porch.jpg" fetchpriority="high">
 </head>
 <body>
   <div class="curtain" aria-hidden="true"></div>
@@ -46,7 +48,7 @@
         <span class="eyebrow" data-reveal style="--d:.4s">Gallery</span>
         <div class="page-head__row">
           <h1 class="display split" style="--d:.5s">The <em>work.</em></h1>
-          <p class="lead" data-reveal style="--d:.9s">A look at recent projects across Jackson and the surrounding counties. Tap any photo to see it larger.</p>
+          <p class="lead" data-reveal style="--d:.4s">A look at recent projects across Jackson and the surrounding counties. Tap any photo to see it larger.</p>
         </div>
       </div>
     </section>

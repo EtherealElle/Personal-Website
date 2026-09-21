@@ -15,17 +15,34 @@
     el.append(inner, span);
   }
 
-  function addImage(el, file, alt, { fallback = "Project photo", parallax } = {}) {
+  // Photos load lazily (only as they near the screen) unless eager is set.
+  function addImage(el, file, alt, { fallback = "Project photo", parallax, eager = false, priority = false, w, h, deferred = false } = {}) {
     if (!file) return placeholder(el, fallback);
     const img = new Image();
     img.decoding = "async";
+    img.loading = eager ? "eager" : "lazy";
+    if (priority) img.fetchPriority = "high";
+    if (w && h) { img.width = w; img.height = h; } // reserves the photo's shape before it loads
     img.alt = alt || "Project photo";
     if (parallax) img.dataset.parallax = parallax;
     img.onerror = () => placeholder(el, fallback);
-    img.src = DIR + file;
+    // deferred photos get their src later from loadWhenNear()
+    if (deferred) img.dataset.src = DIR + file;
+    else img.src = DIR + file;
     el.innerHTML = "";
     el.classList.add("has-img");
     el.appendChild(img);
+  }
+
+  // Tighter than the browser's built-in lazy loading, which fetches photos far
+  // ahead of the screen and slows the first one down on phone connections.
+  function loadWhenNear(imgs) {
+    const load = (img) => { img.src = img.dataset.src; img.removeAttribute("data-src"); };
+    if (!("IntersectionObserver" in window)) return imgs.forEach(load);
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { load(e.target); io.unobserve(e.target); } });
+    }, { rootMargin: "400px 0px" });
+    imgs.forEach((img) => io.observe(img));
   }
 
   function caption(tag, cls, p) {
@@ -50,10 +67,12 @@
       tile.setAttribute("data-reveal", "");
       const media = document.createElement("div");
       media.className = "media";
-      addImage(media, p.file, p.title);
+      // The first photo is on screen at load, so fetch it right away
+      addImage(media, p.file, p.title, { eager: i === 0, priority: i === 0, deferred: i > 0, w: p.w, h: p.h });
       tile.append(media, caption("div", "tile__cap", p));
       grid.appendChild(tile);
     });
+    loadWhenNear([...grid.querySelectorAll("img[data-src]")]);
     if (!photos.length) {
       grid.insertAdjacentHTML("beforebegin", '<p class="gallery-empty">Photos coming soon.</p>');
     }
@@ -91,6 +110,18 @@
         </span>
         <span class="reel__cap"><span>Full gallery</span><span>View all</span></span>`;
       track.appendChild(more);
+
+      // The reel slides sideways inside a clipped box, which native lazy loading
+      // can't see into, so fetch all its photos once the section is getting close.
+      const reel = track.closest(".reel");
+      if (reel && "IntersectionObserver" in window) {
+        const io = new IntersectionObserver((entries) => {
+          if (!entries.some((e) => e.isIntersecting)) return;
+          track.querySelectorAll("img[loading=lazy]").forEach((img) => { img.loading = "eager"; });
+          io.disconnect();
+        }, { rootMargin: "100% 0px" });
+        io.observe(reel);
+      }
     }
   }
 

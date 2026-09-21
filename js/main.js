@@ -8,13 +8,14 @@
      Page transition curtain
      ------------------------------------------------------------------ */
   const curtain = document.querySelector(".curtain");
-  const liftCurtain = () => curtain && requestAnimationFrame(() => {
+  // Two frames so the curtain is painted once before it slides away
+  const liftCurtain = () => curtain && requestAnimationFrame(() => requestAnimationFrame(() => {
     curtain.classList.remove("is-down");
     curtain.classList.add("is-up");
-  });
-  window.addEventListener("load", liftCurtain);
+  }));
+  // Lift as soon as the page is ready to show; photos keep loading underneath.
+  liftCurtain();
   window.addEventListener("pageshow", (e) => { if (e.persisted) liftCurtain(); });
-  setTimeout(liftCurtain, 1200); // safety net if load is slow
 
   document.addEventListener("click", (e) => {
     const link = e.target.closest("a[href]");

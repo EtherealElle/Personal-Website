@@ -43,7 +43,10 @@
     const list = visible();
     current = list.indexOf(tile);
     lbMedia.innerHTML = "";
-    lbMedia.appendChild(tile.querySelector(".media").cloneNode(true));
+    const media = tile.querySelector(".media").cloneNode(true);
+    const img = media.querySelector("img[data-src]"); // photo not scrolled to yet
+    if (img) { img.src = img.dataset.src; img.removeAttribute("data-src"); }
+    lbMedia.appendChild(media);
     const caps = tile.querySelectorAll(".tile__cap span");
     lbTitle.textContent = caps[0]?.textContent || "";
     lbPlace.textContent = caps[1]?.textContent || "";
