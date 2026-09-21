@@ -38,3 +38,7 @@ To receive requests directly (works on phones with no email app set up):
 
 Keep `js/contact.js`: it validates the form, sends it to Formspree, and falls back to the email app if Formspree is unreachable.
 The free Formspree plan doesn't accept file uploads, so the site asks people to text photos instead.
+
+## Caching
+
+Cloudflare tells browsers to keep CSS and JS files for hours. To stop visitors getting a new page with an old script, every CSS/JS link carries a `?v=` fingerprint of the file. `.github/workflows/stamp-versions.yml` updates these automatically when CSS or JS changes; you can also run `python scripts/stamp_versions.py` before pushing.
