@@ -38,6 +38,15 @@
       "h": 1200
     },
     {
+      "image": "/images/work/deck-with-pergola.jpg",
+      "title": "Deck with built-in pergola",
+      "town": "",
+      "type": "pergolas",
+      "featured": true,
+      "w": 1200,
+      "h": 1600
+    },
+    {
       "image": "/images/work/elevated-deck-black-balusters.webp",
       "title": "Elevated deck with black balusters",
       "town": "",
@@ -51,7 +60,7 @@
       "title": "Vaulted tongue-and-groove carport ceiling",
       "town": "",
       "type": "carports",
-      "featured": true,
+      "featured": false,
       "w": 1125,
       "h": 1500
     },
@@ -110,8 +119,35 @@
       "h": 667
     },
     {
+      "image": "/images/work/deck-railing-black-balusters.jpg",
+      "title": "Deck railing with black balusters",
+      "town": "",
+      "type": "decks",
+      "featured": false,
+      "w": 1200,
+      "h": 1600
+    },
+    {
+      "image": "/images/work/deck-steps-to-back-entry.jpg",
+      "title": "Deck and steps to the back entry",
+      "town": "",
+      "type": "decks",
+      "featured": false,
+      "w": 1200,
+      "h": 1600
+    },
+    {
       "image": "/images/work/bathroom-plank-ceiling-tile-shower.jpg",
       "title": "Bathroom with plank ceiling and tile shower",
+      "town": "",
+      "type": "remodels",
+      "featured": false,
+      "w": 1200,
+      "h": 1600
+    },
+    {
+      "image": "/images/work/sunroom-pine-plank-walls.jpg",
+      "title": "Sunroom with pine plank walls and ceiling",
       "town": "",
       "type": "remodels",
       "featured": false,
@@ -171,6 +207,15 @@
       "featured": false,
       "w": 1600,
       "h": 747
+    },
+    {
+      "image": "/images/work/pine-paneled-storage-room.jpg",
+      "title": "Pine-paneled storage room",
+      "town": "",
+      "type": "remodels",
+      "featured": false,
+      "w": 1200,
+      "h": 1600
     },
     {
       "image": "/images/work/timber-pavilion-in-progress.jpg",
