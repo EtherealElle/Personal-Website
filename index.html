@@ -19,6 +19,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="preload" href="data/gallery.json" as="fetch" crossorigin>
 </head>
 <body>
   <div class="curtain" aria-hidden="true"></div>
@@ -142,7 +143,7 @@
           </div>
           <span class="reel__count" data-reel-count>01 / 06</span>
         </div>
-        <!-- Photos come from js/photos.js (entries marked featured: true) -->
+        <!-- Photos come from data/gallery.json (entries marked featured) -->
         <div class="reel__track" data-photos="featured"></div>
         <div class="reel__bar"><i></i></div>
       </div>
@@ -246,7 +247,6 @@
     </div>
   </footer>
 
-  <script src="js/photos.js"></script>
   <script src="js/render-photos.js"></script>
   <script src="js/main.js"></script>
 </body>

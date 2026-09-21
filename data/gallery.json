@@ -1,0 +1,194 @@
+{
+  "detailPhoto": "/images/work/stained-tongue-groove-porch-ceiling.jpg",
+  "photos": [
+    {
+      "image": "/images/work/whole-home-remodel-front-porch.jpg",
+      "title": "Whole-home remodel with covered front porch",
+      "town": "",
+      "type": "remodels",
+      "featured": true,
+      "w": 1600,
+      "h": 747
+    },
+    {
+      "image": "/images/work/timber-pavilion-and-carport.jpg",
+      "title": "Timber pavilion and carport",
+      "town": "",
+      "type": "carports",
+      "featured": true,
+      "w": 1600,
+      "h": 1200
+    },
+    {
+      "image": "/images/work/screened-porch-raised-deck.jpg",
+      "title": "Screened porch on a raised deck",
+      "town": "",
+      "type": "porches",
+      "featured": true,
+      "w": 1600,
+      "h": 1200
+    },
+    {
+      "image": "/images/work/gable-carport-timber-trusses.jpg",
+      "title": "Gable carport with timber trusses",
+      "town": "",
+      "type": "carports",
+      "featured": true,
+      "w": 1200,
+      "h": 1200
+    },
+    {
+      "image": "/images/work/elevated-deck-black-balusters.webp",
+      "title": "Elevated deck with black balusters",
+      "town": "",
+      "type": "decks",
+      "featured": true,
+      "w": 500,
+      "h": 667
+    },
+    {
+      "image": "/images/work/vaulted-carport-ceiling.jpg",
+      "title": "Vaulted tongue-and-groove carport ceiling",
+      "town": "",
+      "type": "carports",
+      "featured": true,
+      "w": 1125,
+      "h": 1500
+    },
+    {
+      "image": "/images/work/stained-tongue-groove-porch-ceiling.jpg",
+      "title": "Stained tongue-and-groove porch ceiling",
+      "town": "",
+      "type": "woodwork",
+      "featured": false,
+      "w": 747,
+      "h": 1600
+    },
+    {
+      "image": "/images/work/bathroom-remodel-glass-shower.jpg",
+      "title": "Bathroom remodel with glass shower",
+      "town": "",
+      "type": "remodels",
+      "featured": false,
+      "w": 747,
+      "h": 1600
+    },
+    {
+      "image": "/images/work/mudroom-bench-coat-hooks.webp",
+      "title": "Mudroom bench with coat hooks",
+      "town": "",
+      "type": "woodwork",
+      "featured": false,
+      "w": 500,
+      "h": 666
+    },
+    {
+      "image": "/images/work/screened-porch-corner-view.jpg",
+      "title": "Screened porch, corner view",
+      "town": "",
+      "type": "porches",
+      "featured": false,
+      "w": 1600,
+      "h": 1200
+    },
+    {
+      "image": "/images/work/outdoor-grill-station-shelf-wall.jpg",
+      "title": "Outdoor grill station with shelf wall",
+      "town": "",
+      "type": "woodwork",
+      "featured": false,
+      "w": 1600,
+      "h": 1200
+    },
+    {
+      "image": "/images/work/deck-stairs-to-walkway.webp",
+      "title": "Deck stairs down to the walkway",
+      "town": "",
+      "type": "decks",
+      "featured": false,
+      "w": 500,
+      "h": 667
+    },
+    {
+      "image": "/images/work/bathroom-plank-ceiling-tile-shower.jpg",
+      "title": "Bathroom with plank ceiling and tile shower",
+      "town": "",
+      "type": "remodels",
+      "featured": false,
+      "w": 1200,
+      "h": 1600
+    },
+    {
+      "image": "/images/work/gable-carport-side-view.jpg",
+      "title": "Gable carport, side view",
+      "town": "",
+      "type": "carports",
+      "featured": false,
+      "w": 1200,
+      "h": 1047
+    },
+    {
+      "image": "/images/work/remodel-back-porch-window-wall.jpg",
+      "title": "Remodel: back porch and window wall",
+      "town": "",
+      "type": "remodels",
+      "featured": false,
+      "w": 1600,
+      "h": 747
+    },
+    {
+      "image": "/images/work/pavilion-rafters-and-shelf-wall.jpg",
+      "title": "Pavilion rafters and shelf wall",
+      "town": "",
+      "type": "carports",
+      "featured": false,
+      "w": 1200,
+      "h": 1600
+    },
+    {
+      "image": "/images/work/shop-lean-to-carport.webp",
+      "title": "Lean-to carport on a shop",
+      "town": "",
+      "type": "carports",
+      "featured": false,
+      "w": 1000,
+      "h": 1333
+    },
+    {
+      "image": "/images/work/remodel-exterior-stairs-balcony.jpg",
+      "title": "Remodel: exterior stairs and balcony",
+      "town": "",
+      "type": "remodels",
+      "featured": false,
+      "w": 1600,
+      "h": 747
+    },
+    {
+      "image": "/images/work/remodel-side-siding-gutters.jpg",
+      "title": "Remodel: new siding and gutters",
+      "town": "",
+      "type": "remodels",
+      "featured": false,
+      "w": 1600,
+      "h": 747
+    },
+    {
+      "image": "/images/work/timber-pavilion-in-progress.jpg",
+      "title": "Timber pavilion taking shape",
+      "town": "",
+      "type": "carports",
+      "featured": false,
+      "w": 1600,
+      "h": 1200
+    },
+    {
+      "image": "/images/work/timber-pavilion-framing.jpg",
+      "title": "Timber pavilion, framing stage",
+      "town": "",
+      "type": "carports",
+      "featured": false,
+      "w": 1600,
+      "h": 1200
+    }
+  ]
+}

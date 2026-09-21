@@ -1,0 +1,74 @@
+# Pages CMS configuration (https://pagescms.org)
+# Sign in at https://app.pagescms.org with GitHub and open this repository.
+
+media:
+  input: images/work
+  output: /images/work
+  extensions: [jpg, jpeg, png, webp]
+  rename: safe
+
+content:
+  - name: gallery
+    label: Gallery
+    type: file
+    path: data/gallery.json
+    format: json
+    fields:
+      - name: photos
+        label: Photos
+        description: Shown in the gallery in this order. Drag to reorder. The first 6 marked "Feature on home page" appear in "Selected work".
+        type: object
+        list: true
+        fields:
+          - name: image
+            label: Photo
+            type: image
+            required: true
+          - name: title
+            label: Title
+            description: Short name for the project, e.g. "Back deck with new railing"
+            type: string
+            required: true
+          - name: town
+            label: Town
+            description: Optional, e.g. Jackson or McDonough
+            type: string
+          - name: type
+            label: Gallery filter
+            type: select
+            required: true
+            options:
+              values:
+                - name: framing
+                  label: Framing
+                - name: sheetrock
+                  label: Sheetrock
+                - name: trim
+                  label: Doors & Trim
+                - name: flooring
+                  label: Flooring
+                - name: decks
+                  label: Decks
+                - name: pergolas
+                  label: Pergolas
+                - name: porches
+                  label: Screened Porches
+                - name: woodwork
+                  label: Custom Woodwork
+                - name: carports
+                  label: Carports & Pavilions
+                - name: remodels
+                  label: Remodels
+          - name: featured
+            label: Feature on home page
+            type: boolean
+          - name: w
+            label: Width in pixels (filled in automatically)
+            type: number
+          - name: h
+            label: Height in pixels (filled in automatically)
+            type: number
+      - name: detailPhoto
+        label: Home page close-up photo
+        description: The detail shot in the home page "The approach" section.
+        type: image

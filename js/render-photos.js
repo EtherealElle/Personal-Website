@@ -1,8 +1,16 @@
-// Builds the gallery grid, the home page reel, and the detail photo from js/photos.js.
-// Must load before js/main.js so the scroll animations pick up the new elements.
-(() => {
+// Builds the gallery grid, the home page reel, and the detail photo from data/gallery.json
+// (edited through Pages CMS). js/main.js and js/gallery.js wait on window.photosReady so
+// the scroll animations and filters see the photos once they are on the page.
+window.photosReady = fetch("data/gallery.json")
+  .then((res) => (res.ok ? res.json() : {}))
+  .catch(() => ({}))
+  .then(render);
+
+function render(data) {
   const DIR = "images/work/";
-  const photos = (window.PHOTOS || []).filter((p) => p && (p.file || p.title));
+  const photos = (data.photos || []).filter((p) => p && (p.image || p.title));
+  // Pages CMS saves "/images/work/name.jpg"; older entries may be a bare file name
+  const src = (path) => (!path ? "" : path.includes("/") ? path.replace(/^\//, "") : DIR + path);
 
   function placeholder(el, label = "Project photo") {
     el.classList.remove("has-img");
@@ -22,13 +30,16 @@
     img.decoding = "async";
     img.loading = eager ? "eager" : "lazy";
     if (priority) img.fetchPriority = "high";
-    if (w && h) { img.width = w; img.height = h; } // reserves the photo's shape before it loads
+    // Reserve the photo's shape before it loads. New uploads may not have their size recorded
+    // yet, so assume 4:3 until the real size is known.
+    img.width = w || 4; img.height = h || 3;
+    if (!(w && h)) img.addEventListener("load", () => { img.width = img.naturalWidth; img.height = img.naturalHeight; }, { once: true });
     img.alt = alt || "Project photo";
     if (parallax) img.dataset.parallax = parallax;
     img.onerror = () => placeholder(el, fallback);
     // deferred photos get their src later from loadWhenNear()
-    if (deferred) img.dataset.src = DIR + file;
-    else img.src = DIR + file;
+    if (deferred) img.dataset.src = src(file);
+    else img.src = src(file);
     el.innerHTML = "";
     el.classList.add("has-img");
     el.appendChild(img);
@@ -68,7 +79,7 @@
       const media = document.createElement("div");
       media.className = "media";
       // The first photo is on screen at load, so fetch it right away
-      addImage(media, p.file, p.title, { eager: i === 0, priority: i === 0, deferred: i > 0, w: p.w, h: p.h });
+      addImage(media, p.image, p.title, { eager: i === 0, priority: i === 0, deferred: i > 0, w: p.w, h: p.h });
       tile.append(media, caption("div", "tile__cap", p));
       grid.appendChild(tile);
     });
@@ -89,7 +100,7 @@
       fig.style.margin = "0";
       const media = document.createElement("div");
       media.className = "media media--dark";
-      addImage(media, p.file, p.title);
+      addImage(media, p.image, p.title);
       fig.append(media, caption("figcaption", "reel__cap", p));
       track.appendChild(fig);
     });
@@ -128,7 +139,7 @@
   /* Home page detail photo */
   const detail = document.querySelector("[data-photo='detail']");
   if (detail) {
-    addImage(detail, window.DETAIL_PHOTO, "Close-up of finished carpentry work", {
+    addImage(detail, data.detailPhoto, "Close-up of finished carpentry work", {
       fallback: "Project detail photo",
       parallax: "0.08",
     });
@@ -136,4 +147,4 @@
     const inner = detail.querySelector(".media__inner");
     if (inner) inner.dataset.parallax = "0.08";
   }
-})();
+}

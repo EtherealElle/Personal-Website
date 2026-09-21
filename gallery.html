@@ -19,7 +19,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
-  <!-- Start the first gallery photo downloading right away. Keep this in sync with the first entry in js/photos.js. -->
+  <!-- Start the photo list and first gallery photo downloading right away. The preload image is kept in sync with data/gallery.json by .github/workflows/optimize-photos.yml. -->
+  <link rel="preload" href="data/gallery.json" as="fetch" crossorigin>
   <link rel="preload" as="image" href="images/work/whole-home-remodel-front-porch.jpg" fetchpriority="high">
 </head>
 <body>
@@ -68,7 +69,7 @@
         <button class="filter" data-filter="remodels" data-reveal>Remodels</button>
       </div>
 
-      <!-- Photos are listed in js/photos.js and stored in images/work/ -->
+      <!-- Photos are listed in data/gallery.json (edit with Pages CMS) and stored in images/work/ -->
       <div class="masonry" data-photos="gallery"></div>
     </section>
 
@@ -106,7 +107,6 @@
     </div>
   </footer>
 
-  <script src="js/photos.js"></script>
   <script src="js/render-photos.js"></script>
   <script src="js/main.js"></script>
   <script src="js/gallery.js"></script>

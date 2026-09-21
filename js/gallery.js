@@ -1,4 +1,4 @@
-(() => {
+(window.photosReady || Promise.resolve()).then(() => {
   const tiles = Array.from(document.querySelectorAll(".tile"));
   const filters = Array.from(document.querySelectorAll(".filter"));
 
@@ -84,4 +84,4 @@
     if (e.key === "ArrowLeft") step(-1);
     if (e.key === "ArrowRight") step(1);
   });
-})();
+});

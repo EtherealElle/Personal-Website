@@ -1,4 +1,5 @@
-(() => {
+// Pages with a photo list wait for it so reveals and the reel measure the real content
+(window.photosReady || Promise.resolve()).then(() => {
   const root = document.documentElement;
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const clamp = (v, min = 0, max = 1) => Math.min(max, Math.max(min, v));
@@ -273,4 +274,4 @@
      Misc
      ------------------------------------------------------------------ */
   $$("[data-year]").forEach((el) => { el.textContent = new Date().getFullYear(); });
-})();
+});

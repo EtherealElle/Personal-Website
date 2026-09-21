@@ -11,19 +11,21 @@ To change the email, search the `.html` files and `js/contact.js` for `cleo@cleo
 
 The site is served at `https://cleovalentinebuilds.com/` (set by the `CNAME` file). Link previews (Facebook, Nextdoor, texts) use absolute URLs on that domain; if the domain ever changes, update `CNAME` and search-and-replace the old address.
 
-## Add your photos
+## Update the gallery (Pages CMS)
 
-1. Copy photos of your work into `images/work/`.
-2. Open `js/photos.js` and add one line per photo:
-   ```js
-   { file: "back-deck.jpg", title: "Back deck", town: "Jackson", type: "decks", featured: true },
-   ```
-   - `type` picks the gallery filter: framing, sheetrock, trim, flooring, decks, pergolas, porches, woodwork, carports, remodels.
-   - `featured: true` also shows it in "Selected work" on the home page (first 6 featured).
-3. Set `window.DETAIL_PHOTO` in the same file to a close-up shot for the home page "The approach" section.
-4. Save and refresh.
+1. Go to [app.pagescms.org](https://app.pagescms.org) and sign in with GitHub.
+2. Open **EtherealElle/Personal-Website**, then **Gallery**.
+3. Add, edit, reorder or remove photos:
+   - **Photo**: upload straight from your phone.
+   - **Title** and **Town**: shown under each photo.
+   - **Gallery filter**: which filter button it appears under.
+   - **Feature on home page**: the first 6 featured photos appear in "Selected work".
+   - Leave the width and height boxes empty; they fill in automatically.
+4. Click **Save**. The site updates within a few minutes.
 
-Gallery photos keep their own shape. Any entry whose file is missing shows a blank placeholder, and filters with no photos are hidden.
+After each save, a GitHub Action (`.github/workflows/optimize-photos.yml`) shrinks big phone photos to 1600px on the longest side (never cropped), converts PNGs to JPG, records each photo's size, and redeploys. Your full-size originals are not kept in the repository, so keep them on your phone or computer.
+
+The gallery data lives in `data/gallery.json`, which you can also edit by hand. Previewing locally needs a small web server (for example `npx http-server`), because the pages load that file with `fetch`, which doesn't work from a double-clicked HTML file.
 
 ## Contact form
 
