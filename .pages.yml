@@ -59,6 +59,8 @@ content:
                   label: Carports & Pavilions
                 - name: remodels
                   label: Remodels
+                - name: fencing
+                  label: Fencing
           - name: featured
             label: Feature on home page
             type: boolean

@@ -3,8 +3,21 @@
 // the scroll animations and filters see the photos once they are on the page.
 window.photosReady = fetch("data/gallery.json")
   .then((res) => (res.ok ? res.json() : {}))
-  .catch(() => ({}))
+  .catch(loadLocalCopy)
   .then(render);
+
+// Browsers block fetch() for pages opened straight from disk (file://), so fall back to
+// data/gallery.js, a script copy of the same list kept in sync by scripts/optimize_photos.py.
+function loadLocalCopy() {
+  if (location.protocol !== "file:") return {};
+  return new Promise((resolve) => {
+    const s = document.createElement("script");
+    s.src = "data/gallery.js";
+    s.onload = () => resolve(window.GALLERY_DATA || {});
+    s.onerror = () => resolve({});
+    document.head.appendChild(s);
+  });
+}
 
 function render(data) {
   const DIR = "images/work/";
@@ -139,7 +152,9 @@ function render(data) {
   /* Home page detail photo */
   const detail = document.querySelector("[data-photo='detail']");
   if (detail) {
-    addImage(detail, data.detailPhoto, "Close-up of finished carpentry work", {
+    // Fall back to the first featured photo if the close-up is ever missing
+    const close = data.detailPhoto || (photos.find((p) => p.featured) || photos[0] || {}).image;
+    addImage(detail, close, "Close-up of finished carpentry work", {
       fallback: "Project detail photo",
       parallax: "0.08",
     });

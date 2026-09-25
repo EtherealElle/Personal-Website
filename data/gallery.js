@@ -1,4 +1,5 @@
-{
+// Generated from data/gallery.json by scripts/optimize_photos.py. Do not edit.
+window.GALLERY_DATA = {
   "detailPhoto": "/images/work/stained-tongue-groove-porch-ceiling.jpg",
   "photos": [
     {
@@ -410,4 +411,4 @@
       "h": 1200
     }
   ]
-}
+};
