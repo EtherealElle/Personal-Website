@@ -42,3 +42,7 @@ The free Formspree plan doesn't accept file uploads, so the site asks people to 
 ## Caching
 
 Cloudflare tells browsers to keep CSS and JS files for hours. To stop visitors getting a new page with an old script, every CSS/JS link carries a `?v=` fingerprint of the file. `.github/workflows/stamp-versions.yml` updates these automatically when CSS or JS changes; you can also run `python scripts/stamp_versions.py` before pushing.
+
+## Walkthrough video
+
+`images/work/carport-walkthrough.mp4` plays in the "Step inside the build" section on the home page. It has no audio track and does not download until a visitor taps play; `images/work/carport-walkthrough-poster.jpg` is the still shown until then. To swap the video, replace both files (keep the names), or ask for the section to point somewhere else.

@@ -321,6 +321,33 @@ section { position: relative; }
 }
 
 /* ==========================================================================
+   Walkthrough video (home page)
+   ========================================================================== */
+.video { padding: 0 0 clamp(6rem, 14vh, 10rem); }
+.video__grid { display: grid; grid-template-columns: 1fr 0.85fr; gap: clamp(2rem, 6vw, 6rem); align-items: center; }
+.video__grid .display { font-size: clamp(2.6rem, 5.5vw, 5rem); margin: 1.25rem 0 1.5rem; }
+.video__grid .lead { margin: 0 0 2rem; }
+.video__player { position: relative; margin: 0; aspect-ratio: 9 / 16; max-height: 80vh; justify-self: center; width: 100%; background: var(--dark); overflow: hidden; }
+.video__player video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.video__play {
+  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 1rem; color: var(--dark-ink); background: rgba(21, 20, 18, 0.2);
+  transition: opacity 0.5s var(--ease), background 0.5s var(--ease);
+}
+.video__play-btn {
+  width: 78px; height: 78px; border-radius: 50%; background: var(--accent); color: var(--dark);
+  display: grid; place-items: center; transition: transform 0.5s var(--ease);
+}
+.video__play-btn svg { width: 30px; height: 30px; margin-left: 4px; }
+.video__play-label { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; text-shadow: 0 1px 12px rgba(0,0,0,0.5); }
+.video__play:hover .video__play-btn { transform: scale(1.08); }
+.video__player.is-playing .video__play { opacity: 0; pointer-events: none; }
+@media (max-width: 860px) {
+  .video__grid { grid-template-columns: 1fr; }
+  .video__player { max-height: 70vh; max-width: 420px; }
+}
+
+/* ==========================================================================
    Horizontal work reel
    ========================================================================== */
 .reel { background: var(--dark); color: var(--dark-ink); height: 400vh; }

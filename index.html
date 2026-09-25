@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=07bf1744">
+  <link rel="stylesheet" href="css/styles.css?v=1999c152">
   <link rel="preload" href="data/gallery.json" as="fetch" crossorigin>
 </head>
 <body>
@@ -130,6 +130,30 @@
             <svg class="service__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ============ WALKTHROUGH VIDEO ============ -->
+    <section class="video">
+      <div class="container video__grid">
+        <div>
+          <span class="eyebrow" data-reveal>Walkthrough</span>
+          <h2 class="display split">Step inside<br><em>the build.</em></h2>
+          <p class="lead" data-reveal style="--d:.1s">Eighteen seconds under a timber-frame carport, from the drive to the finished ceiling. No sound, just the work.</p>
+          <a href="gallery.html" class="btn" data-reveal style="--d:.2s">See more carports
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+        <figure class="video__player" data-video data-reveal="scale">
+          <video src="images/work/carport-walkthrough.mp4" poster="images/work/carport-walkthrough-poster.jpg"
+                 playsinline preload="none" muted></video>
+          <button class="video__play" type="button" aria-label="Play the carport walkthrough">
+            <span class="video__play-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+            </span>
+            <span class="video__play-label">Watch the walkthrough · 0:18</span>
+          </button>
+        </figure>
       </div>
     </section>
 
@@ -248,6 +272,6 @@
   </footer>
 
   <script src="js/render-photos.js?v=578fe706"></script>
-  <script src="js/main.js?v=60625a27"></script>
+  <script src="js/main.js?v=1431902e"></script>
 </body>
 </html>

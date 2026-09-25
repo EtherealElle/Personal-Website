@@ -271,6 +271,25 @@
   requestAnimationFrame(frame);
 
   /* ------------------------------------------------------------------
+     Walkthrough video: nothing downloads until the visitor taps play
+     ------------------------------------------------------------------ */
+  $$("[data-video]").forEach((box) => {
+    const video = box.querySelector("video");
+    const play = box.querySelector(".video__play");
+    if (!video || !play) return;
+    play.addEventListener("click", () => {
+      box.classList.add("is-playing");
+      video.controls = true;
+      video.play();
+    });
+    video.addEventListener("ended", () => {
+      box.classList.remove("is-playing");
+      video.controls = false;
+      video.load(); // back to the poster frame
+    });
+  });
+
+  /* ------------------------------------------------------------------
      Misc
      ------------------------------------------------------------------ */
   $$("[data-year]").forEach((el) => { el.textContent = new Date().getFullYear(); });

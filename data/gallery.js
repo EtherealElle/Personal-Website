@@ -19,14 +19,6 @@ window.GALLERY_DATA = {
       "h": 1200
     },
     {
-      "image": "/images/work/screened-porch-raised-deck.jpg",
-      "title": "Screened porch on a raised deck",
-      "type": "porches",
-      "featured": true,
-      "w": 1600,
-      "h": 1200
-    },
-    {
       "image": "/images/work/gable-carport-timber-trusses.jpg",
       "title": "Gable carport with timber trusses",
       "type": "carports",
@@ -54,7 +46,7 @@ window.GALLERY_DATA = {
       "image": "/images/work/screened-porch-gable-deck.jpg",
       "title": "Screened porch with gable roof and deck",
       "type": "porches",
-      "featured": false,
+      "featured": true,
       "w": 1600,
       "h": 1200
     },
@@ -129,14 +121,6 @@ window.GALLERY_DATA = {
       "featured": false,
       "w": 500,
       "h": 666
-    },
-    {
-      "image": "/images/work/screened-porch-corner-view.jpg",
-      "title": "Screened porch, corner view",
-      "type": "porches",
-      "featured": false,
-      "w": 1600,
-      "h": 1200
     },
     {
       "image": "/images/work/outdoor-grill-station-shelf-wall.jpg",
