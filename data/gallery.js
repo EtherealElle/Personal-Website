@@ -243,9 +243,9 @@ window.GALLERY_DATA = {
       "h": 1200
     },
     {
-      "image": "/images/work/signal-2026-09-21-13-27-10-912.jpg",
+      "image": "/images/work/stained-fence-gate.jpg",
       "title": "Stained Fence Gate",
-      "type": "woodwork",
+      "type": "fencing",
       "featured": false,
       "w": 1600,
       "h": 747
