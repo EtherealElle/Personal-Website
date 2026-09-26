@@ -1,6 +1,6 @@
 # Personal website
 
-A static four-page site: `index.html` (home), `small-jobs.html`, `gallery.html`, `contact.html`.
+A static five-page site: `index.html` (home), `small-jobs.html`, `gallery.html`, `referrals.html`, `contact.html`.
 No build step. Open `index.html` in a browser, or upload the whole folder to any static host (Netlify, GitHub Pages, Cloudflare Pages).
 
 ## Contact details
