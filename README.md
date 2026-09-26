@@ -52,6 +52,5 @@ Cloudflare tells browsers to keep CSS and JS files for hours. To stop visitors g
 `referrals.html` is meant to be sent to people I've already worked for, by text or email:
 `https://cleovalentinebuilds.com/referrals.html`. It isn't in the top menu — only in the footer of
 every page — so it stays a thank-you for existing clients instead of an offer to strangers. The page
-states the two terms ($100 gift card of your choice, once the referral goes through with the job),
-how it works, and a menu of common gift cards. To add or drop a brand, edit the `<li>` items inside
-the matching `.gift-list` in `referrals.html`.
+states the two terms ($100 gift card of your choice, once the referral goes through with the job)
+and how it works. It deliberately doesn't list specific stores.

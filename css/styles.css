@@ -375,41 +375,11 @@ section { position: relative; }
 .step h3 { font-size: 1.05rem; font-weight: 500; margin: 1rem 0 0.5rem; }
 .step p { margin: 0; color: var(--ink-soft); max-width: 32ch; }
 
-/* Gift card menu */
-.gifts { padding: 0 0 clamp(6rem, 14vh, 10rem); }
-.gifts__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.9rem, 2vw, 1.5rem); }
-.gift-group {
-  border: 1px solid var(--line); background: rgba(255,255,255,0.5);
-  padding: clamp(1.4rem, 3vw, 2rem); display: flex; flex-direction: column;
-  transition: border-color 0.5s var(--ease), background 0.5s var(--ease), transform 0.6s var(--ease);
-}
-@media (hover: hover) {
-  .gift-group:hover { border-color: var(--accent); background: var(--accent-soft); transform: translateY(-4px); }
-  .gift-group:hover .gift-list li { background: #fff; }
-}
-.gift-group__icon { width: 26px; height: 26px; color: var(--accent-ink); }
-.gift-group__title { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.5rem, 2.4vw, 1.9rem); line-height: 1.1; margin: 1rem 0 0.35rem; }
-.gift-group__note { margin: 0 0 1.25rem; color: var(--ink-soft); font-size: 0.9rem; }
-.gift-list { list-style: none; margin: auto 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
-.gift-list li { border: 1px solid var(--accent); background: var(--accent-soft); border-radius: 999px; padding: 0.35rem 0.85rem; font-size: 0.85rem; transition: background 0.5s var(--ease); }
-
-.gift-wild {
-  margin-top: clamp(0.9rem, 2vw, 1.5rem); border: 1px solid var(--accent); background: var(--accent-soft);
-  padding: clamp(1.4rem, 3vw, 2rem); display: flex; align-items: center; gap: clamp(1rem, 3vw, 2.5rem); flex-wrap: wrap;
-}
-.gift-wild__mark svg { width: 34px; height: 34px; color: var(--accent-ink); display: block; }
-.gift-wild h3 { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.5rem, 2.4vw, 1.9rem); margin: 0 0 0.25rem; }
-.gift-wild p { margin: 0; color: var(--ink-soft); }
-.gift-wild__note { margin-left: auto; font-size: 0.9rem; max-width: 26ch; border-left: 1px solid var(--accent); padding-left: clamp(1rem, 2vw, 1.75rem); }
-
-@media (max-width: 1100px) { .gifts__grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 620px) { .gifts__grid { grid-template-columns: 1fr; } }
 @media (max-width: 860px) {
   .referral__grid { grid-template-columns: 1fr; }
   .giftcard-stack { max-width: 460px; }
   .steps__grid { grid-template-columns: 1fr; }
   .step, .step + .step { padding: 1.75rem 0; border-right: 0; border-bottom: 1px solid var(--line); }
-  .gift-wild__note { margin-left: 0; border-left: 0; padding-left: 0; border-top: 1px solid var(--accent); padding-top: 1rem; max-width: none; }
 }
 
 /* ==========================================================================
