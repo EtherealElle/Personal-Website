@@ -163,9 +163,10 @@ section { position: relative; }
 .js [data-reveal].is-in { opacity: 1; transform: none; }
 
 /* Word-by-word split text */
-.split .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+/* The mask is padded top and bottom so tall or trailing glyphs (an italic $, a comma) aren't sliced */
+.split .w { display: inline-block; overflow: hidden; vertical-align: top; padding: 0.1em 0; margin: -0.1em 0; }
 .split .w > span {
-  display: inline-block; transform: translateY(105%);
+  display: inline-block; transform: translateY(118%);
   transition: transform 1.1s var(--ease); transition-delay: calc(var(--i) * 0.06s + var(--d, 0s));
 }
 .split.is-in .w > span { transform: none; }
