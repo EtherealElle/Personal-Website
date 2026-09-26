@@ -1,7 +1,17 @@
 # Personal website
 
 A static five-page site: `index.html` (home), `small-jobs.html`, `gallery.html`, `referrals.html`, `contact.html`.
-No build step. Open `index.html` in a browser, or upload the whole folder to any static host (Netlify, GitHub Pages, Cloudflare Pages).
+No build step. Upload the whole folder to any static host (Netlify, GitHub Pages, Cloudflare Pages).
+
+To preview it locally, run a small web server in this folder (`npx http-server`) and open
+<http://localhost:8080>. Double-clicking a file no longer works, because the pages link to each other
+by path (`/gallery`, not `gallery.html`) and the gallery loads its photo list with `fetch`.
+
+## Addresses
+
+Pages are linked without the `.html`: `/gallery`, `/small-jobs`, `/referrals`, `/contact`, and `/` for
+home. GitHub Pages serves `gallery.html` at `/gallery` on its own, so the files keep their names and
+old `...html` links still work. If a page is ever renamed, update its `canonical` and `og:url` tags too.
 
 ## Contact details
 
