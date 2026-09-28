@@ -64,3 +64,20 @@ Cloudflare tells browsers to keep CSS and JS files for hours. To stop visitors g
 every page — so it stays a thank-you for existing clients instead of an offer to strangers. The page
 states the two terms ($100 gift card of your choice, once the referral goes through with the job)
 and how it works. It deliberately doesn't list specific stores.
+
+## Design picks (temporary)
+
+`picks.html` is a private tournament page for helping a client settle design choices: two
+photos at a time, tap the one you like more, winner advances. It is **not linked from the
+site** and carries a `noindex` tag, so it only reaches whoever you send it to:
+
+```
+https://cleovalentinebuilds.com/picks?for=Jess
+```
+
+The `?for=` name is optional and only personalises the greeting. Finished picks are emailed
+to you through the same Formspree inbox as the contact form, with a text-message fallback if
+that fails.
+
+Photos live in `images/picks/`, one folder per decision — see `images/picks/README.md` for
+how to set one up and how to remove the whole feature when it has served its purpose.

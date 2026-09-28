@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Design Picks</title>
+  <meta name="description" content="A quick, private way to narrow down design choices.">
+  <!-- Private page: not linked from the site and kept out of search results -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#f7f2f1">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <script>document.documentElement.classList.replace("no-js", "js");</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/picks.css?v=7887d544">
+</head>
+<body>
+  <div class="confetti" aria-hidden="true"></div>
+
+  <main class="app">
+
+    <!-- ============ INTRO ============ -->
+    <section class="screen is-on" id="screen-intro">
+      <div class="intro">
+        <span class="sparkles" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5 13.9 9 20 11l-6.1 2L12 19.5 10.1 13 4 11l6.1-2L12 2.5Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5 13.9 9 20 11l-6.1 2L12 19.5 10.1 13 4 11l6.1-2L12 2.5Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5 13.9 9 20 11l-6.1 2L12 19.5 10.1 13 4 11l6.1-2L12 2.5Z"/></svg>
+        </span>
+
+        <p class="hello" data-hello hidden></p>
+        <h1 class="title">Design<br><em>showdown.</em></h1>
+        <p class="blurb">
+          Two photos at a time. Tap the one you like more.<br>
+          No wrong answers — go with your gut.
+        </p>
+
+        <p class="stat" data-stat></p>
+
+        <div class="intro__buttons">
+          <button class="btn btn--big" type="button" data-start>
+            Let's go
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+          <button class="btn btn--ghost" type="button" data-resume hidden>Pick up where I left off</button>
+        </div>
+
+        <p class="empty" data-empty hidden>
+          No photos in here yet. Add some folders to <code>images/picks/</code> and run
+          <code>python scripts/build_picks.py</code>.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ THE GAME ============ -->
+    <section class="screen" id="screen-game" hidden>
+      <header class="bar">
+        <button class="undo" type="button" data-undo disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg>
+          <span>Undo</span>
+        </button>
+        <span class="bar__count" data-count>1 / 1</span>
+      </header>
+
+      <div class="track" aria-hidden="true"><i data-progress></i></div>
+
+      <div class="ask">
+        <h2 class="ask__title" data-topic>Loading</h2>
+        <p class="ask__round" data-round></p>
+      </div>
+
+      <div class="arena">
+        <button class="card" type="button" data-card="0">
+          <span class="card__badge" data-badge>A</span>
+          <img alt="" data-img decoding="async">
+          <span class="card__label" data-label></span>
+          <span class="card__heart" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 20s-7-4.6-7-9.4A3.9 3.9 0 0 1 12 8a3.9 3.9 0 0 1 7 2.6C19 15.4 12 20 12 20Z"/></svg>
+          </span>
+        </button>
+
+        <div class="vs" aria-hidden="true"><span>or</span></div>
+
+        <button class="card" type="button" data-card="1">
+          <span class="card__badge" data-badge>B</span>
+          <img alt="" data-img decoding="async">
+          <span class="card__label" data-label></span>
+          <span class="card__heart" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 20s-7-4.6-7-9.4A3.9 3.9 0 0 1 12 8a3.9 3.9 0 0 1 7 2.6C19 15.4 12 20 12 20Z"/></svg>
+          </span>
+        </button>
+      </div>
+
+      <p class="cheer" data-cheer aria-live="polite">Tap the one you like more</p>
+    </section>
+
+    <!-- ============ RESULTS ============ -->
+    <section class="screen" id="screen-results" hidden>
+      <div class="done">
+        <span class="trophy" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 4h8v5a4 4 0 0 1-8 0V4Z"/><path d="M16 5h3v2a3 3 0 0 1-3 3M8 5H5v2a3 3 0 0 0 3 3"/><path d="M12 13v4M9 20h6M10 17h4"/></svg>
+        </span>
+        <h2 class="title title--sm">Look at<br><em>your taste.</em></h2>
+        <p class="blurb" data-done-note>Here's what you picked. Add a note to anything you want to explain.</p>
+
+        <ul class="winners" data-winners></ul>
+
+        <form class="send" data-send>
+          <label class="field" data-name-field>
+            <span>Your name</span>
+            <input type="text" name="who" autocomplete="name" placeholder="So I know whose picks these are">
+          </label>
+          <button class="btn btn--big" type="submit">
+            Send my picks to Cleo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+          <p class="send__status" role="status" aria-live="polite" data-status></p>
+          <a class="btn btn--ghost" data-sms hidden>Text them to me instead</a>
+        </form>
+
+        <button class="restart" type="button" data-restart>Start over</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="credit">
+    <a href="https://cleovalentinebuilds.com/">Cleo Elle Valentine</a> · Jackson, GA
+  </footer>
+
+  <script src="js/picks-data.js?v=ed969665"></script>
+  <script src="js/picks.js?v=2f1ec3d1"></script>
+</body>
+</html>

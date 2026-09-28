@@ -1,0 +1,58 @@
+# Rebuilds the private design-picks tournament after photos are added to images/picks/.
+# Temporary, like the rest of that feature - see images/picks/README.md to remove it.
+name: Build design picks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "images/picks/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: site-maintenance
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install pillow
+
+      - run: python scripts/build_picks.py
+
+      - name: Stamp asset versions
+        run: python scripts/stamp_versions.py
+
+      - name: Commit changes
+        id: commit
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "Nothing to change."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A images/picks js/picks-data.js picks.html
+          git commit -m "Rebuild design picks"
+          git pull --rebase
+          git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      # Commits made by this workflow don't trigger a Pages rebuild on their own
+      - name: Rebuild GitHub Pages
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" || echo "Pages rebuild request failed; the next push will redeploy."
