@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=025894a7">
+  <link rel="stylesheet" href="css/styles.css?v=8494c266">
   <link rel="preload" href="data/gallery.json" as="fetch" crossorigin>
 </head>
 <body>
@@ -38,6 +38,10 @@
         <a href="/small-jobs">Small Jobs</a>
         <a href="/gallery">Gallery</a>
         <a href="/contact">Contact</a>
+        <span class="nav__reach">
+          <a href="mailto:cleo@cleovalentinebuilds.com">Email</a>
+          <span>(470) 301-9576</span>
+        </span>
       </nav>
     </div>
   </header>
@@ -54,21 +58,45 @@
       <div class="container hero__content">
         <span class="eyebrow" data-reveal style="--d:.5s">Carpentry &amp; Construction — Jackson, Georgia</span>
         <h1 class="display hero__title split" style="--d:.6s">Built square.<br><em>Built to last.</em></h1>
+
+        <!-- Text leads: it's the fastest way to reach me and the preferred one -->
+        <div class="hero__actions" data-reveal style="--d:.95s">
+          <a href="sms:4703019576?&amp;body=Hi%20Cleo%20%E2%80%94%20I%27ve%20got%20a%20job%20I%27d%20like%20a%20quote%20on%3A%20" class="btn btn--solid hero__sms">Text a photo of the job
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="mailto:cleo@cleovalentinebuilds.com?subject=Job%20inquiry" class="btn hero__mail">Email me</a>
+          <span class="hero__call">or call <a href="tel:4703019576">(470) 301-9576</a></span>
+        </div>
+
         <div class="hero__foot">
           <div class="hero__meta" data-reveal style="--d:1.1s">
             <div><strong>Based in</strong>Jackson, GA</div>
             <div><strong>Serving</strong>50 miles around</div>
             <div><strong>From</strong>Framing to finish</div>
           </div>
-          <a href="#story" class="scroll-cue" data-reveal style="--d:1.3s">
+          <a href="#work" class="scroll-cue" data-reveal style="--d:1.3s">
             <span class="scroll-cue__line"></span> Scroll
           </a>
         </div>
       </div>
     </section>
 
+    <!-- ============ FIRST LOOK AT THE WORK ============ -->
+    <!-- The best six photos go here, where everyone lands. Filled from data/gallery.json. -->
+    <section class="firstlook" id="work">
+      <div class="container">
+        <div class="firstlook__head">
+          <span class="eyebrow" data-reveal>Recent work</span>
+          <a href="/gallery" class="firstlook__all" data-reveal>See all <span data-all-count>49</span> projects
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+        <div class="firstlook__grid" data-photos="proof" data-stagger="0.06"></div>
+      </div>
+    </section>
+
     <!-- ============ STATEMENT ============ -->
-    <section class="statement" id="story">
+    <section class="statement">
       <div class="container">
         <span class="eyebrow" data-reveal>The short version</span>
         <p class="statement__text">
@@ -217,8 +245,8 @@
             <span>Direct, one-on-one communication</span>
           </div>
           <div class="about__sign" data-reveal style="--d:.2s">
-            <div><strong>Phone</strong><span>(470) 301-9576</span></div>
-            <div><strong>Email</strong><span>cleo@cleovalentinebuilds.com</span></div>
+            <div><strong>Text me</strong><span><a href="sms:4703019576">(470) 301-9576</a></span></div>
+            <div><strong>Email</strong><span><a href="mailto:cleo@cleovalentinebuilds.com">cleo@cleovalentinebuilds.com</a></span></div>
           </div>
         </div>
       </div>
@@ -272,7 +300,19 @@
     </div>
   </footer>
 
-  <script src="js/render-photos.js?v=578fe706"></script>
+  <!-- Phones only: text or email without hunting for the footer -->
+  <div class="callbar">
+    <a class="callbar__primary" href="sms:4703019576?&amp;body=Hi%20Cleo%20%E2%80%94%20I%27ve%20got%20a%20job%20I%27d%20like%20a%20quote%20on%3A%20">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M21 11.5a8 8 0 0 1-8 8H8l-5 3 1.5-4.4A8 8 0 0 1 11 3.5h2a8 8 0 0 1 8 8Z"/></svg>
+      Text a photo
+    </a>
+    <a href="mailto:cleo@cleovalentinebuilds.com?subject=Job%20inquiry">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>
+      Email
+    </a>
+  </div>
+
+  <script src="js/render-photos.js?v=191d8ce3"></script>
   <script src="js/main.js?v=1431902e"></script>
 </body>
 </html>

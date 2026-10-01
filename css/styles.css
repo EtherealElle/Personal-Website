@@ -172,8 +172,11 @@ section { position: relative; }
 .split.is-in .w > span { transform: none; }
 
 /* Image wipe */
-.js [data-wipe] { clip-path: inset(100% 0 0 0); transition: clip-path 1.4s var(--ease); transition-delay: var(--d, 0s); }
-.js [data-wipe].is-in { clip-path: inset(0 0 0 0); }
+/* The wipe clips the box's contents, not the box itself. Clipping the observed
+   element to zero area makes IntersectionObserver report it as never visible, so
+   it never gets .is-in and stays hidden for good. */
+.js [data-wipe] > * { clip-path: inset(100% 0 0 0); transition: clip-path 1.4s var(--ease); transition-delay: var(--d, 0s); }
+.js [data-wipe].is-in > * { clip-path: inset(0 0 0 0); }
 [data-wipe] .media__inner { transform: scale(1.25); transition: transform 2s var(--ease); transition-delay: var(--d, 0s); }
 [data-wipe].is-in .media__inner { transform: scale(1); }
 
@@ -232,6 +235,89 @@ section { position: relative; }
   animation: cue 2.2s var(--ease) infinite;
 }
 @keyframes cue { from { transform: translateY(-100%); } to { transform: translateY(260%); } }
+
+/* ==========================================================================
+   Contact actions — text first, email second.
+   Analytics (Sep 2026): 71% of visitors are on a phone and 94% land on the
+   home page, which had no way to make contact without scrolling to the footer.
+   ========================================================================== */
+.hero__actions {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem;
+  margin-top: clamp(1.5rem, 4vh, 2.5rem);
+}
+.hero__actions .btn { padding: 0.95rem 1.5rem; }
+.hero__call { font-size: 0.85rem; color: var(--ink-soft); }
+.hero__call a { border-bottom: 1px solid var(--line); }
+.hero__call a:hover { color: var(--accent-ink); border-color: var(--accent-ink); }
+
+.hero__sms { order: 1; }
+.hero__mail { order: 2; }
+.hero__call { order: 3; width: 100%; }
+
+/* Above 720px the filled button swaps to email: sms: links are unreliable on desktop. */
+@media (min-width: 720px) {
+  .hero__sms { order: 2; }
+  .hero__mail { order: 1; }
+  .hero__call { order: 3; width: auto; margin-left: 0.25rem; }
+  .hero__sms.btn--solid { background: none; color: var(--ink); }
+  .hero__sms.btn--solid::before { background: var(--ink); }
+  .hero__sms.btn--solid:hover { color: var(--bg); }
+  .hero__mail { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .hero__mail::before { background: var(--accent); }
+  .hero__mail:hover { color: var(--ink); }
+}
+
+/* Sticky bar, phones only. The footer gets matching padding so nothing is covered. */
+.callbar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 80;
+  display: flex; gap: 0.5rem;
+  padding: 0.6rem 0.75rem calc(0.6rem + env(safe-area-inset-bottom));
+  background: rgba(247, 242, 241, 0.94);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-top: 1px solid var(--line);
+}
+.callbar a {
+  flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  padding: 0.85rem 1rem; border: 1px solid var(--ink); border-radius: 999px;
+  font-size: 0.95rem; font-weight: 500; color: var(--ink);
+}
+.callbar a svg { width: 17px; height: 17px; }
+/* needs to out-specify `.callbar a` above, or the label sits black-on-black */
+.callbar a.callbar__primary { background: var(--ink); color: var(--bg); }
+@media (min-width: 720px) { .callbar { display: none; } }
+@media (max-width: 719px) { .footer { padding-bottom: 74px; } }
+
+/* Email and number in the nav, where there is room for them */
+.nav__reach { display: none; }
+@media (min-width: 1000px) {
+  .nav__reach { display: inline-flex; align-items: center; gap: 0.9rem; color: var(--ink-soft); }
+  .nav__reach a::after { display: none; }
+}
+
+/* ==========================================================================
+   First look — the best six photos, immediately under the hero
+   ========================================================================== */
+.firstlook { padding: clamp(3rem, 8vh, 5rem) 0 clamp(4rem, 10vh, 7rem); }
+.firstlook__head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 1.5rem; flex-wrap: wrap; margin-bottom: clamp(1.25rem, 3vh, 2rem);
+}
+.firstlook__all {
+  display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;
+  border-bottom: 1px solid var(--line); padding-bottom: 0.2rem;
+  transition: color 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+.firstlook__all svg { width: 15px; height: 15px; transition: transform 0.4s var(--ease); }
+.firstlook__all:hover { color: var(--accent-ink); border-color: var(--accent-ink); }
+.firstlook__all:hover svg { transform: translateX(4px); }
+.firstlook__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(0.5rem, 1.5vw, 1rem); }
+.firstlook__item { margin: 0; }
+.firstlook__item .media { aspect-ratio: 1 / 1; }
+.firstlook__cap { padding-top: 0.5rem; font-size: 0.82rem; color: var(--ink-soft); display: flex; gap: 0.5rem; }
+@media (min-width: 720px) {
+  .firstlook__grid { grid-template-columns: repeat(3, 1fr); }
+  .firstlook__item .media { aspect-ratio: 4 / 5; }
+}
 
 /* ==========================================================================
    Intro statement
@@ -685,7 +771,7 @@ section { position: relative; }
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; transition-delay: 0s !important; }
-  .js [data-reveal], .split .w > span, .js [data-wipe] { opacity: 1; transform: none; clip-path: none; }
+  .js [data-reveal], .split .w > span, .js [data-wipe], .js [data-wipe] > * { opacity: 1; transform: none; clip-path: none; }
   .statement__text .word { opacity: 1; }
   .curtain { display: none; }
 }

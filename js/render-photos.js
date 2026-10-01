@@ -102,11 +102,36 @@ function render(data) {
     }
   }
 
+  /* Home page "first look" strip, right under the hero.
+     This is the one everybody sees, so it gets the featured photos; the reel
+     further down the page takes the next six. */
+  const strip = document.querySelector("[data-photos='proof']");
+  const shown = new Set();
+  if (strip) {
+    let picks = photos.filter((p) => p.featured);
+    if (!picks.length) picks = photos;
+    picks.slice(0, 6).forEach((p) => {
+      shown.add(p);
+      const fig = document.createElement("figure");
+      fig.className = "firstlook__item";
+      fig.setAttribute("data-reveal", "");
+      const media = document.createElement("div");
+      media.className = "media";
+      media.setAttribute("data-wipe", "");
+      addImage(media, p.image, p.title, { deferred: true, w: p.w, h: p.h });
+      fig.append(media, caption("figcaption", "firstlook__cap", p));
+      strip.appendChild(fig);
+    });
+    loadWhenNear([...strip.querySelectorAll("img[data-src]")]);
+    if (!strip.children.length) strip.closest(".firstlook")?.remove();
+  }
+  document.querySelectorAll("[data-all-count]").forEach((el) => { el.textContent = photos.length; });
+
   /* Home page "Selected work" reel */
   const track = document.querySelector("[data-photos='featured']");
   if (track) {
-    let picks = photos.filter((p) => p.featured);
-    if (!picks.length) picks = photos;
+    let picks = photos.filter((p) => !shown.has(p));
+    if (picks.length < 3) picks = photos;
     picks.slice(0, 6).forEach((p) => {
       const fig = document.createElement("figure");
       fig.className = "reel__item";
@@ -122,7 +147,7 @@ function render(data) {
     } else {
       // Final tile linking to the full gallery
       const more = document.createElement("a");
-      more.href = "gallery.html";
+      more.href = "/gallery";
       more.className = "reel__item reel__more";
       more.innerHTML = `
         <span class="reel__more-box">
