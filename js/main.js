@@ -34,12 +34,8 @@
   /* ------------------------------------------------------------------
      Navigation
      ------------------------------------------------------------------ */
+  // The links sit in the bar on every screen size, so there is no menu to open.
   const nav = document.querySelector(".nav");
-  const toggle = document.querySelector(".nav__toggle");
-  toggle?.addEventListener("click", () => {
-    const open = nav.classList.toggle("is-open");
-    toggle.setAttribute("aria-expanded", String(open));
-  });
 
   /* ------------------------------------------------------------------
      Split text into words for staggered reveals
@@ -226,7 +222,7 @@
 
     if (nav) {
       nav.classList.toggle("is-scrolled", y > 40);
-      if (!nav.classList.contains("is-open") && Math.abs(delta) > 2) {
+      if (Math.abs(delta) > 2) {
         nav.classList.toggle("is-hidden", delta > 0 && y > vh * 0.6);
       }
     }
