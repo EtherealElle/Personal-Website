@@ -110,6 +110,55 @@ don't go in a public repository.
 It's also the only honest record of whether the site is working. Cloudflare counts
 visits; it cannot count a text message.
 
+## Logo
+
+The mark is the name itself: **CLEO ♥ VALENTINE**, set in Instrument Serif uppercase
+with a heart where the space would be. Two forms.
+
+### In the nav and the footer
+
+Markup, not an image — the name stays real text, so it is selectable, searchable and read
+aloud properly, and only the heart is drawn:
+
+```html
+<a href="/" class="brand" aria-label="Cleo Valentine Builds, home">
+  <span>Cleo</span>
+  <svg class="brand__heart" viewBox="0 0 24 24" aria-hidden="true"><path d="..."/></svg>
+  <span>Valentine</span>
+</a>
+```
+
+Styled by `.brand` / `.footer__brand` / `.brand__heart` in `css/styles.css`. The heart is
+`var(--accent)`, the same pink as the nav underline and the scroll bar. That is brilliant
+on the dark footer (11:1 against `--dark`) and deliberately soft on the cream nav
+(1.5:1) — a quiet tint rather than a second logo competing with the name. To make it
+carry harder on cream, give `.brand__heart` its own colour; `#d4628a` reaches 3:1 while
+still reading as pink.
+
+To use it anywhere new, copy the markup above and give it `.brand`.
+
+### Profile pictures
+
+`images/logo/profile-1024.png` and `profile-512.png` — CLEO / heart / VALENTINE stacked
+and centred on the dark ground. For Google Business Profile, Facebook, Instagram and
+anywhere else that wants a square avatar. The text sits well inside the circle those
+platforms crop to, so nothing is lost when it goes round.
+
+Regenerate at any size, or after changing the wording or colours:
+
+```
+python scripts/render_logo.py
+```
+
+It renders the mark in headless Chrome (so it is set in the real Instrument Serif) and
+scales the smaller copy down proportionally. Needs Chrome and a network connection for
+the font; set `CHROME` if it is installed somewhere unusual.
+
+### Still the old house
+
+`favicon.svg` is unchanged — a wordmark cannot be a 16px tab icon. Replacing it with a
+heart on an ink tile would match; ask when you want that done.
+
 ## Caching
 
 Cloudflare tells browsers to keep CSS and JS files for hours. To stop visitors getting a new page with an old script, every CSS/JS link carries a `?v=` fingerprint of the file. `.github/workflows/stamp-versions.yml` updates these automatically when CSS or JS changes; you can also run `python scripts/stamp_versions.py` before pushing.
