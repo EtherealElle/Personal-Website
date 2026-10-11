@@ -49,6 +49,67 @@ To receive requests directly (works on phones with no email app set up):
 Keep `js/contact.js`: it validates the form, sends it to Formspree, and falls back to the email app if Formspree is unreachable.
 The free Formspree plan doesn't accept file uploads, so the site asks people to text photos instead.
 
+## Agents
+
+Three jobs that come up after every job, packaged as Claude Code skills. Type the name
+with a slash in Claude Code and it runs. Each one drafts and shows its work first;
+none of them sends anything or commits without being asked.
+
+### `/photo-intake` — photos into the gallery
+
+Drop phone photos in `images/inbox/`, then run it. It looks at each photo, writes a
+title in the right voice, picks the gallery filter, reads the EXIF GPS to work out the
+town, spots before/after pairs and duplicates, holds back the ones that won't do, moves
+the keepers into `images/work/`, adds them to `data/gallery.json` and opens a commit.
+You approve the list before anything moves.
+
+Two things it always does: never crops (oversized photos scale down proportionally), and
+strips the metadata, so a photo taken in a client's living room doesn't ship their
+coordinates to a public repository. See `images/inbox/README.md`.
+
+Underneath: `scripts/intake_photos.py scan` measures, `apply` moves. The measuring is a
+script; the judging needs eyes on the photo.
+
+### `/lead-reply` — answer an enquiry fast
+
+Paste in a Formspree notification, a Facebook message or a text. It drafts a reply in
+your voice, as a short text and as an email, picks two or three gallery photos that
+actually match the job, and logs the lead. Whoever replies first usually gets the job.
+
+It never quotes a price, never commits to a date, never claims licensed or insured, and
+never sends anything — the output is text to copy. It reads a pasted enquiry rather than
+watching the inbox, because nothing here can read your mail: Formspree's free plan has
+no API.
+
+Underneath: `scripts/pick_photos.py "<the job>" --town "<town>"` ranks the gallery
+against the job. If there's no matching work it says so instead of sending a carport
+photo to someone with a hole in their wall.
+
+### `/review-ask` — get the reviews
+
+Reads the ledger, tells you who's owed a review ask and who's gone quiet, and drafts
+each ask naming the actual job. Follows up once after five days, twice at most, then
+stops — a client who hasn't answered twice has answered.
+
+It needs the direct review link once. In Google Business Profile tap **Ask for reviews**,
+copy the `https://g.page/r/.../review` link, then:
+
+    python scripts/jobs.py config --review-link <url>
+
+### The ledger
+
+`scripts/jobs.py` keeps `private/jobs.json` — who got in touch, what stage it's at, who's
+been asked for a review. `private/` is gitignored and never committed; client details
+don't go in a public repository.
+
+    python scripts/jobs.py add --name Jess --town Decatur --job "drywall patch"
+    python scripts/jobs.py set jess --stage done --finished today
+    python scripts/jobs.py due          # a lead with no reply, a job with no review ask
+    python scripts/jobs.py list
+
+It's also the only honest record of whether the site is working. Cloudflare counts
+visits; it cannot count a text message.
+
 ## Caching
 
 Cloudflare tells browsers to keep CSS and JS files for hours. To stop visitors getting a new page with an old script, every CSS/JS link carries a `?v=` fingerprint of the file. `.github/workflows/stamp-versions.yml` updates these automatically when CSS or JS changes; you can also run `python scripts/stamp_versions.py` before pushing.

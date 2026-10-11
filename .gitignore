@@ -3,6 +3,21 @@ Thumbs.db
 desktop.ini
 .DS_Store
 
-# Editor / tool settings
-.claude/
+# Editor / tool settings, but the project's own agent skills are tracked
+.claude/*
+!.claude/skills/
 .vscode/
+
+# Photo viewer sidecars - these sit next to the photos and must not be committed
+catalog.lock
+catalog.log
+catalog.snap
+view.json
+images/**/thumbs/
+
+# Client names, numbers, job notes and the review link. Never in a public repo.
+private/
+
+# Photos waiting to be sorted into the gallery by scripts/intake_photos.py
+images/inbox/*
+!images/inbox/README.md
