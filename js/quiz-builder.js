@@ -16,8 +16,10 @@
   var preview = $("#preview");
 
   // Built from wherever this page is served, so it is right on the live site and
-  // right when previewing from a laptop.
-  var BASE = location.origin + location.pathname.replace(/quiz-builder\.html$/, "") + "quiz";
+  // right when previewing from a laptop. Drop the last path segment whatever it is:
+  // the live page is /quiz-builder, not /quiz-builder.html, so matching on the
+  // extension produced /quiz-builderquiz and a 404.
+  var BASE = location.origin + location.pathname.replace(/[^/]*$/, "") + "quiz";
 
   var plain = function (html) {
     var d = document.createElement("div");
