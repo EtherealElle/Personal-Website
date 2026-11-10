@@ -199,20 +199,26 @@ Any image the browser can load works — a drawing, or a photo from `images/work
 Photos are fitted inside the tile, never cropped. Run `python scripts/stamp_versions.py`
 after editing so the new file reaches people with the old one cached.
 
-### The trim drawings
+### The drawings
 
-`images/quiz/01-window-door-trim/` is drawn rather than photographed, by
+Everything under `images/quiz/` is drawn rather than photographed, by
 `scripts/build_quiz_art.py`. Four photos of four different houses would differ in wall
 colour, window size and light, so the client would be picking a room rather than a
-detail. These are the same window in the same wall with the same light, and only the
-casing changes.
+detail. Within a question these are the same room in the same light, and only the
+thing being asked about changes.
 
 ```
 python scripts/build_quiz_art.py
 ```
 
-Edit the geometry at the top of that script to change proportions, or the option
-functions to change a cut.
+The walls are a mid greige and the trim is near-white, about 3:1 apart. That is how a
+real room works &mdash; white trim reads *because* the wall behind it is darker &mdash;
+and it is the only way the casing stays legible in a thumbnail on a phone. Drawn on a
+pale wall, as it was first, the trim measured 1.2:1 and effectively vanished.
+
+Edit the palette or the shared geometry at the top of that script to change the look,
+and the option functions to change a cut or a panel count. `SETS` at the bottom maps
+folders to the options that go in them.
 
 ### Removing it
 

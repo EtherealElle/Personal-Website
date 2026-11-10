@@ -37,6 +37,33 @@ window.QUIZ = {
           image: "images/quiz/01-window-door-trim/standard-casing.svg"
         }
       ]
+    },
+    {
+      id: "interior-doors",
+      title: "Interior doors",
+      note: "Same opening, same casing. Only the door changes.",
+      options: [
+        {
+          label: "Flat slab",
+          note: "No panels at all, flush and modern",
+          image: "images/quiz/02-interior-doors/flat-slab.svg"
+        },
+        {
+          label: "Two panel",
+          note: "Two tall recesses, quiet and current",
+          image: "images/quiz/02-interior-doors/two-panel.svg"
+        },
+        {
+          label: "Three panel",
+          note: "A little more detail, still simple",
+          image: "images/quiz/02-interior-doors/three-panel.svg"
+        },
+        {
+          label: "Five panel",
+          note: "What most houses round here were built with",
+          image: "images/quiz/02-interior-doors/five-panel.svg"
+        }
+      ]
     }
   ]
 };

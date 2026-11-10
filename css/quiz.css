@@ -105,7 +105,9 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 /* The tile holds the whole image inside itself - contain, never cover, so nothing
    is ever cropped off a drawing or a photo. */
-.opt__img { width: 100%; aspect-ratio: 4 / 5; background: var(--accent-soft); }
+/* Matches the wall in the drawings, so there is no flash of a different colour
+   behind an image that is still loading. */
+.opt__img { width: 100%; aspect-ratio: 4 / 5; background: #9e9188; }
 .opt__img img { width: 100%; height: 100%; object-fit: contain; }
 
 .opt__text { padding: 0.65rem 0.75rem 0.8rem; }
