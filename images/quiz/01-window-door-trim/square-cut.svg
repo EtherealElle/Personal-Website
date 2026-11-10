@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500" role="img">
+  <defs>
+    <linearGradient id="day" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0" stop-color="#cfdce4"/><stop offset="0.55" stop-color="#e4edf1"/>
+      <stop offset="1" stop-color="#eef2f2"/>
+    </linearGradient>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ece5e1"/><stop offset="1" stop-color="#e3dcd7"/>
+    </linearGradient>
+    <style>
+  .trim { fill: #fdfbfa; stroke: #bfb3ab; stroke-width: 1; stroke-linejoin: round; }
+  .sash { fill: #f7f3f1; stroke: #bfb3ab; stroke-width: 1; }
+  .score { stroke: #bfb3ab; stroke-width: 0.9; fill: none; opacity: 0.75; }
+  .cast { fill: rgba(60,46,40,0.13); }
+</style>
+  </defs>
+  <rect width="400" height="500" fill="url(#wall)"/>
+  <rect x="110" y="120" width="180" height="280" fill="url(#day)"/>
+  <!-- the opening sits slightly proud, so it drops a soft shadow onto the glass -->
+  <rect x="110" y="120" width="180" height="10" class="cast"/>
+  <g class="sash">
+    <rect x="110" y="120" width="180" height="280" fill="none"/>
+    <rect x="117" y="127" width="166" height="9"/>
+    <rect x="117" y="127" width="9" height="266"/>
+    <rect x="274" y="127" width="9" height="266"/>
+    <rect x="117" y="254" width="166" height="12"/>
+    <rect x="117" y="384" width="166" height="9"/>
+  </g>
+  <g transform="translate(0 5)"><path class="cast" d="M82 87H318V120H82Z"/></g>
+  <rect class="trim" x="88" y="120" width="22" height="280"/>
+  <rect class="trim" x="290" y="120" width="22" height="280"/>
+  <path class="trim" d="M82 87H318V120H82Z"/>
+  <rect class="cast" x="78" y="414" width="244" height="7"/>
+  <rect class="trim" x="92" y="414" width="216" height="28"/>
+  <rect class="trim" x="78" y="400" width="244" height="14"/>
+  <path class="score" d="M81 411H319"/>
+</svg>

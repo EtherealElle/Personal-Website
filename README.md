@@ -159,6 +159,66 @@ the font; set `CHROME` if it is installed somewhere unusual.
 `favicon.svg` is unchanged — a wordmark cannot be a 16px tab icon. Replacing it with a
 heart on an ink tile would match; ask when you want that done.
 
+## Design quiz (temporary)
+
+`quiz.html` is a private page for asking a client how they want the details built.
+One question per screen, four options on a board, tap the one you like. It is **not
+linked from the site** and carries a `noindex` tag, so it only reaches whoever you
+send it to:
+
+```
+https://cleovalentinebuilds.com/quiz?for=Jess
+```
+
+The `?for=` name is optional. When it is there the greeting uses it and the client is
+not asked to type their name at the end; without it, they are. Answers come back to the
+same Formspree inbox as the contact form, with a text-message fallback if that fails.
+
+It is separate from `/picks`, which is a head-to-head tournament for narrowing a long
+list of photos. Use the quiz for "which of these four", and picks for "which of these
+twenty".
+
+### Adding or changing questions
+
+Everything lives in `js/quiz-data.js` — one entry per question, 2 to 6 options each:
+
+```js
+{
+  id: "porch-ceiling",               // appears in the emailed answer
+  title: "Porch ceiling",
+  note: "Optional line under the question",
+  options: [
+    { label: "Stained tongue and groove",
+      note: "Optional line under the label",
+      image: "images/work/stained-tongue-groove-porch-ceiling.jpg" }
+  ]
+}
+```
+
+Any image the browser can load works — a drawing, or a photo from `images/work/`.
+Photos are fitted inside the tile, never cropped. Run `python scripts/stamp_versions.py`
+after editing so the new file reaches people with the old one cached.
+
+### The trim drawings
+
+`images/quiz/01-window-door-trim/` is drawn rather than photographed, by
+`scripts/build_quiz_art.py`. Four photos of four different houses would differ in wall
+colour, window size and light, so the client would be picking a room rather than a
+detail. These are the same window in the same wall with the same light, and only the
+casing changes.
+
+```
+python scripts/build_quiz_art.py
+```
+
+Edit the geometry at the top of that script to change proportions, or the option
+functions to change a cut.
+
+### Removing it
+
+Delete `quiz.html`, `css/quiz.css`, `js/quiz.js`, `js/quiz-data.js`,
+`scripts/build_quiz_art.py` and `images/quiz/`. Nothing else refers to them.
+
 ## Caching
 
 Cloudflare tells browsers to keep CSS and JS files for hours. To stop visitors getting a new page with an old script, every CSS/JS link carries a `?v=` fingerprint of the file. `.github/workflows/stamp-versions.yml` updates these automatically when CSS or JS changes; you can also run `python scripts/stamp_versions.py` before pushing.

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Design Quiz</title>
+  <meta name="description" content="A few quick questions about how you want the details built.">
+  <!-- Private page: not linked from the site and kept out of search results -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#f7f2f1">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <script>document.documentElement.classList.replace("no-js", "js");</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/quiz.css?v=9b570213">
+</head>
+<body>
+  <main class="app">
+
+    <!-- ============ INTRO ============ -->
+    <section class="screen is-on" id="screen-intro">
+      <div class="intro">
+        <span class="eyebrow">Cleo <svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.6C9.7 18.5 3.8 14.3 3.8 10.1 3.8 7.4 6 5.3 8.6 5.3 10.3 5.3 11.4 6.4 12 7.6 12.6 6.4 13.7 5.3 15.4 5.3 18 5.3 20.2 7.4 20.2 10.1 20.2 14.3 14.3 18.5 12 20.6Z"/></svg> Valentine</span>
+        <h1 class="title">Design<br><em>quiz.</em></h1>
+        <p class="blurb" data-blurb></p>
+        <p class="meta" data-meta></p>
+        <button class="btn btn--solid" type="button" data-start>Start</button>
+      </div>
+    </section>
+
+    <!-- ============ QUESTION ============ -->
+    <section class="screen" id="screen-quiz" hidden>
+      <header class="bar">
+        <span class="step">Question <span data-now>1</span> of <span data-total>1</span></span>
+        <button class="link" type="button" data-back hidden>Back</button>
+      </header>
+      <div class="track" aria-hidden="true"><i data-progress></i></div>
+
+      <div class="ask">
+        <h2 class="ask__title" data-title>Loading</h2>
+        <p class="ask__note" data-note></p>
+      </div>
+
+      <div class="board" data-board role="group" aria-label="Choose one"></div>
+    </section>
+
+    <!-- ============ RESULTS ============ -->
+    <section class="screen" id="screen-done" hidden>
+      <div class="done">
+        <h2 class="title title--sm">That's<br><em>everything.</em></h2>
+        <ul class="summary" data-summary></ul>
+
+        <form class="send" data-form>
+          <label class="field" data-namefield>
+            <span>Your name</span>
+            <input type="text" name="client" autocomplete="name" maxlength="60" required>
+          </label>
+          <label class="field">
+            <span>Anything you want to add? (optional)</span>
+            <textarea name="notes" rows="3" maxlength="600"></textarea>
+          </label>
+          <button class="btn btn--solid" type="submit">Send to Cleo</button>
+          <p class="sent" data-sent hidden>Sent. Thank you &mdash; I'll come back to you.</p>
+          <a class="btn btn--line" data-sms hidden>Text it to me instead</a>
+        </form>
+
+        <button class="link link--centre" type="button" data-restart>Start over</button>
+      </div>
+    </section>
+
+  </main>
+
+  <noscript>
+    <p style="padding:2rem;font:1rem/1.6 Inter,system-ui,sans-serif">
+      This quiz needs JavaScript turned on. If it won't work on your phone, just text me and
+      I'll walk you through the choices.
+    </p>
+  </noscript>
+
+  <script src="js/quiz-data.js?v=1e6834c8"></script>
+  <script src="js/quiz.js?v=385f09fd"></script>
+</body>
+</html>

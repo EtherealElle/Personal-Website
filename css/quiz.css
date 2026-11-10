@@ -1,0 +1,141 @@
+/* Design quiz - private page, phone first. Shares the site's tokens but stands alone,
+   so the whole feature can be deleted in one go. */
+:root {
+  --bg: #f7f2f1;
+  --ink: #171614;
+  --ink-soft: #5d5a54;
+  --line: rgba(23, 22, 20, 0.14);
+  --accent: #f4b8c9;
+  --accent-soft: #fbe3ea;
+  --accent-ink: #b85a7c;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+.app { min-height: 100svh; display: flex; flex-direction: column; }
+.screen { display: none; flex: 1; flex-direction: column; }
+.screen.is-on { display: flex; }
+
+/* ---------------------------------------------------------------- intro */
+.intro {
+  flex: 1; display: flex; flex-direction: column; justify-content: center;
+  gap: 1rem; padding: 2rem 1.25rem calc(2rem + env(safe-area-inset-bottom));
+  max-width: 34rem; margin: 0 auto; width: 100%;
+}
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 0.4em;
+  font-family: var(--font-display); font-size: 1.05rem; line-height: 1;
+  text-transform: uppercase; letter-spacing: 0.015em;
+}
+.heart { width: 0.56em; height: 0.56em; flex: none; fill: var(--accent-ink); }
+
+.title {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(3.2rem, 17vw, 5rem); line-height: 0.92; letter-spacing: -0.02em;
+  margin: 0.4rem 0 0;
+}
+.title em { font-style: italic; color: var(--accent-ink); }
+.title--sm { font-size: clamp(2.6rem, 13vw, 3.6rem); }
+
+.blurb { margin: 0; color: var(--ink-soft); max-width: 36ch; }
+.meta { margin: 0; font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0.95rem 1.6rem; border-radius: 999px; border: 1px solid var(--ink);
+  font-size: 0.95rem; font-weight: 500; text-decoration: none; color: inherit;
+  margin-top: 0.5rem; min-height: 48px;
+}
+.btn--solid { background: var(--ink); color: var(--bg); }
+.btn--line { background: none; }
+
+/* ---------------------------------------------------------------- question */
+.bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: calc(0.9rem + env(safe-area-inset-top)) 1.25rem 0.6rem;
+}
+.step { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); }
+.link {
+  font-size: 0.85rem; color: var(--ink-soft); text-decoration: underline;
+  text-underline-offset: 3px; padding: 0.5rem; min-height: 44px;
+}
+.link--centre { align-self: center; margin-top: 0.5rem; }
+
+.track { height: 2px; background: var(--line); margin: 0 1.25rem; }
+.track i { display: block; height: 100%; width: 0; background: var(--accent-ink); transition: width 0.5s var(--ease); }
+
+.ask { padding: 1.4rem 1.25rem 0.9rem; max-width: 40rem; margin: 0 auto; width: 100%; }
+.ask__title {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(2rem, 9vw, 2.6rem); line-height: 1; letter-spacing: -0.02em; margin: 0;
+}
+.ask__note { margin: 0.5rem 0 0; font-size: 0.92rem; color: var(--ink-soft); }
+
+.board {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem;
+  padding: 0.4rem 1.25rem calc(2rem + env(safe-area-inset-bottom));
+  max-width: 40rem; margin: 0 auto; width: 100%;
+}
+@media (min-width: 760px) { .board { grid-template-columns: repeat(4, 1fr); max-width: 64rem; } }
+
+.opt {
+  display: flex; flex-direction: column; text-align: left; padding: 0;
+  background: #fff; border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+  transition: border-color 0.2s var(--ease), transform 0.2s var(--ease);
+}
+.opt:hover { border-color: var(--accent-ink); }
+.opt:active { transform: scale(0.985); }
+.opt:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+.opt.is-picked { border-color: var(--accent-ink); box-shadow: inset 0 0 0 1px var(--accent-ink); }
+
+/* The tile holds the whole image inside itself - contain, never cover, so nothing
+   is ever cropped off a drawing or a photo. */
+.opt__img { width: 100%; aspect-ratio: 4 / 5; background: var(--accent-soft); }
+.opt__img img { width: 100%; height: 100%; object-fit: contain; }
+
+.opt__text { padding: 0.65rem 0.75rem 0.8rem; }
+.opt__label { display: block; font-weight: 600; font-size: 0.93rem; line-height: 1.3; }
+.opt__note { display: block; margin-top: 0.15rem; font-size: 0.78rem; color: var(--ink-soft); line-height: 1.45; }
+
+/* ---------------------------------------------------------------- results */
+.done {
+  flex: 1; display: flex; flex-direction: column; justify-content: center;
+  gap: 1rem; padding: 2rem 1.25rem calc(2rem + env(safe-area-inset-bottom));
+  max-width: 34rem; margin: 0 auto; width: 100%;
+}
+.summary { list-style: none; margin: 0.5rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; }
+.summary li {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+  padding-bottom: 0.6rem; border-bottom: 1px solid var(--line);
+}
+.summary span:first-child { font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); }
+.summary span:last-child { font-family: var(--font-display); font-size: 1.35rem; text-align: right; }
+
+.send { display: flex; flex-direction: column; gap: 0.85rem; margin-top: 0.75rem; }
+.field { display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.85rem; color: var(--ink-soft); }
+.field input, .field textarea {
+  font: inherit; color: var(--ink); background: #fff;
+  border: 1px solid var(--line); border-radius: 10px; padding: 0.7rem 0.8rem; width: 100%;
+  min-height: 44px; resize: vertical;
+}
+.field input:focus, .field textarea:focus { outline: 2px solid var(--accent-ink); outline-offset: 1px; }
+.sent { margin: 0; font-size: 0.9rem; color: var(--accent-ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; }
+}
