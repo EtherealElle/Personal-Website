@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500" role="img">
+  <defs>
+    <linearGradient id="day" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0" stop-color="#b9cedd"/><stop offset="0.55" stop-color="#d7e6ee"/>
+      <stop offset="1" stop-color="#e6eff1"/>
+    </linearGradient>
+    <linearGradient id="wall" x1="0" y1="0" x2="0.15" y2="1">
+      <stop offset="0" stop-color="#a3968c"/><stop offset="1" stop-color="#92857b"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9a7c5f"/><stop offset="1" stop-color="#8a6e54"/>
+    </linearGradient>
+    <linearGradient id="boards" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="#8a5f3c"/><stop offset="1" stop-color="#7a5234"/>
+    </linearGradient>
+    <style>
+  .trim { fill: #fcfaf8; stroke: #b3a69c; stroke-width: 1; stroke-linejoin: round; }
+  .panel { fill: #e7dcd3; stroke: #b3a69c; stroke-width: 0.9; }
+  .sash { fill: #fcfaf8; stroke: #b3a69c; stroke-width: 1; }
+  .score { stroke: #b3a69c; stroke-width: 0.9; fill: none; opacity: 0.8; }
+  .cast { fill: rgba(38,28,22,0.22); }
+  .soft { fill: rgba(38,28,22,0.20); }
+</style>
+  </defs>
+  <rect width="400" height="500" fill="url(#wall)"/>
+  <rect width="400" height="500" fill="url(#boards)"/>
+  <rect x="0" y="38" width="400" height="3" fill="rgba(0,0,0,0.26)"/>
+  <rect x="0" y="41" width="400" height="2" fill="rgba(255,255,255,0.22)"/>
+  <rect x="0" y="76" width="400" height="3" fill="rgba(0,0,0,0.26)"/>
+  <rect x="0" y="79" width="400" height="2" fill="rgba(255,255,255,0.22)"/>
+  <rect x="0" y="114" width="400" height="3" fill="rgba(0,0,0,0.26)"/>
+  <rect x="0" y="117" width="400" height="2" fill="rgba(255,255,255,0.22)"/>
+  <rect x="0" y="152" width="400" height="3" fill="rgba(0,0,0,0.26)"/>
+  <rect x="0" y="155" width="400" height="2" fill="rgba(255,255,255,0.22)"/>
+  <rect x="0" y="190" width="400" height="3" fill="rgba(0,0,0,0.26)"/>
+  <rect x="0" y="193" width="400" height="2" fill="rgba(255,255,255,0.22)"/>
+  <rect x="0" y="228" width="400" height="3" fill="rgba(0,0,0,0.26)"/>
+  <rect x="0" y="231" width="400" height="2" fill="rgba(255,255,255,0.22)"/>
+  <rect x="0" y="266" width="400" height="3" fill="rgba(0,0,0,0.26)"/>
+  <rect x="0" y="269" width="400" height="2" fill="rgba(255,255,255,0.22)"/>
+  <rect x="0" y="304" width="400" height="3" fill="rgba(0,0,0,0.26)"/>
+  <rect x="0" y="307" width="400" height="2" fill="rgba(255,255,255,0.22)"/>
+  <rect x="0" y="342" width="400" height="3" fill="rgba(0,0,0,0.26)"/>
+  <rect x="0" y="345" width="400" height="2" fill="rgba(255,255,255,0.22)"/>
+  <rect x="0" y="380" width="400" height="3" fill="rgba(0,0,0,0.26)"/>
+  <rect x="0" y="383" width="400" height="2" fill="rgba(255,255,255,0.22)"/>
+  <rect class="cast" x="0" y="404" width="400" height="12"/>
+  <rect class="trim" x="0" y="416" width="400" height="46"/>
+  <rect class="panel" x="0" y="462" width="400" height="38"/>
+  <path class="score" d="M0 462H400"/>
+</svg>

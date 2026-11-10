@@ -174,6 +174,25 @@ The `?for=` name is optional. When it is there the greeting uses it and the clie
 not asked to type their name at the end; without it, they are. Answers come back to the
 same Formspree inbox as the contact form, with a text-message fallback if that fails.
 
+### Building a client's quiz
+
+Not every job needs every question. **`/quiz-builder`** is your own page (also unlinked
+and `noindex`): tick the questions this job actually needs, type the client's first
+name, and it writes the link for you to copy and text over. There is a button to open
+it yourself first.
+
+Under the bonnet it just adds `?q=`:
+
+```
+https://cleovalentinebuilds.com/quiz?for=Jess&q=baseboard,deck-railing
+```
+
+The ids are the `id` fields in `js/quiz-data.js`, and **the order in the link is the
+order the client sees**, so a quiz can be arranged to suit the job. Leave `?q=` off and
+they get every question. An id that doesn't exist is skipped rather than breaking the
+page. Nothing is stored anywhere &mdash; the whole choice travels in the link, which is
+why this works on a site with no server behind it.
+
 It is separate from `/picks`, which is a head-to-head tournament for narrowing a long
 list of photos. Use the quiz for "which of these four", and picks for "which of these
 twenty".
@@ -222,8 +241,9 @@ folders to the options that go in them.
 
 ### Removing it
 
-Delete `quiz.html`, `css/quiz.css`, `js/quiz.js`, `js/quiz-data.js`,
-`scripts/build_quiz_art.py` and `images/quiz/`. Nothing else refers to them.
+Delete `quiz.html`, `quiz-builder.html`, `css/quiz.css`, `js/quiz.js`,
+`js/quiz-builder.js`, `js/quiz-data.js`, `scripts/build_quiz_art.py` and
+`images/quiz/`. Nothing else refers to them.
 
 ## Caching
 

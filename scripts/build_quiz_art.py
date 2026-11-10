@@ -202,6 +202,171 @@ def door(panels):
     return svg + "</svg>\n"
 
 
+# ================================================================ baseboard
+# Cropped close, so the difference between a 3 and a 7 inch board is obvious.
+BB_FLOOR_Y = 382
+BB_CASING_L, BB_CASING_R = 36, 74
+INCH = 14.0
+
+
+def baseboard(inches):
+    """Wall, floor, and a baseboard of the given height dying into a door casing.
+    The casing gives the eye something to measure the height against."""
+    h = inches * INCH
+    top = BB_FLOOR_Y - h
+    svg = open_svg()
+    svg += f'  <rect x="0" y="{BB_FLOOR_Y}" width="{W}" height="{H - BB_FLOOR_Y}" fill="url(#floor)"/>\n'
+    svg += f'  <rect class="trim" x="{BB_CASING_L}" y="0" width="{BB_CASING_R - BB_CASING_L}" height="{BB_FLOOR_Y}"/>\n'
+    svg += f'  <rect class="trim" x="{BB_CASING_R}" y="{top:.1f}" width="{W - BB_CASING_R}" height="{h:.1f}"/>\n'
+    # A cap that stands proud of the face, and the shadow it throws down it
+    svg += f'  <rect class="trim" x="{BB_CASING_R}" y="{top:.1f}" width="{W - BB_CASING_R}" height="9"/>\n'
+    svg += f'  <rect class="soft" x="{BB_CASING_R}" y="{top + 9:.1f}" width="{W - BB_CASING_R}" height="4"/>\n'
+    svg += f'  <rect class="cast" x="{BB_CASING_R}" y="{BB_FLOOR_Y}" width="{W - BB_CASING_R}" height="7"/>\n'
+    return svg + "</svg>\n"
+
+
+# ================================================================ deck railing
+R_POST_L, R_POST_R = (46, 78), (322, 354)
+R_TOP, R_TOP_B = 110, 132
+R_BOT, R_BOT_B = 372, 390
+R_DECK_Y, R_YARD_Y = 400, 330
+METAL = "#2d2d2d"
+CABLE = "#9fa5a6"
+
+OUTDOOR_DEFS = """
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#bed5e2"/><stop offset="1" stop-color="#e2ebe8"/>
+    </linearGradient>
+    <linearGradient id="yard" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8fa07a"/><stop offset="1" stop-color="#7d8f6a"/>
+    </linearGradient>"""
+
+
+def rail_scene():
+    svg = open_svg(OUTDOOR_DEFS)
+    svg += f'  <rect width="{W}" height="{R_YARD_Y}" fill="url(#sky)"/>\n'
+    svg += f'  <rect y="{R_YARD_Y}" width="{W}" height="{R_DECK_Y - R_YARD_Y}" fill="url(#yard)"/>\n'
+    svg += f'  <rect y="{R_DECK_Y}" width="{W}" height="{H - R_DECK_Y}" fill="url(#floor)"/>\n'
+    for y in range(R_DECK_Y + 16, H, 22):
+        svg += f'  <path class="soft" d="M0 {y}H{W}"/>\n'
+    return svg
+
+
+def rail_frame():
+    """Posts and rails - the parts every railing has."""
+    svg = ""
+    for x0, x1 in (R_POST_L, R_POST_R):
+        svg += f'  <rect class="trim" x="{x0}" y="{R_TOP}" width="{x1 - x0}" height="{R_DECK_Y - R_TOP}"/>\n'
+    svg += f'  <rect class="trim" x="{R_POST_L[0] - 16}" y="{R_TOP}" width="{R_POST_R[1] - R_POST_L[0] + 32}" height="{R_TOP_B - R_TOP}"/>\n'
+    svg += f'  <rect class="trim" x="{R_POST_L[1]}" y="{R_BOT}" width="{R_POST_R[0] - R_POST_L[1]}" height="{R_BOT_B - R_BOT}"/>\n'
+    return svg
+
+
+def railing(kind):
+    svg = rail_scene()
+    x0, x1 = R_POST_L[1], R_POST_R[0]
+    y0, y1 = R_TOP_B, R_BOT
+    if kind == "metal":
+        x = x0 + 13
+        while x < x1 - 4:
+            svg += f'  <rect x="{x}" y="{y0}" width="5" height="{y1 - y0}" fill="{METAL}"/>\n'
+            x += 26
+    elif kind == "picket":
+        x = x0 + 8
+        while x < x1 - 16:
+            svg += f'  <rect class="trim" x="{x}" y="{y0}" width="17" height="{y1 - y0}"/>\n'
+            x += 33
+    elif kind == "cable":
+        y = y0 + 16
+        while y < y1 - 6:
+            svg += f'  <rect x="{x0}" y="{y}" width="{x1 - x0}" height="3.5" fill="{CABLE}"/>\n'
+            y += 33
+    elif kind == "slat":
+        y = y0 + 4
+        while y < y1 - 18:
+            svg += f'  <rect class="trim" x="{x0}" y="{y}" width="{x1 - x0}" height="19"/>\n'
+            y += 30
+    return svg + rail_frame() + "</svg>\n"
+
+
+# ================================================================ porch ceiling
+CEILING = {
+    "stained": ("#8a5f3c", "#7a5234"),
+    "white": ("#f4f1ec", "#e6e1da"),
+    "cedar": ("#c99a68", "#bb8d5d"),
+    "haint": ("#b9ccc8", "#a9bdb9"),
+}
+
+
+def porch_ceiling(finish):
+    """Boards running across the underside, a beam, and the top of a column."""
+    light, dark = CEILING[finish]
+    svg = open_svg(f"""
+    <linearGradient id="boards" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="{light}"/><stop offset="1" stop-color="{dark}"/>
+    </linearGradient>""")
+    svg += f'  <rect width="{W}" height="{H}" fill="url(#boards)"/>\n'
+    # Each joint is a dark line with a lighter one under it, which is what a
+    # V-groove between two boards actually looks like from below.
+    for y in range(38, 408, 38):
+        svg += (f'  <rect x="0" y="{y}" width="{W}" height="3" fill="rgba(0,0,0,0.26)"/>\n'
+                f'  <rect x="0" y="{y + 3}" width="{W}" height="2" fill="rgba(255,255,255,0.22)"/>\n')
+    # A painted beam across the end of the run, the way a porch is usually framed
+    svg += f'  <rect class="cast" x="0" y="{H - 96}" width="{W}" height="12"/>\n'
+    svg += f'  <rect class="trim" x="0" y="{H - 84}" width="{W}" height="46"/>\n'
+    svg += f'  <rect class="panel" x="0" y="{H - 38}" width="{W}" height="38"/>\n'
+    svg += f'  <path class="score" d="M0 {H - 38}H{W}"/>\n'
+    return svg + "</svg>\n"
+
+
+# ================================================================ hardware
+FINISH = {
+    "black": ("#2b2b2b", "#4a4a4a"),
+    "brass": ("#b08d4f", "#cfae72"),
+    "nickel": ("#b2b8ba", "#d2d7d8"),
+    "bronze": ("#4b3a2f", "#6b5445"),
+}
+
+
+def hardware(finish):
+    """A lever on a door, close enough that the finish is the whole picture."""
+    base, shine = FINISH[finish]
+    svg = open_svg()
+    svg += f'  <rect class="trim" width="{W}" height="{H}"/>\n'
+    svg += f'  <rect class="panel" x="268" y="0" width="{W - 268}" height="{H}"/>\n'
+    svg += f'  <rect class="soft" x="268" y="0" width="4" height="{H}"/>\n'
+    # Lever first, so the rose sits on top of where it enters the door
+    svg += f'  <rect x="44" y="237" width="124" height="26" rx="13" fill="{base}"/>\n'
+    svg += f'  <rect x="52" y="241" width="104" height="7" rx="3.5" fill="{shine}" opacity="0.75"/>\n'
+    svg += f'  <circle cx="178" cy="250" r="44" fill="{base}"/>\n'
+    svg += f'  <circle cx="178" cy="243" r="33" fill="{shine}" opacity="0.5"/>\n'
+    svg += f'  <circle cx="178" cy="250" r="44" fill="none" stroke="{shine}" stroke-width="2" opacity="0.45"/>\n'
+    svg += f'  <ellipse cx="178" cy="300" rx="44" ry="10" fill="rgba(38,28,22,0.16)"/>\n'
+    return svg + "</svg>\n"
+
+
+# ================================================================ crown
+CROWN_CEIL = "#efe9e2"
+
+
+def crown(pieces):
+    """Ceiling meeting wall, with 0 to 3 pieces of moulding in the corner."""
+    ceil_y = 92
+    svg = open_svg()
+    svg += f'  <rect width="{W}" height="{ceil_y}" fill="{CROWN_CEIL}"/>\n'
+    if not pieces:
+        svg += f'  <path class="score" d="M0 {ceil_y}H{W}"/>\n'
+        svg += f'  <rect class="soft" x="0" y="{ceil_y}" width="{W}" height="5"/>\n'
+        return svg + "</svg>\n"
+    depth = {1: 28, 2: 46, 3: 66}[pieces]
+    svg += f'  <rect class="cast" x="0" y="{ceil_y + depth}" width="{W}" height="7"/>\n'
+    svg += f'  <rect class="trim" x="0" y="{ceil_y}" width="{W}" height="{depth}"/>\n'
+    for i in range(1, pieces + 1):
+        y = ceil_y + depth * i / (pieces + 1)
+        svg += f'  <path class="score" d="M0 {y:.1f}H{W}"/>\n'
+    return svg + "</svg>\n"
+
+
 # ================================================================ output
 SETS = {
     "01-window-door-trim": [
@@ -215,6 +380,35 @@ SETS = {
         ("two-panel.svg", lambda: door(2)),
         ("three-panel.svg", lambda: door(3)),
         ("five-panel.svg", lambda: door(5)),
+    ],
+    "03-baseboard": [
+        ("three-quarter.svg", lambda: baseboard(3.25)),
+        ("five-quarter.svg", lambda: baseboard(5.25)),
+        ("seven-quarter.svg", lambda: baseboard(7.25)),
+    ],
+    "04-deck-railing": [
+        ("black-metal.svg", lambda: railing("metal")),
+        ("wood-picket.svg", lambda: railing("picket")),
+        ("cable.svg", lambda: railing("cable")),
+        ("horizontal-slat.svg", lambda: railing("slat")),
+    ],
+    "05-porch-ceiling": [
+        ("stained.svg", lambda: porch_ceiling("stained")),
+        ("painted-white.svg", lambda: porch_ceiling("white")),
+        ("natural-cedar.svg", lambda: porch_ceiling("cedar")),
+        ("haint-blue.svg", lambda: porch_ceiling("haint")),
+    ],
+    "06-hardware-finish": [
+        ("matte-black.svg", lambda: hardware("black")),
+        ("brass.svg", lambda: hardware("brass")),
+        ("brushed-nickel.svg", lambda: hardware("nickel")),
+        ("oil-rubbed-bronze.svg", lambda: hardware("bronze")),
+    ],
+    "07-crown-moulding": [
+        ("none.svg", lambda: crown(0)),
+        ("single-cove.svg", lambda: crown(1)),
+        ("two-piece.svg", lambda: crown(2)),
+        ("built-up.svg", lambda: crown(3)),
     ],
 }
 

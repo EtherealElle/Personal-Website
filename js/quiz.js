@@ -10,12 +10,26 @@
 
   var $ = function (sel, ctx) { return (ctx || document).querySelector(sel); };
   var data = window.QUIZ || { questions: [] };
-  var questions = data.questions || [];
-  if (!questions.length) return;
+  var all = data.questions || [];
+  if (!all.length) return;
 
   // Name from the link, e.g. /quiz?for=Jess
   var params = new URLSearchParams(location.search);
   var invited = (params.get("for") || "").replace(/[<>]/g, "").trim().slice(0, 40);
+
+  // Which questions, e.g. /quiz?q=baseboard,deck-railing. The link's order wins, so
+  // a quiz can be arranged for the job in hand. An unknown id is skipped rather than
+  // breaking the page, and no ?q= at all means every question.
+  var wanted = (params.get("q") || "").split(",").map(function (s) { return s.trim(); })
+    .filter(Boolean);
+  var questions = all;
+  if (wanted.length) {
+    questions = wanted.map(function (id) {
+      for (var i = 0; i < all.length; i++) if (all[i].id === id) return all[i];
+      return null;
+    }).filter(Boolean);
+    if (!questions.length) questions = all;
+  }
 
   var answers = {};
   var at = 0;
