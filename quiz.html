@@ -14,8 +14,30 @@
     (function () {
       var ok = false;
       try { var c = document.createElement("canvas"); ok = !!(c.getContext("webgl2") || c.getContext("webgl")); } catch (e) { ok = false; }
+      // The 3D code is loaded as modules through an import map; browsers before
+      // iOS 16.4 can't do that, so they'd sit on "Loading" forever
+      if (!(window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports("importmap"))) ok = false;
       if (!ok) location.replace("/quiz-classic" + location.search);
       document.documentElement.classList.replace("no-js", "js");
+    })();
+
+    // If the 3D hasn't put a room on screen in 15 seconds, or anything breaks first,
+    // say so and offer the flat version, rather than sitting on a blank page
+    (function () {
+      var errors = [];
+      function fail(why) {
+        if (window.__quizReady || window.__quizFailed) return;
+        window.__quizFailed = true;
+        var box = document.querySelector("[data-fallback]");
+        if (!box) return;
+        box.querySelector("a").href = "/quiz-classic" + location.search;
+        box.querySelector("small").textContent = why;
+        box.hidden = false;
+      }
+      window.__quizFail = fail;
+      addEventListener("error", function (e) { errors.push(e.message || "script error"); fail(errors[0]); });
+      addEventListener("unhandledrejection", function (e) { var r = e.reason; fail((r && r.message) || String(r)); });
+      setTimeout(function () { fail("Timed out" + (errors.length ? ": " + errors[0] : "")); }, 15000);
     })();
   </script>
   <script type="importmap">
@@ -29,7 +51,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/quiz3d.css?v=0644fd60">
+  <link rel="stylesheet" href="css/quiz3d.css?v=63335801">
 </head>
 <body>
   <!-- The 3D house behind everything; the questions scroll over it -->
@@ -86,6 +108,15 @@
     <nav class="explore__rooms" data-rooms aria-label="Your picks"></nav>
   </div>
 
+  <section class="failed" data-fallback hidden>
+    <div class="panel">
+      <h1 class="title title--sm">The 3D didn't<br><em>load here.</em></h1>
+      <p class="blurb">Same questions, as simple cards instead &mdash; it only takes a tap.</p>
+      <a class="btn btn--solid btn--wide" href="/quiz-classic">Continue</a>
+      <small class="why"></small>
+    </div>
+  </section>
+
   <section class="failed" data-failed hidden>
     <div class="panel">
       <h1 class="title title--sm">Something<br><em>went wrong.</em></h1>
@@ -100,6 +131,6 @@
   </noscript>
 
   <script src="js/quiz-core.js?v=89cc95af"></script>
-  <script type="module" src="js/quiz3d.js?v=3a889aa9"></script>
+  <script type="module" src="js/quiz3d.js?v=4586b9af" onerror="window.__quizFail(&quot;The 3D code did not load&quot;)"></script>
 </body>
 </html>

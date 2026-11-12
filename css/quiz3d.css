@@ -178,3 +178,5 @@ body.is-exploring .veil { z-index: 21; }
 .room[aria-current="true"] small { color: #c9c3ba; }
 
 .failed { position: fixed; inset: 0; z-index: 40; display: grid; place-items: center; padding: 1rem; background: var(--bg); }
+
+.why { display: block; font-size: 0.72rem; color: var(--ink-soft); word-break: break-word; }

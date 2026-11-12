@@ -467,15 +467,11 @@ function wireForm() {
 
 async function start() {
   let catalog;
-  try {
-    [catalog, scenes] = await Promise.all([QuizCore.load(), import("/scripts/quiz-render/scenes.js")]);
-  } catch (e) {
-    console.error(e);
-    // The 3D couldn't load (or the catalog): the flat quiz asks the same questions
-    if (catalog) location.replace("/quiz-classic" + location.search);
-    else $("[data-failed]").hidden = false;
-    return;
-  }
+  try { catalog = await QuizCore.load(); }
+  catch (e) { $("[data-failed]").hidden = false; return; }
+  // If the 3D itself can't load, the flat quiz asks the same questions
+  try { scenes = await import("/scripts/quiz-render/scenes.js"); }
+  catch (e) { window.__quizFail("Couldn't load the 3D: " + (e && e.message)); return; }
   const parsed = QuizCore.parse(catalog, location.search);
   items = parsed.items;
   name = parsed.name;
@@ -511,7 +507,9 @@ async function start() {
 
   [$("[data-intro]"), ...items.map((it) => it.sec), $("[data-finale]")].forEach((s) => watcher.observe(s));
   await show(items[0], { instant: true });
+  if (rooms.size || !photo.hidden) window.__quizReady = true;
+  else window.__quizFail("The first room didn't build");
   progress();
 }
 
-start();
+start().catch((e) => window.__quizFail(e && e.message ? e.message : String(e)));
