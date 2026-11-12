@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Page not found — Cleo Valentine Builds</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#f7f2f1">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+  <!-- GitHub Pages serves this file for any address that doesn't match a page, so it
+       runs before anything is painted and quietly fixes the addresses that go wrong in
+       practice: a trailing slash (/quiz/), a stray .html, and a link that arrived with
+       the page name doubled up. Anything it can't place falls through to the page. -->
+  <script>
+  (function () {
+    var KNOWN = ["gallery", "small-jobs", "contact", "referrals", "quiz", "quiz-builder", "picks"];
+    var here = location.pathname;
+    var tail = here.replace(/\/+$/, "").replace(/\.html$/, "").split("/").pop();
+    var to = null;
+
+    if (KNOWN.indexOf(tail) !== -1) {
+      to = "/" + tail;
+    } else if (tail) {
+      // Longest first, so "quiz-builder" is preferred over "quiz"
+      var by = KNOWN.slice().sort(function (a, b) { return b.length - a.length; });
+      for (var i = 0; i < by.length; i++) {
+        if (tail.slice(-by[i].length) === by[i]) { to = "/" + by[i]; break; }
+      }
+    }
+
+    if (to && to !== here) location.replace(to + location.search + location.hash);
+  })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* Self-contained: this page has to work even when something else is broken. */
+    :root {
+      --bg: #f7f2f1; --ink: #171614; --ink-soft: #5d5a54;
+      --line: rgba(23,22,20,0.14); --accent: #f4b8c9; --accent-ink: #b85a7c;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100svh; background: var(--bg); color: var(--ink);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif; line-height: 1.6;
+      display: flex; align-items: center; justify-content: center;
+      padding: 2rem 1.25rem calc(2rem + env(safe-area-inset-bottom));
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { width: 100%; max-width: 34rem; }
+    .brand {
+      display: flex; align-items: center; gap: 0.4em; text-decoration: none; color: inherit;
+      font-family: "Instrument Serif", Georgia, serif; font-size: 1.15rem; line-height: 1;
+      text-transform: uppercase; letter-spacing: 0.015em;
+    }
+    .brand svg { width: 0.56em; height: 0.56em; flex: none; fill: var(--accent-ink); }
+    h1 {
+      font-family: "Instrument Serif", Georgia, serif; font-weight: 400;
+      font-size: clamp(2.8rem, 14vw, 4rem); line-height: 0.95; letter-spacing: -0.02em;
+      margin: 1.5rem 0 0.75rem;
+    }
+    h1 em { font-style: italic; color: var(--accent-ink); }
+    p { margin: 0 0 1rem; color: var(--ink-soft); max-width: 40ch; }
+    .links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+    .links a {
+      display: inline-flex; align-items: center; min-height: 48px;
+      padding: 0.8rem 1.25rem; border: 1px solid var(--ink); border-radius: 999px;
+      text-decoration: none; color: inherit; font-size: 0.92rem; font-weight: 500;
+    }
+    .links a:first-child { background: var(--ink); color: var(--bg); }
+    .note { margin-top: 1.75rem; font-size: 0.86rem; }
+    .note a { color: var(--accent-ink); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a href="/" class="brand">
+      <span>Cleo</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.6C9.7 18.5 3.8 14.3 3.8 10.1 3.8 7.4 6 5.3 8.6 5.3 10.3 5.3 11.4 6.4 12 7.6 12.6 6.4 13.7 5.3 15.4 5.3 18 5.3 20.2 7.4 20.2 10.1 20.2 14.3 14.3 18.5 12 20.6Z"/></svg>
+      <span>Valentine</span>
+    </a>
+
+    <h1>That page<br><em>moved on.</em></h1>
+    <p>Nothing here at that address. It may have been mistyped, or a link may have been cut short on its way to you.</p>
+
+    <div class="links">
+      <a href="/">Home</a>
+      <a href="/gallery">Recent work</a>
+      <a href="/contact">Get an estimate</a>
+    </div>
+
+    <p class="note">
+      If someone sent you here, text me and I'll send the right link:
+      <a href="sms:4703019576">(470)&nbsp;301-9576</a>
+    </p>
+  </div>
+</body>
+</html>
