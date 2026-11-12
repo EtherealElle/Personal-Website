@@ -17,6 +17,17 @@ const SUPERSAMPLE = 2;
 let renderer = null;
 let envTex = null;
 
+// The same scenes run live in the quiz page as well as here. Live, the page brings its
+// own renderer, and a phone gets smaller textures and shadow maps: generating them is
+// the slow part, and a phone screen can't show the difference.
+let TEX_SCALE = 1;
+let SHADOW_SIZE = 4096;
+export function configureLive({ renderer: r, textureScale = 1, shadowSize = 2048 } = {}) {
+  if (r) renderer = r;
+  TEX_SCALE = textureScale;
+  SHADOW_SIZE = shadowSize;
+}
+
 export function getRenderer() {
   if (renderer) return renderer;
   renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
@@ -147,6 +158,7 @@ export function camera(pos, target, fov = 30) {
   const c = new THREE.PerspectiveCamera(fov, OUT_W / OUT_H, 1, 5000);
   c.position.set(...pos);
   c.lookAt(...target);
+  c.userData.target = target;   // where it's aimed, for a live camera to fly to
   return c;
 }
 
@@ -159,7 +171,7 @@ export function sun(scene, { from, at = [0, 0, 0], size = 60, intensity = 2.4, c
   l.position.set(at[0] + from[0], at[1] + from[1], at[2] + from[2]);
   l.target.position.set(...at);
   l.castShadow = true;
-  l.shadow.mapSize.set(4096, 4096);
+  l.shadow.mapSize.set(SHADOW_SIZE, SHADOW_SIZE);
   const c = l.shadow.camera;
   c.left = -size; c.right = size; c.top = size; c.bottom = -size;
   c.near = 1; c.far = depth;
@@ -227,6 +239,8 @@ const texCache = new Map();
 
 function canvasTex(key, w, h, paint, { repeat = [1, 1], srgb = true } = {}) {
   if (texCache.has(key)) return texCache.get(key);
+  w = Math.max(64, Math.round(w * TEX_SCALE));
+  h = Math.max(64, Math.round(h * TEX_SCALE));
   const cv = document.createElement("canvas");
   cv.width = w; cv.height = h;
   const g = cv.getContext("2d");

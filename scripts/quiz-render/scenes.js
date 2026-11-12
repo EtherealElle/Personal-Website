@@ -1113,6 +1113,18 @@ const BUILDERS = {
   handles: { build: buildHandles, options: ["knob", "lever", "curved", "glass", "square"] },
 };
 
+/** Build one question's scene with one style, for the live quiz. */
+export function buildScene(q, o) {
+  const b = BUILDERS[q];
+  if (!b || !b.options.includes(o)) return null;
+  return b.build(o);
+}
+
+/** Which styles of a question can be built in 3D (photo styles can't). */
+export function buildable(q) {
+  return BUILDERS[q] ? BUILDERS[q].options.slice() : [];
+}
+
 export function renderList() {
   const out = [];
   Object.entries(BUILDERS).forEach(([q, b]) => b.options.forEach((o) => out.push({ q, o })));

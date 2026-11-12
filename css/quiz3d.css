@@ -1,0 +1,180 @@
+/* The 3D design quiz: one page, a house behind it. Panels scroll over a fixed canvas;
+   on a phone they sit along the bottom, on a wider screen down the left, and the camera
+   frames each room in whatever space is left. */
+:root {
+  --bg: #f7f2f1;
+  --ink: #171614;
+  --ink-soft: #5d5a54;
+  --line: rgba(23, 22, 20, 0.14);
+  --accent: #f4b8c9;
+  --accent-soft: #fbe3ea;
+  --accent-ink: #b85a7c;
+  --glass: rgba(247, 242, 241, 0.86);
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0; color: var(--ink); background: #d9d3cc;
+  font-family: var(--font-sans); line-height: 1.55; -webkit-font-smoothing: antialiased;
+}
+body.is-exploring { overflow: hidden; }
+img { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
+
+/* ---------------------------------------------------------------- the stage */
+.stage { position: fixed; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; touch-action: pan-y; }
+body.is-exploring .stage { touch-action: none; z-index: 20; }
+.veil { position: fixed; inset: 0; z-index: 1; background: #e9e4df; opacity: 0; pointer-events: none; transition: opacity 0.22s ease; }
+.veil.is-on { opacity: 1; }
+body.is-exploring .veil { z-index: 21; }
+
+.building {
+  position: fixed; z-index: 3; left: 50%; top: 18%; transform: translateX(-50%); margin: 0;
+  padding: 0.5rem 1rem; border-radius: 999px; background: var(--glass); backdrop-filter: blur(10px);
+  font-size: 0.82rem; color: var(--ink-soft); letter-spacing: 0.04em;
+}
+
+.progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 30; background: rgba(23,22,20,0.08); }
+.progress i { display: block; height: 100%; width: 0; background: var(--accent-ink); transition: width 0.3s var(--ease); }
+
+/* A style that's a photo rather than a model: framed in the space the room would fill */
+.photo {
+  position: fixed; z-index: 2; margin: 0; left: 50%; transform: translateX(-50%);
+  top: calc(1.2rem + env(safe-area-inset-top)); width: min(78vw, 26rem);
+  background: #fff; padding: 0.5rem; border-radius: 12px; box-shadow: 0 18px 50px rgba(23,22,20,0.28);
+}
+.photo img { width: 100%; max-height: 46svh; object-fit: contain; border-radius: 6px; }
+
+/* ---------------------------------------------------------------- scrolling story */
+.story { position: relative; z-index: 4; }
+.intro, .q, .finale {
+  min-height: 100svh; display: flex; align-items: flex-end;
+  padding: 0 0.75rem calc(0.75rem + env(safe-area-inset-bottom));
+}
+.q { min-height: 112svh; }
+
+.panel {
+  width: 100%; max-width: 30rem; margin: 0 auto;
+  background: var(--glass); backdrop-filter: blur(16px) saturate(1.1); -webkit-backdrop-filter: blur(16px) saturate(1.1);
+  border: 1px solid rgba(255,255,255,0.6); border-radius: 18px;
+  box-shadow: 0 12px 40px rgba(23,22,20,0.16);
+  padding: 1.1rem 1.1rem 1.15rem; display: flex; flex-direction: column; gap: 0.7rem;
+}
+.panel--intro { padding: 1.4rem 1.3rem 1.4rem; gap: 0.9rem; }
+
+@media (min-width: 900px) {
+  .intro, .q, .finale { align-items: center; padding: 3rem 0 3rem 3.5vw; }
+  .panel { margin: 0; max-width: 27rem; }
+}
+
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 0.4em;
+  font-family: var(--font-display); font-size: 1.05rem; line-height: 1;
+  text-transform: uppercase; letter-spacing: 0.015em;
+}
+.heart { width: 0.56em; height: 0.56em; flex: none; fill: var(--accent-ink); }
+.title {
+  font-family: var(--font-display); font-weight: 400; margin: 0;
+  font-size: clamp(3rem, 15vw, 4.6rem); line-height: 0.92; letter-spacing: -0.02em;
+}
+.title em { font-style: italic; color: var(--accent-ink); }
+.title--sm { font-size: clamp(2.3rem, 11vw, 3.2rem); }
+.blurb { margin: 0; color: var(--ink-soft); }
+.blurb a { color: var(--accent-ink); }
+.meta { margin: 0; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  padding: 0.85rem 1.4rem; border-radius: 999px; border: 1px solid var(--ink);
+  font-size: 0.95rem; font-weight: 500; text-decoration: none; color: inherit; min-height: 48px;
+}
+.btn--solid { background: var(--ink); color: var(--bg); }
+.btn--line { background: transparent; }
+.btn--wide { width: 100%; }
+.btn--glass { background: var(--glass); border-color: transparent; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 4px 18px rgba(23,22,20,0.16); }
+.btn:disabled { opacity: 0.4; cursor: default; }
+.link { font-size: 0.86rem; color: var(--ink-soft); text-decoration: underline; text-underline-offset: 3px; min-height: 44px; align-self: center; }
+
+/* ---------------------------------------------------------------- a question */
+.q__step { font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); }
+.q__title { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.9rem, 8vw, 2.4rem); line-height: 1; letter-spacing: -0.02em; margin: 0; }
+.q__note { margin: 0; font-size: 0.88rem; color: var(--ink-soft); }
+
+/* Styles in a row you swipe along; tapping one rebuilds the room behind */
+.chips {
+  display: flex; gap: 0.5rem; overflow-x: auto; scroll-snap-type: x proximity;
+  margin: 0 -1.1rem; padding: 0.2rem 1.1rem 0.4rem; scrollbar-width: none;
+}
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: 0 0 6.6rem; scroll-snap-align: start; display: flex; flex-direction: column; text-align: left;
+  background: #fff; border: 1px solid var(--line); border-radius: 10px; overflow: hidden;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.chip img { width: 100%; aspect-ratio: 4 / 5; object-fit: contain; background: #e9e4df; }
+.chip span { font-size: 0.74rem; line-height: 1.25; font-weight: 600; padding: 0.38rem 0.45rem 0.45rem; }
+.chip[aria-pressed="true"] { border-color: var(--accent-ink); box-shadow: 0 0 0 2px var(--accent-ink); }
+.chip:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+
+.q__showing { margin: 0; font-size: 0.86rem; min-height: 1.3em; }
+.q__showing strong { font-weight: 600; }
+.q__showing span { color: var(--ink-soft); }
+.q__row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.9rem; }
+.none {
+  padding: 0.55rem 0.95rem; border-radius: 999px; min-height: 44px;
+  border: 1px dashed var(--ink-soft); color: var(--ink-soft); font-size: 0.84rem;
+}
+.none[aria-pressed="true"] { border-style: solid; border-color: var(--accent-ink); color: var(--accent-ink); background: var(--accent-soft); }
+.q__next { align-self: flex-end; font-size: 0.86rem; font-weight: 500; min-height: 44px; padding: 0 0.2rem; color: var(--ink); }
+
+.field { display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.84rem; color: var(--ink-soft); }
+.field input, .field textarea {
+  font: inherit; font-size: 1rem; color: var(--ink); background: #fff;
+  border: 1px solid var(--line); border-radius: 10px; padding: 0.65rem 0.8rem; width: 100%; resize: vertical; min-height: 44px;
+}
+.field input:focus, .field textarea:focus { outline: 2px solid var(--accent-ink); outline-offset: 1px; }
+
+/* ---------------------------------------------------------------- the end */
+.summary { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.summary li { display: flex; gap: 0.7rem; align-items: center; padding: 0.55rem 0; border-bottom: 1px solid var(--line); }
+.summary img { width: 3rem; flex: none; aspect-ratio: 4 / 5; object-fit: contain; background: #e9e4df; border-radius: 6px; }
+.summary div { display: flex; flex-direction: column; min-width: 0; }
+.summary small { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); }
+.summary strong { font-family: var(--font-display); font-weight: 400; font-size: 1.2rem; line-height: 1.15; }
+.summary em { font-size: 0.8rem; color: var(--ink-soft); }
+.summary .is-missing strong { color: var(--accent-ink); }
+.send { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.3rem; }
+.sent, .pending { margin: 0; font-size: 0.88rem; color: var(--accent-ink); }
+
+/* ---------------------------------------------------------------- walking round */
+.explore { position: fixed; inset: 0; z-index: 25; pointer-events: none; display: flex; flex-direction: column; justify-content: space-between; }
+.explore > * { pointer-events: auto; }
+.explore__top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: calc(0.9rem + env(safe-area-inset-top)) 0.9rem 0; }
+.explore__hint {
+  margin: 0; font-size: 0.78rem; padding: 0.45rem 0.85rem; border-radius: 999px;
+  background: var(--glass); backdrop-filter: blur(10px); color: var(--ink-soft); pointer-events: none;
+}
+.explore__rooms {
+  display: flex; gap: 0.5rem; overflow-x: auto; scrollbar-width: none;
+  padding: 0.75rem 0.9rem calc(0.9rem + env(safe-area-inset-bottom));
+}
+.explore__rooms::-webkit-scrollbar { display: none; }
+.room {
+  flex: 0 0 auto; display: flex; flex-direction: column; align-items: flex-start; gap: 0.05rem;
+  padding: 0.6rem 0.9rem; border-radius: 14px; min-height: 52px; text-align: left;
+  background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.6); box-shadow: 0 4px 18px rgba(23,22,20,0.14);
+}
+.room small { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); }
+.room strong { font-size: 0.9rem; font-weight: 600; white-space: nowrap; }
+.room[aria-current="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.room[aria-current="true"] small { color: #c9c3ba; }
+
+.failed { position: fixed; inset: 0; z-index: 40; display: grid; place-items: center; padding: 1rem; background: var(--bg); }

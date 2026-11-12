@@ -161,6 +161,15 @@ heart on an ink tile would match; ask when you want that done.
 
 ## Design quiz
 
+**It's a walk through a 3D house.** `/quiz` is one long page over a live 3D scene: each
+question is a room, and as the client scrolls, the camera glides into the next one.
+Tapping a style rebuilds that room with it in place. At the end, **Walk through your
+picks** lets them drag to look around each room and jump between rooms, with every
+choice they made in it. The rooms are built in the browser by the same code that makes
+the renders (`scripts/quiz-render/`), and on a phone with smaller textures and shadows.
+Phones without WebGL are sent to **`/quiz-classic`**, the same quiz as flat cards, with
+the same link. The code is `js/quiz3d.js` and `css/quiz3d.css`.
+
 `quiz.html` asks a client how they want the details built: one question per screen, a
 board of styles, tap the one you like. It is **not linked from the site** and carries a
 `noindex` tag, so it only reaches whoever you send it to. Fourteen questions and 75
