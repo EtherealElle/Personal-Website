@@ -9,7 +9,6 @@
    The link format and catalog are shared with the builder (js/quiz-core.js). */
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { configureLive, dispose } from "/scripts/quiz-render/lib.js";
 
 const FORMSPREE = "https://formspree.io/f/xvkgglnj";
 const PHONE = "4703019576";
@@ -29,7 +28,6 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.outputColorSpace = THREE.SRGBColorSpace;
-configureLive({ renderer, textureScale: isPhone ? 0.5 : 1, shadowSize: isPhone ? 1024 : 2048 });
 
 const BG = new THREE.Color(0xd9d3cc);
 const world = new THREE.Scene();
@@ -140,7 +138,7 @@ async function room(qid, oid, quiet = false) {
     env: built.scene.environment, bg: built.scene.background || BG, exposure: built.exposure || 1,
     pose: { pos: c.position.clone().add(off), target: new THREE.Vector3(...c.userData.target).add(off), fov: c.fov },
   };
-  if (r) { world.remove(r.group); dispose(r.group); }
+  if (r) { world.remove(r.group); scenes.dispose(r.group); }
   g.visible = active === qid;
   world.add(g);
   rooms.set(qid, next);
@@ -470,8 +468,11 @@ async function start() {
   try { catalog = await QuizCore.load(); }
   catch (e) { $("[data-failed]").hidden = false; return; }
   // If the 3D itself can't load, the flat quiz asks the same questions
-  try { scenes = await import("/scripts/quiz-render/scenes.js"); }
+  // Fingerprinted by scripts/stamp_versions.py, so a phone can never pair this page with
+  // an older copy of the scenes it has cached
+  try { scenes = await import("/scripts/quiz-render/scenes.js?v=73984aba"); }
   catch (e) { window.__quizFail("Couldn't load the 3D: " + (e && e.message)); return; }
+  scenes.configureLive({ renderer, textureScale: isPhone ? 0.5 : 1, shadowSize: isPhone ? 1024 : 2048 });
   const parsed = QuizCore.parse(catalog, location.search);
   items = parsed.items;
   name = parsed.name;

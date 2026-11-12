@@ -7,7 +7,11 @@ import {
   sweep, placeSweep, board, box, mesh, turned, woodBoard, paint, wallPaint, woodMat, woodTexture, metal,
   outdoorsTexture, skyTexture, grassTexture, brickTexture, stoneTexture, paintTexture, rand,
   flatProfile, colonialCasing, flutedCasing, capMoulding, arc, sCurve,
-} from "./lib.js";
+} from "./lib.js?v=5b77f93a";
+
+// The live quiz takes these from here rather than from lib.js directly, so the page and
+// the scenes share a single copy of lib.js (two copies would mean two renderers).
+export { configureLive, dispose } from "./lib.js?v=5b77f93a";
 
 const TRIM = 0xf2efe8;      // semi-gloss white trim
 const WALL = 0x9e968b;      // mid greige: white trim reads because the wall is darker
