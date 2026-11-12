@@ -159,91 +159,100 @@ the font; set `CHROME` if it is installed somewhere unusual.
 `favicon.svg` is unchanged — a wordmark cannot be a 16px tab icon. Replacing it with a
 heart on an ink tile would match; ask when you want that done.
 
-## Design quiz (temporary)
+## Design quiz
 
-`quiz.html` is a private page for asking a client how they want the details built.
-One question per screen, four options on a board, tap the one you like. It is **not
-linked from the site** and carries a `noindex` tag, so it only reaches whoever you
-send it to:
+`quiz.html` asks a client how they want the details built: one question per screen, a
+board of styles, tap the one you like. It is **not linked from the site** and carries a
+`noindex` tag, so it only reaches whoever you send it to. Fourteen questions and 75
+styles so far &mdash; trim, doors, baseboards, crown, wainscoting, built-ins, mantels,
+deck railing, deck boards, porch ceilings, columns, fences, hardware finish and handle
+style.
 
-```
-https://cleovalentinebuilds.com/quiz?for=Jess
-```
+On each question the client can:
 
-The `?for=` name is optional. When it is there the greeting uses it and the client is
-not asked to type their name at the end; without it, they are. Answers come back to the
-same Formspree inbox as the contact form, with a text-message fallback if that fails.
+- **tap a style** to choose it (nothing moves on until they press Next),
+- **tap the magnifier** to see it full screen, and choose from there,
+- pick **None of these are quite right**, which opens a note so they can say why,
+- **add a note** about any question &mdash; it comes through with their answer.
 
-### Building a client's quiz
+When the link carries their name they're greeted by it and **never asked for it**. If
+they reload halfway through, they pick up where they left off. Answers and notes come to
+the same Formspree inbox as the contact form, as `Design quiz - <name>`, with a text
+message as the fallback if Formspree can't be reached.
 
-Not every job needs every question. **`/quiz-builder`** is your own page (also unlinked
-and `noindex`): tick the questions this job actually needs, type the client's first
-name, and it writes the link for you to copy and text over. There is a button to open
-it yourself first.
+### Sending one: `/quiz-builder`
 
-Under the bonnet it just adds `?q=`:
+Your page, also unlinked and `noindex`. Bookmark it on your phone.
 
-```
-https://cleovalentinebuilds.com/quiz?for=Jess&q=baseboard,deck-railing
-```
+1. Type the client's first name.
+2. Tick the questions this job needs.
+3. Open any question to choose **which styles** they see. Each needs at least two.
+4. **Text it** opens Messages with the link written in; or copy it, or open it yourself
+   first.
 
-The ids are the `id` fields in `js/quiz-data.js`, and **the order in the link is the
-order the client sees**, so a quiz can be arranged to suit the job. Leave `?q=` off and
-they get every question. An id that doesn't exist is skipped rather than breaking the
-page. Nothing is stored anywhere &mdash; the whole choice travels in the link, which is
-why this works on a site with no server behind it.
-
-It is separate from `/picks`, which is a head-to-head tournament for narrowing a long
-list of photos. Use the quiz for "which of these four", and picks for "which of these
-twenty".
-
-### Adding or changing questions
-
-Everything lives in `js/quiz-data.js` — one entry per question, 2 to 6 options each:
-
-```js
-{
-  id: "porch-ceiling",               // appears in the emailed answer
-  title: "Porch ceiling",
-  note: "Optional line under the question",
-  options: [
-    { label: "Stained tongue and groove",
-      note: "Optional line under the label",
-      image: "images/work/stained-tongue-groove-porch-ceiling.jpg" }
-  ]
-}
-```
-
-Any image the browser can load works — a drawing, or a photo from `images/work/`.
-Photos are fitted inside the tile, never cropped. Run `python scripts/stamp_versions.py`
-after editing so the new file reaches people with the old one cached.
-
-### The drawings
-
-Everything under `images/quiz/` is drawn rather than photographed, by
-`scripts/build_quiz_art.py`. Four photos of four different houses would differ in wall
-colour, window size and light, so the client would be picking a room rather than a
-detail. Within a question these are the same room in the same light, and only the
-thing being asked about changes.
+The link carries everything, so nothing is stored anywhere:
 
 ```
-python scripts/build_quiz_art.py
+https://cleovalentinebuilds.com/quiz?for=Jess&trim=square.22.cap&doors
 ```
 
-The walls are a mid greige and the trim is near-white, about 3:1 apart. That is how a
-real room works &mdash; white trim reads *because* the wall behind it is darker &mdash;
-and it is the only way the casing stays legible in a thumbnail on a phone. Drawn on a
-pale wall, as it was first, the trim measured 1.2:1 and effectively vanished.
+`trim=square.22.cap` means that question, with those styles. `doors` on its own means
+that question with its default styles. Questions appear in the order they're listed.
+Older links (`?q=window-door-trim,interior-doors`) still work, as do a question's old
+names; anything unrecognised, like the tracking tag Facebook adds to shared links, is
+ignored.
 
-Edit the palette or the shared geometry at the top of that script to change the look,
-and the option functions to change a cut or a panel count. `SETS` at the bottom maps
-folders to the options that go in them.
+The quiz and the builder share one file for reading and writing these links,
+`js/quiz-core.js`, so the link the builder writes is always the one the quiz reads.
+
+### Changing what's in it: Pages CMS
+
+The catalog is `data/quiz.json`, and it's editable in **Pages CMS under Design quiz**:
+
+- **Show by default** decides whether a style is included unless you untick it in the
+  builder. Use it to retire a style without deleting it.
+- Rename a style, rewrite its description, reorder styles or questions.
+- **Add your own style** with a photo &mdash; of a finished job, say. Upload it as the
+  Picture and leave Small version empty. It's shown whole, never cropped, and the GitHub
+  Action shrinks it and strips its location data on the way in, since a phone photo of a
+  client's room records where it was taken.
+- Don't change a **Link name** once a link using it has gone out.
+
+### The renders
+
+Every built-in style is a 3D render, not a photo. Four photos of four different houses
+would differ in wall colour, window size and light, so the client would be choosing a
+room rather than a detail. Within a question these are the same room, the same light and
+the same lens, and only the thing being asked about changes.
+
+They're built from real dimensions in inches &mdash; casings swept from actual moulding
+profiles with mitred corners, crown meeting in an inside corner, baseboards turning an
+outside corner so the profile shows end-on &mdash; then lit with a raking light and
+ambient occlusion and rendered in headless Chrome:
+
+```
+node scripts/quiz-render/render.mjs              # everything
+node scripts/quiz-render/render.mjs trim doors   # some questions
+node scripts/quiz-render/render.mjs trim/22      # one style
+```
+
+Each style is written as `images/quiz/<question>/<style>.webp` (1000&times;1250) and
+`<style>-sm.webp` (500&times;625). The scenes are in `scripts/quiz-render/scenes.js`, one
+builder per question; shared geometry, materials and textures are in `lib.js`. Adding a
+rendered style means a few lines in its builder, a render, and an entry in
+`data/quiz.json`. Needs Chrome and a network connection for three.js, which is pinned in
+`render.html`.
 
 ### Removing it
 
 Delete `quiz.html`, `quiz-builder.html`, `css/quiz.css`, `js/quiz.js`,
-`js/quiz-builder.js`, `js/quiz-data.js`, `scripts/build_quiz_art.py` and
-`images/quiz/`. Nothing else refers to them.
+`js/quiz-builder.js`, `js/quiz-core.js`, `data/quiz.json`, `images/quiz/` and
+`scripts/quiz-render/`, and the `quiz` entries in `.pages.yml`. Nothing else refers to
+them.
+
+It is separate from `/picks`, which is a head-to-head tournament for narrowing a long
+list of photos. Use the quiz for "which of these styles", and picks for "which of these
+twenty photos".
 
 ## Caching
 

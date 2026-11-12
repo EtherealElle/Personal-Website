@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/quiz.css?v=0233105b">
+  <link rel="stylesheet" href="css/quiz.css?v=d1a7b294">
 </head>
 <body>
   <main class="app">
@@ -23,9 +23,9 @@
       <div class="intro">
         <span class="eyebrow">Cleo <svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.6C9.7 18.5 3.8 14.3 3.8 10.1 3.8 7.4 6 5.3 8.6 5.3 10.3 5.3 11.4 6.4 12 7.6 12.6 6.4 13.7 5.3 15.4 5.3 18 5.3 20.2 7.4 20.2 10.1 20.2 14.3 14.3 18.5 12 20.6Z"/></svg> Valentine</span>
         <h1 class="title">Design<br><em>quiz.</em></h1>
-        <p class="blurb" data-blurb></p>
+        <p class="blurb" data-blurb>Loading&hellip;</p>
         <p class="meta" data-meta></p>
-        <button class="btn btn--solid" type="button" data-start>Start</button>
+        <button class="btn btn--solid" type="button" data-start disabled>Start</button>
       </div>
     </section>
 
@@ -43,6 +43,21 @@
       </div>
 
       <div class="board" data-board role="group" aria-label="Choose one"></div>
+
+      <div class="extras">
+        <button class="none" type="button" data-none aria-pressed="false">None of these are quite right</button>
+        <div class="qnote">
+          <button class="link link--left" type="button" data-note-toggle aria-expanded="false">+ Add a note about this</button>
+          <label class="field" data-note-field hidden>
+            <span>Your note</span>
+            <textarea rows="3" maxlength="500" data-note-text placeholder="Anything you like or don't, or what you'd change"></textarea>
+          </label>
+        </div>
+      </div>
+
+      <div class="nextbar">
+        <button class="btn btn--solid btn--wide" type="button" data-next disabled>Next</button>
+      </div>
     </section>
 
     <!-- ============ RESULTS ============ -->
@@ -57,8 +72,8 @@
             <input type="text" name="client" autocomplete="name" maxlength="60" required>
           </label>
           <label class="field">
-            <span>Anything you want to add? (optional)</span>
-            <textarea name="notes" rows="3" maxlength="600"></textarea>
+            <span>Anything else? (optional)</span>
+            <textarea name="notes" rows="3" maxlength="800"></textarea>
           </label>
           <button class="btn btn--solid" type="submit">Send to Cleo</button>
           <p class="sent" data-sent hidden>Sent. Thank you &mdash; I'll come back to you.</p>
@@ -69,7 +84,27 @@
       </div>
     </section>
 
+    <section class="screen" id="screen-error" hidden>
+      <div class="intro">
+        <h1 class="title title--sm">Something<br><em>went wrong.</em></h1>
+        <p class="blurb">The quiz didn't load. Text me and I'll send the link again, or walk you through it: <a href="sms:4703019576">(470)&nbsp;301-9576</a></p>
+      </div>
+    </section>
+
   </main>
+
+  <!-- A closer look at one style -->
+  <div class="zoom" data-zoom hidden role="dialog" aria-modal="true" aria-labelledby="zoom-label">
+    <button class="zoom__close" type="button" data-zoom-close aria-label="Close">&times;</button>
+    <figure class="zoom__fig">
+      <img data-zoom-img alt="">
+      <figcaption>
+        <strong id="zoom-label" data-zoom-label></strong>
+        <span data-zoom-note></span>
+      </figcaption>
+    </figure>
+    <button class="btn btn--solid btn--wide" type="button" data-zoom-pick>Choose this one</button>
+  </div>
 
   <noscript>
     <p style="padding:2rem;font:1rem/1.6 Inter,system-ui,sans-serif">
@@ -78,7 +113,7 @@
     </p>
   </noscript>
 
-  <script src="js/quiz-data.js?v=0a017014"></script>
-  <script src="js/quiz.js?v=7e9dcd83"></script>
+  <script src="js/quiz-core.js?v=89cc95af"></script>
+  <script src="js/quiz.js?v=59ebba17"></script>
 </body>
 </html>

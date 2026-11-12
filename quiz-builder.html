@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Build a Quiz</title>
-  <meta name="description" content="Pick the questions for a client and get the link.">
+  <meta name="description" content="Pick the questions and styles for a client and get the link.">
   <!-- Yours, not a client's: not linked from the site and kept out of search results -->
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#f7f2f1">
@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/quiz.css?v=0233105b">
+  <link rel="stylesheet" href="css/quiz.css?v=d1a7b294">
 </head>
 <body>
   <main class="app">
@@ -21,31 +21,32 @@
       <div class="build">
         <span class="eyebrow">Cleo <svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.6C9.7 18.5 3.8 14.3 3.8 10.1 3.8 7.4 6 5.3 8.6 5.3 10.3 5.3 11.4 6.4 12 7.6 12.6 6.4 13.7 5.3 15.4 5.3 18 5.3 20.2 7.4 20.2 10.1 20.2 14.3 14.3 18.5 12 20.6Z"/></svg> Valentine</span>
         <h1 class="title title--sm">Build a<br><em>quiz.</em></h1>
-        <p class="blurb">Tick what this job actually needs, then copy the link and text it over. Only you see this page.</p>
+        <p class="blurb">Tick the questions this job needs. Open one to choose which styles they see. Then copy the link, or text it straight from here. Only you see this page.</p>
 
-        <label class="field">
-          <span>Client's first name (optional)</span>
-          <input type="text" id="who" autocomplete="off" maxlength="40" placeholder="Jess">
+        <label class="field field--big">
+          <span>Who's it for?</span>
+          <input type="text" id="who" autocomplete="off" maxlength="40" placeholder="Their first name">
+          <small>The quiz greets them by name, and they won't be asked for it at the end.</small>
         </label>
 
-        <fieldset class="picklist">
-          <legend>Questions</legend>
-          <div id="list"></div>
-        </fieldset>
+        <h2>Questions <span class="tally" id="tally"></span></h2>
+        <div id="list"><p class="blurb">Loading&hellip;</p></div>
 
         <div class="buildbar">
-          <button class="link" type="button" id="all">Select all</button>
-          <button class="link" type="button" id="none">Clear</button>
+          <button class="link" type="button" id="none">Clear all</button>
         </div>
 
         <label class="field">
-          <span>The link <span class="tally" id="tally"></span></span>
+          <span>The link</span>
           <textarea id="link" rows="3" readonly></textarea>
         </label>
 
-        <button class="btn btn--solid" type="button" id="copy">Copy link</button>
-        <a class="btn btn--line" id="preview" target="_blank" rel="noopener">Open it yourself first</a>
-        <p class="sent" id="said" hidden>Copied.</p>
+        <div class="actions">
+          <button class="btn btn--solid" type="button" id="copy">Copy link</button>
+          <a class="btn btn--line" id="text">Text it</a>
+          <a class="btn btn--line" id="preview" target="_blank" rel="noopener">Open it yourself first</a>
+          <p class="sent" id="said" hidden>Copied.</p>
+        </div>
       </div>
     </section>
   </main>
@@ -54,7 +55,7 @@
     <p style="padding:2rem;font:1rem/1.6 Inter,system-ui,sans-serif">This page needs JavaScript.</p>
   </noscript>
 
-  <script src="js/quiz-data.js?v=0a017014"></script>
-  <script src="js/quiz-builder.js?v=0d9c0175"></script>
+  <script src="js/quiz-core.js?v=89cc95af"></script>
+  <script src="js/quiz-builder.js?v=6a136fa3"></script>
 </body>
 </html>

@@ -1,0 +1,711 @@
+{
+  "title": "Design quiz",
+  "blurb": "A few quick questions so I build the details the way you actually want them. No wrong answers, and nothing here is binding.",
+  "questions": [
+    {
+      "id": "trim",
+      "title": "Window &amp; door trim",
+      "note": "Same window, same wall, same paint. Only the casing changes.",
+      "options": [
+        {
+          "id": "square",
+          "label": "Square cut",
+          "note": "Flat boards, square ends, a plain header on top",
+          "image": "/images/quiz/trim/square.webp",
+          "thumb": "/images/quiz/trim/square-sm.webp",
+          "default": true
+        },
+        {
+          "id": "22",
+          "label": "22° angle",
+          "note": "Header ends cut back, a gentle flare",
+          "image": "/images/quiz/trim/22.webp",
+          "thumb": "/images/quiz/trim/22-sm.webp",
+          "default": true
+        },
+        {
+          "id": "45",
+          "label": "45° angle",
+          "note": "The same cut, steeper and more pronounced",
+          "image": "/images/quiz/trim/45.webp",
+          "thumb": "/images/quiz/trim/45-sm.webp",
+          "default": true
+        },
+        {
+          "id": "cap",
+          "label": "Craftsman cap",
+          "note": "A thick cap over the header, with a shadow line under it",
+          "image": "/images/quiz/trim/cap.webp",
+          "thumb": "/images/quiz/trim/cap-sm.webp",
+          "default": true
+        },
+        {
+          "id": "colonial",
+          "label": "Standard casing",
+          "note": "Milled profile, mitred corners, the conventional look",
+          "image": "/images/quiz/trim/colonial.webp",
+          "thumb": "/images/quiz/trim/colonial-sm.webp",
+          "default": true
+        },
+        {
+          "id": "frame",
+          "label": "Picture frame",
+          "note": "Flat boards mitred all the way round. Clean and modern",
+          "image": "/images/quiz/trim/frame.webp",
+          "thumb": "/images/quiz/trim/frame-sm.webp",
+          "default": false
+        },
+        {
+          "id": "victorian",
+          "label": "Victorian",
+          "note": "Fluted casing with turned rosettes at the corners",
+          "image": "/images/quiz/trim/victorian.webp",
+          "thumb": "/images/quiz/trim/victorian-sm.webp",
+          "default": false
+        }
+      ],
+      "aliases": "window-door-trim"
+    },
+    {
+      "id": "doors",
+      "title": "Interior doors",
+      "note": "Same opening, same casing. Only the door changes.",
+      "options": [
+        {
+          "id": "slab",
+          "label": "Flat slab",
+          "note": "No panels at all, flush and modern",
+          "image": "/images/quiz/doors/slab.webp",
+          "thumb": "/images/quiz/doors/slab-sm.webp",
+          "default": true
+        },
+        {
+          "id": "shaker2",
+          "label": "Two panel",
+          "note": "Two recessed panels, quiet and current",
+          "image": "/images/quiz/doors/shaker2.webp",
+          "thumb": "/images/quiz/doors/shaker2-sm.webp",
+          "default": true
+        },
+        {
+          "id": "shaker3",
+          "label": "Three panel",
+          "note": "A little more detail, still simple",
+          "image": "/images/quiz/doors/shaker3.webp",
+          "thumb": "/images/quiz/doors/shaker3-sm.webp",
+          "default": true
+        },
+        {
+          "id": "shaker5",
+          "label": "Five panel",
+          "note": "What most houses round here were built with",
+          "image": "/images/quiz/doors/shaker5.webp",
+          "thumb": "/images/quiz/doors/shaker5-sm.webp",
+          "default": true
+        },
+        {
+          "id": "raised6",
+          "label": "Six panel",
+          "note": "Raised panels with a moulded edge. The traditional one",
+          "image": "/images/quiz/doors/raised6.webp",
+          "thumb": "/images/quiz/doors/raised6-sm.webp",
+          "default": true
+        },
+        {
+          "id": "french",
+          "label": "Glass, ten lite",
+          "note": "Lets light through to the next room",
+          "image": "/images/quiz/doors/french.webp",
+          "thumb": "/images/quiz/doors/french-sm.webp",
+          "default": false
+        }
+      ],
+      "aliases": "interior-doors"
+    },
+    {
+      "id": "base",
+      "title": "Baseboards",
+      "note": "Shown turning a corner, so you can see the profile end-on.",
+      "options": [
+        {
+          "id": "modern",
+          "label": "3½ inch square",
+          "note": "Flat and plain. Disappears into the room",
+          "image": "/images/quiz/base/modern.webp",
+          "thumb": "/images/quiz/base/modern-sm.webp",
+          "default": true
+        },
+        {
+          "id": "colonial",
+          "label": "3¼ inch colonial",
+          "note": "The standard profile most houses have",
+          "image": "/images/quiz/base/colonial.webp",
+          "thumb": "/images/quiz/base/colonial-sm.webp",
+          "default": true
+        },
+        {
+          "id": "craftsman",
+          "label": "5¼ inch craftsman",
+          "note": "A flat board with a cap. Reads as deliberate",
+          "image": "/images/quiz/base/craftsman.webp",
+          "thumb": "/images/quiz/base/craftsman-sm.webp",
+          "default": true
+        },
+        {
+          "id": "tall",
+          "label": "7¼ inch craftsman",
+          "note": "Taller again. Suits an older house with high ceilings",
+          "image": "/images/quiz/base/tall.webp",
+          "thumb": "/images/quiz/base/tall-sm.webp",
+          "default": true
+        },
+        {
+          "id": "builtup",
+          "label": "9 inch built-up",
+          "note": "Board, cap and shoe. Formal, and substantial",
+          "image": "/images/quiz/base/builtup.webp",
+          "thumb": "/images/quiz/base/builtup-sm.webp",
+          "default": false
+        }
+      ],
+      "aliases": "baseboard"
+    },
+    {
+      "id": "crown",
+      "title": "Crown moulding",
+      "note": "Looking up into the corner where the walls meet the ceiling.",
+      "options": [
+        {
+          "id": "none",
+          "label": "None",
+          "note": "A clean line where wall meets ceiling",
+          "image": "/images/quiz/crown/none.webp",
+          "thumb": "/images/quiz/crown/none-sm.webp",
+          "default": true
+        },
+        {
+          "id": "cove",
+          "label": "Simple cove",
+          "note": "One small curve. Quiet",
+          "image": "/images/quiz/crown/cove.webp",
+          "thumb": "/images/quiz/crown/cove-sm.webp",
+          "default": true
+        },
+        {
+          "id": "colonial",
+          "label": "Colonial crown",
+          "note": "The classic S-shaped profile",
+          "image": "/images/quiz/crown/colonial.webp",
+          "thumb": "/images/quiz/crown/colonial-sm.webp",
+          "default": true
+        },
+        {
+          "id": "large",
+          "label": "Large crown",
+          "note": "The same shape, bigger. Suits a high ceiling",
+          "image": "/images/quiz/crown/large.webp",
+          "thumb": "/images/quiz/crown/large-sm.webp",
+          "default": false
+        },
+        {
+          "id": "builtup",
+          "label": "Built up",
+          "note": "Crown over a frieze board. For a formal room",
+          "image": "/images/quiz/crown/builtup.webp",
+          "thumb": "/images/quiz/crown/builtup-sm.webp",
+          "default": true
+        }
+      ],
+      "aliases": "crown-moulding"
+    },
+    {
+      "id": "panel",
+      "title": "Wainscoting",
+      "note": "What goes on the lower part of the wall.",
+      "options": [
+        {
+          "id": "none",
+          "label": "Plain wall",
+          "note": "Just baseboard. Nothing added",
+          "image": "/images/quiz/panel/none.webp",
+          "thumb": "/images/quiz/panel/none-sm.webp",
+          "default": true
+        },
+        {
+          "id": "beadboard",
+          "label": "Beadboard",
+          "note": "Narrow boards with a bead. Cottage, bathroom, porch",
+          "image": "/images/quiz/panel/beadboard.webp",
+          "thumb": "/images/quiz/panel/beadboard-sm.webp",
+          "default": true
+        },
+        {
+          "id": "batten",
+          "label": "Board &amp; batten",
+          "note": "Flat panel with battens. Simple and graphic",
+          "image": "/images/quiz/panel/batten.webp",
+          "thumb": "/images/quiz/panel/batten-sm.webp",
+          "default": true
+        },
+        {
+          "id": "frame",
+          "label": "Picture frame",
+          "note": "Applied moulding boxes. Dressy without being heavy",
+          "image": "/images/quiz/panel/frame.webp",
+          "thumb": "/images/quiz/panel/frame-sm.webp",
+          "default": true
+        },
+        {
+          "id": "raised",
+          "label": "Raised panel",
+          "note": "Full panelled wainscot. Formal",
+          "image": "/images/quiz/panel/raised.webp",
+          "thumb": "/images/quiz/panel/raised-sm.webp",
+          "default": false
+        },
+        {
+          "id": "shiplap",
+          "label": "Shiplap",
+          "note": "Horizontal boards, floor to ceiling",
+          "image": "/images/quiz/panel/shiplap.webp",
+          "thumb": "/images/quiz/panel/shiplap-sm.webp",
+          "default": true
+        }
+      ]
+    },
+    {
+      "id": "builtin",
+      "title": "Built-ins &amp; shelving",
+      "note": "Same wall, same books. Only the joinery changes.",
+      "options": [
+        {
+          "id": "open",
+          "label": "Open bookcase",
+          "note": "Shelves all the way up, nothing hidden",
+          "image": "/images/quiz/builtin/open.webp",
+          "thumb": "/images/quiz/builtin/open-sm.webp",
+          "default": true
+        },
+        {
+          "id": "cabinet",
+          "label": "Cabinets below",
+          "note": "Closed storage underneath, shelves above",
+          "image": "/images/quiz/builtin/cabinet.webp",
+          "thumb": "/images/quiz/builtin/cabinet-sm.webp",
+          "default": true
+        },
+        {
+          "id": "glass",
+          "label": "Glass-front uppers",
+          "note": "Doors you can see through, over cabinets",
+          "image": "/images/quiz/builtin/glass.webp",
+          "thumb": "/images/quiz/builtin/glass-sm.webp",
+          "default": true
+        },
+        {
+          "id": "floating",
+          "label": "Floating shelves",
+          "note": "Thick oak shelves on the wall, no frame at all",
+          "image": "/images/quiz/builtin/floating.webp",
+          "thumb": "/images/quiz/builtin/floating-sm.webp",
+          "default": true
+        },
+        {
+          "id": "library",
+          "label": "Library wall",
+          "note": "Floor to ceiling, with a rolling ladder",
+          "image": "/images/quiz/builtin/library.webp",
+          "thumb": "/images/quiz/builtin/library-sm.webp",
+          "default": true
+        }
+      ]
+    },
+    {
+      "id": "mantel",
+      "title": "Fireplace mantel",
+      "note": "Same firebox and slate. Only the mantel changes.",
+      "options": [
+        {
+          "id": "beam",
+          "label": "Rustic beam",
+          "note": "One heavy timber shelf, nothing else",
+          "image": "/images/quiz/mantel/beam.webp",
+          "thumb": "/images/quiz/mantel/beam-sm.webp",
+          "default": true
+        },
+        {
+          "id": "craftsman",
+          "label": "Craftsman",
+          "note": "Flat legs, a frieze, and a shelf on corbels",
+          "image": "/images/quiz/mantel/craftsman.webp",
+          "thumb": "/images/quiz/mantel/craftsman-sm.webp",
+          "default": true
+        },
+        {
+          "id": "colonial",
+          "label": "Colonial",
+          "note": "Fluted pilasters and crown under the shelf",
+          "image": "/images/quiz/mantel/colonial.webp",
+          "thumb": "/images/quiz/mantel/colonial-sm.webp",
+          "default": true
+        },
+        {
+          "id": "overmantel",
+          "label": "To the ceiling",
+          "note": "A full surround with panelling above the shelf",
+          "image": "/images/quiz/mantel/overmantel.webp",
+          "thumb": "/images/quiz/mantel/overmantel-sm.webp",
+          "default": true
+        }
+      ]
+    },
+    {
+      "id": "railing",
+      "title": "Deck railing",
+      "note": "Same posts and rails. Only what fills the gap changes.",
+      "options": [
+        {
+          "id": "metal",
+          "label": "Black metal",
+          "note": "Thin balusters, least in the way of a view",
+          "image": "/images/quiz/railing/metal.webp",
+          "thumb": "/images/quiz/railing/metal-sm.webp",
+          "default": true
+        },
+        {
+          "id": "picket",
+          "label": "Wood balusters",
+          "note": "Square painted spindles, the traditional one",
+          "image": "/images/quiz/railing/picket.webp",
+          "thumb": "/images/quiz/railing/picket-sm.webp",
+          "default": true
+        },
+        {
+          "id": "cable",
+          "label": "Cable",
+          "note": "Nearly invisible from a few feet back",
+          "image": "/images/quiz/railing/cable.webp",
+          "thumb": "/images/quiz/railing/cable-sm.webp",
+          "default": true
+        },
+        {
+          "id": "slat",
+          "label": "Horizontal slat",
+          "note": "Boards run sideways. More privacy, more shade",
+          "image": "/images/quiz/railing/slat.webp",
+          "thumb": "/images/quiz/railing/slat-sm.webp",
+          "default": true
+        },
+        {
+          "id": "glass",
+          "label": "Glass panel",
+          "note": "Nothing at all between you and the yard",
+          "image": "/images/quiz/railing/glass.webp",
+          "thumb": "/images/quiz/railing/glass-sm.webp",
+          "default": false
+        }
+      ],
+      "aliases": "deck-railing"
+    },
+    {
+      "id": "decking",
+      "title": "Deck boards",
+      "note": "What you walk on.",
+      "options": [
+        {
+          "id": "cedar",
+          "label": "Natural cedar",
+          "note": "Warm and light. Goes silver if you leave it",
+          "image": "/images/quiz/decking/cedar.webp",
+          "thumb": "/images/quiz/decking/cedar-sm.webp",
+          "default": true
+        },
+        {
+          "id": "treated",
+          "label": "Treated pine, stained",
+          "note": "The budget-friendly one, stained honey",
+          "image": "/images/quiz/decking/treated.webp",
+          "thumb": "/images/quiz/decking/treated-sm.webp",
+          "default": true
+        },
+        {
+          "id": "grey",
+          "label": "Grey composite",
+          "note": "No staining, ever. Cool and even",
+          "image": "/images/quiz/decking/grey.webp",
+          "thumb": "/images/quiz/decking/grey-sm.webp",
+          "default": true
+        },
+        {
+          "id": "brown",
+          "label": "Brown composite",
+          "note": "No staining, ever. Warm and dark",
+          "image": "/images/quiz/decking/brown.webp",
+          "thumb": "/images/quiz/decking/brown-sm.webp",
+          "default": true
+        },
+        {
+          "id": "ipe",
+          "label": "Ipe hardwood",
+          "note": "Dense tropical hardwood that lasts for decades",
+          "image": "/images/quiz/decking/ipe.webp",
+          "thumb": "/images/quiz/decking/ipe-sm.webp",
+          "default": true
+        }
+      ]
+    },
+    {
+      "id": "ceiling",
+      "title": "Porch ceiling",
+      "note": "Looking up from the porch toward the street.",
+      "options": [
+        {
+          "id": "stained",
+          "label": "Stained",
+          "note": "Warm, and hides a lot",
+          "image": "/images/quiz/ceiling/stained.webp",
+          "thumb": "/images/quiz/ceiling/stained-sm.webp",
+          "default": true
+        },
+        {
+          "id": "white",
+          "label": "Painted white",
+          "note": "Bounces light back down onto the porch",
+          "image": "/images/quiz/ceiling/white.webp",
+          "thumb": "/images/quiz/ceiling/white-sm.webp",
+          "default": true
+        },
+        {
+          "id": "cedar",
+          "label": "Natural cedar",
+          "note": "Left to go its own colour over time",
+          "image": "/images/quiz/ceiling/cedar.webp",
+          "thumb": "/images/quiz/ceiling/cedar-sm.webp",
+          "default": true
+        },
+        {
+          "id": "haint",
+          "label": "Haint blue",
+          "note": "The Southern one. Pale blue-green",
+          "image": "/images/quiz/ceiling/haint.webp",
+          "thumb": "/images/quiz/ceiling/haint-sm.webp",
+          "default": true
+        },
+        {
+          "id": "beadboard",
+          "label": "White beadboard",
+          "note": "Narrower boards with a bead",
+          "image": "/images/quiz/ceiling/beadboard.webp",
+          "thumb": "/images/quiz/ceiling/beadboard-sm.webp",
+          "default": true
+        },
+        {
+          "id": "pine",
+          "label": "Knotty pine",
+          "note": "Clear-coated, knots and all",
+          "image": "/images/quiz/ceiling/pine.webp",
+          "thumb": "/images/quiz/ceiling/pine-sm.webp",
+          "default": false
+        }
+      ],
+      "aliases": "porch-ceiling"
+    },
+    {
+      "id": "columns",
+      "title": "Porch columns",
+      "note": "Same porch, same beam. Only the column changes.",
+      "options": [
+        {
+          "id": "box",
+          "label": "Square box",
+          "note": "Straight and square, trimmed top and bottom",
+          "image": "/images/quiz/columns/box.webp",
+          "thumb": "/images/quiz/columns/box-sm.webp",
+          "default": true
+        },
+        {
+          "id": "tapered",
+          "label": "Craftsman on brick",
+          "note": "A tapered column standing on a brick pier",
+          "image": "/images/quiz/columns/tapered.webp",
+          "thumb": "/images/quiz/columns/tapered-sm.webp",
+          "default": true
+        },
+        {
+          "id": "tuscan",
+          "label": "Round Tuscan",
+          "note": "The classic round column, gently swelled",
+          "image": "/images/quiz/columns/tuscan.webp",
+          "thumb": "/images/quiz/columns/tuscan-sm.webp",
+          "default": true
+        },
+        {
+          "id": "turned",
+          "label": "Turned post",
+          "note": "Victorian spindle, slimmer and more ornate",
+          "image": "/images/quiz/columns/turned.webp",
+          "thumb": "/images/quiz/columns/turned-sm.webp",
+          "default": true
+        },
+        {
+          "id": "timber",
+          "label": "Timber post",
+          "note": "Rough-sawn cedar on a black steel base",
+          "image": "/images/quiz/columns/timber.webp",
+          "thumb": "/images/quiz/columns/timber-sm.webp",
+          "default": true
+        }
+      ]
+    },
+    {
+      "id": "fence",
+      "title": "Fence",
+      "note": "Same posts, same yard. Only the boards change.",
+      "options": [
+        {
+          "id": "privacy",
+          "label": "Privacy",
+          "note": "Tight vertical boards. Nothing gets through",
+          "image": "/images/quiz/fence/privacy.webp",
+          "thumb": "/images/quiz/fence/privacy-sm.webp",
+          "default": true
+        },
+        {
+          "id": "shadowbox",
+          "label": "Shadowbox",
+          "note": "Boards alternate sides. Air gets through, eyes don't",
+          "image": "/images/quiz/fence/shadowbox.webp",
+          "thumb": "/images/quiz/fence/shadowbox-sm.webp",
+          "default": true
+        },
+        {
+          "id": "horizontal",
+          "label": "Horizontal",
+          "note": "Sideways boards with small gaps. Modern",
+          "image": "/images/quiz/fence/horizontal.webp",
+          "thumb": "/images/quiz/fence/horizontal-sm.webp",
+          "default": true
+        },
+        {
+          "id": "picket",
+          "label": "Picket",
+          "note": "Painted, pointed, waist high. The front-yard one",
+          "image": "/images/quiz/fence/picket.webp",
+          "thumb": "/images/quiz/fence/picket-sm.webp",
+          "default": true
+        },
+        {
+          "id": "capped",
+          "label": "Capped",
+          "note": "Board-on-board with a cap and trim. Finished-looking",
+          "image": "/images/quiz/fence/capped.webp",
+          "thumb": "/images/quiz/fence/capped-sm.webp",
+          "default": true
+        }
+      ]
+    },
+    {
+      "id": "finish",
+      "title": "Hardware finish",
+      "note": "Whatever you pick, every handle in the room should match it.",
+      "options": [
+        {
+          "id": "black",
+          "label": "Matte black",
+          "note": "High contrast, very current",
+          "image": "/images/quiz/finish/black.webp",
+          "thumb": "/images/quiz/finish/black-sm.webp",
+          "default": true
+        },
+        {
+          "id": "satinbrass",
+          "label": "Satin brass",
+          "note": "Warm and soft, and ages well",
+          "image": "/images/quiz/finish/satinbrass.webp",
+          "thumb": "/images/quiz/finish/satinbrass-sm.webp",
+          "default": true
+        },
+        {
+          "id": "brass",
+          "label": "Polished brass",
+          "note": "Bright and traditional",
+          "image": "/images/quiz/finish/brass.webp",
+          "thumb": "/images/quiz/finish/brass-sm.webp",
+          "default": false
+        },
+        {
+          "id": "nickel",
+          "label": "Brushed nickel",
+          "note": "Quiet, and hides fingerprints",
+          "image": "/images/quiz/finish/nickel.webp",
+          "thumb": "/images/quiz/finish/nickel-sm.webp",
+          "default": true
+        },
+        {
+          "id": "chrome",
+          "label": "Polished chrome",
+          "note": "Bright, cool and mirror-like",
+          "image": "/images/quiz/finish/chrome.webp",
+          "thumb": "/images/quiz/finish/chrome-sm.webp",
+          "default": false
+        },
+        {
+          "id": "bronze",
+          "label": "Oil-rubbed bronze",
+          "note": "Dark brown, softer than black",
+          "image": "/images/quiz/finish/bronze.webp",
+          "thumb": "/images/quiz/finish/bronze-sm.webp",
+          "default": true
+        }
+      ],
+      "aliases": "hardware-finish"
+    },
+    {
+      "id": "handles",
+      "title": "Handle style",
+      "note": "All in satin brass, so only the shape changes.",
+      "options": [
+        {
+          "id": "knob",
+          "label": "Round knob",
+          "note": "The classic. Fits anywhere",
+          "image": "/images/quiz/handles/knob.webp",
+          "thumb": "/images/quiz/handles/knob-sm.webp",
+          "default": true
+        },
+        {
+          "id": "lever",
+          "label": "Straight lever",
+          "note": "Clean and modern. Easy with full hands",
+          "image": "/images/quiz/handles/lever.webp",
+          "thumb": "/images/quiz/handles/lever-sm.webp",
+          "default": true
+        },
+        {
+          "id": "curved",
+          "label": "Curved lever",
+          "note": "A traditional lever with a soft return",
+          "image": "/images/quiz/handles/curved.webp",
+          "thumb": "/images/quiz/handles/curved-sm.webp",
+          "default": true
+        },
+        {
+          "id": "glass",
+          "label": "Glass knob",
+          "note": "Faceted glass. Vintage, and catches the light",
+          "image": "/images/quiz/handles/glass.webp",
+          "thumb": "/images/quiz/handles/glass-sm.webp",
+          "default": true
+        },
+        {
+          "id": "square",
+          "label": "Square lever",
+          "note": "Square rose, square lever. Very modern",
+          "image": "/images/quiz/handles/square.webp",
+          "thumb": "/images/quiz/handles/square-sm.webp",
+          "default": true
+        }
+      ]
+    }
+  ]
+}

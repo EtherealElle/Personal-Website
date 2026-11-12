@@ -2,10 +2,18 @@
 # Sign in at https://app.pagescms.org with GitHub and open this repository.
 
 media:
-  input: images/work
-  output: /images/work
-  extensions: [jpg, jpeg, png, webp]
-  rename: safe
+  - name: work
+    label: Gallery photos
+    input: images/work
+    output: /images/work
+    extensions: [jpg, jpeg, png, webp]
+    rename: safe
+  - name: quiz
+    label: Design quiz pictures
+    input: images/quiz
+    output: /images/quiz
+    extensions: [jpg, jpeg, png, webp]
+    rename: safe
 
 content:
   - name: gallery
@@ -24,6 +32,8 @@ content:
             label: Photo
             type: image
             required: true
+            options:
+              media: work
           - name: title
             label: Title
             description: Short name for the project, e.g. "Back deck with new railing"
@@ -74,3 +84,81 @@ content:
         label: Home page close-up photo
         description: The detail shot in the home page "The approach" section.
         type: image
+        options:
+          media: work
+
+  - name: quiz
+    label: Design quiz
+    type: file
+    path: data/quiz.json
+    format: json
+    fields:
+      - name: title
+        label: Title
+        type: string
+      - name: blurb
+        label: Greeting
+        description: The first thing a client reads. "Hi Jess -" goes in front of it when the link has their name.
+        type: text
+      - name: questions
+        label: Questions
+        description: Each question is a board of styles. Which questions and styles go to which client is chosen at /quiz-builder.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - name: id
+            label: Link name
+            description: Short, lowercase, no spaces - like "trim". It appears in quiz links, so don't change it after a link has gone out.
+            type: string
+            required: true
+          - name: title
+            label: Question
+            type: string
+            required: true
+          - name: note
+            label: Line under the question
+            type: string
+          - name: aliases
+            label: Old link names
+            description: Leave as it is. Keeps links sent under an earlier name working.
+            type: string
+          - name: options
+            label: Styles
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{label}"
+            fields:
+              - name: label
+                label: Name
+                type: string
+                required: true
+              - name: note
+                label: Short description
+                type: string
+              - name: default
+                label: Show by default
+                description: On means it's included unless you untick it in the builder for a particular client.
+                type: boolean
+              - name: image
+                label: Picture
+                description: A render, or upload your own photo. Always shown whole, never cropped.
+                type: image
+                required: true
+                options:
+                  media: quiz
+                  path: images/quiz/photos
+              - name: thumb
+                label: Small version
+                description: Filled in for the renders. Leave empty for a photo you upload.
+                type: image
+                options:
+                  media: quiz
+              - name: id
+                label: Link name
+                description: Leave empty on a new style and one is made from its name. Don't change it on an existing style.
+                type: string

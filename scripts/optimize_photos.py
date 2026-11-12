@@ -14,6 +14,8 @@ from PIL import Image, ImageOps
 
 PHOTO_DIR = "images/work"
 DATA = "data/gallery.json"
+QUIZ_DIR = "images/quiz"
+QUIZ_DATA = "data/quiz.json"
 DATA_JS = "data/gallery.js"
 GALLERY_PAGE = "gallery.html"
 MAX_SIDE = 1600
@@ -21,12 +23,13 @@ MAX_BYTES = 500 * 1024
 QUALITY = 74
 
 
-def optimize(path):
-    """Resize/recompress one photo. Returns the new path if the file was renamed."""
+def optimize(path, force=False):
+    """Resize/recompress one photo. Returns the new path if the file was renamed.
+    `force` re-encodes even a small photo, which is how its metadata gets dropped."""
     ext = os.path.splitext(path)[1].lower()
     im = Image.open(path)
     too_big = max(im.size) > MAX_SIDE or os.path.getsize(path) > MAX_BYTES
-    if not too_big:
+    if not too_big and not force:
         return path
     im = ImageOps.exif_transpose(im)  # bake in phone rotation before metadata is dropped
     im.thumbnail((MAX_SIDE, MAX_SIDE), Image.LANCZOS)
@@ -43,7 +46,7 @@ def optimize(path):
     data = buf.getvalue()
     # A detailed photo can stay above MAX_BYTES even at full quality. Keep the original
     # unless the new one is meaningfully smaller, so repeat runs don't slowly degrade it.
-    if out == path and len(data) > os.path.getsize(path) * 0.9:
+    if out == path and len(data) > os.path.getsize(path) * 0.9 and not force:
         return path
     with open(out, "wb") as f:
         f.write(data)
@@ -51,6 +54,45 @@ def optimize(path):
         os.remove(path)
     print(f"optimized {path} -> {out} {im.size[0]}x{im.size[1]} {os.path.getsize(out) // 1024}K")
     return out
+
+
+def has_metadata(path):
+    try:
+        return len(Image.open(path).getexif()) > 0
+    except Exception:
+        return False
+
+
+def optimize_quiz():
+    """Photos uploaded for the design quiz through Pages CMS land in images/quiz/photos.
+    They're shrunk like gallery photos, and their metadata is stripped every time, not
+    only when they're big: a phone photo of a client's room carries where it was taken.
+    The renders, one folder per question, are left alone."""
+    if not os.path.isdir(QUIZ_DIR):
+        return
+    renamed = {}
+    for root, _, files in os.walk(QUIZ_DIR):
+        rel = os.path.relpath(root, QUIZ_DIR).replace("\\", "/")
+        if rel not in (".", "photos") and not rel.startswith("photos/"):
+            continue
+        for name in sorted(files):
+            if os.path.splitext(name)[1].lower() not in (".jpg", ".jpeg", ".png", ".webp"):
+                continue
+            path = os.path.join(root, name).replace("\\", "/")
+            new = optimize(path, force=has_metadata(path))
+            if new != path:
+                renamed["/" + path] = "/" + new
+    if renamed and os.path.exists(QUIZ_DATA):
+        with open(QUIZ_DATA, encoding="utf-8") as f:
+            quiz = json.load(f)
+        for q in quiz.get("questions", []):
+            for o in q.get("options", []):
+                for k in ("image", "thumb"):
+                    if o.get(k) in renamed:
+                        o[k] = renamed[o[k]]
+        with open(QUIZ_DATA, "w", encoding="utf-8") as f:
+            json.dump(quiz, f, indent=2, ensure_ascii=False)
+            f.write("\n")
 
 
 def main():
@@ -98,3 +140,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    optimize_quiz()

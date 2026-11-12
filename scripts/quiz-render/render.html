@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Quiz renders</title>
+  <!-- Pinned, so a render made next year matches one made today -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+  <style>body { margin: 0; background: #222; }</style>
+</head>
+<body>
+  <script type="module">
+    import { renderOne, renderList } from "./scenes.js";
+    window.renderOne = renderOne;
+    window.renderList = renderList;
+    window.RENDER_READY = true;
+  </script>
+</body>
+</html>
