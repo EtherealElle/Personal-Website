@@ -9,7 +9,6 @@ on:
       - "css/**"
       - "js/**"
       - "*.html"
-      - "scripts/quiz-render/**"
   workflow_dispatch:
 
 permissions:
@@ -42,7 +41,7 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A -- "*.html" js/quiz3d.js scripts/quiz-render/scenes.js
+          git add -A -- "*.html"
           git commit -m "Update asset version fingerprints"
           git pull --rebase
           git push

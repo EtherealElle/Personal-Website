@@ -1,0 +1,203 @@
+{
+ "route": [
+  "columns",
+  "ceiling",
+  "panel",
+  "trim",
+  "crown",
+  "mantel",
+  "builtin",
+  "base",
+  "doors",
+  "handles",
+  "finish",
+  "decking",
+  "railing",
+  "fence"
+ ],
+ "stills": {
+  "columns": {
+   "box": "/images/house/columns/box.webp?v=cf57e4e7",
+   "tapered": "/images/house/columns/tapered.webp?v=f8c20d86",
+   "tuscan": "/images/house/columns/tuscan.webp?v=cf3078f5",
+   "turned": "/images/house/columns/turned.webp?v=9f989828",
+   "timber": "/images/house/columns/timber.webp?v=0a2f4e60"
+  },
+  "ceiling": {
+   "stained": "/images/house/ceiling/stained.webp?v=8e2afe6c",
+   "white": "/images/house/ceiling/white.webp?v=ccc6c705",
+   "cedar": "/images/house/ceiling/cedar.webp?v=6a99f69f",
+   "haint": "/images/house/ceiling/haint.webp?v=75f56892",
+   "beadboard": "/images/house/ceiling/beadboard.webp?v=68de23cf",
+   "pine": "/images/house/ceiling/pine.webp?v=d6ec2d78"
+  },
+  "panel": {
+   "none": "/images/house/panel/none.webp?v=46d1c9b1",
+   "beadboard": "/images/house/panel/beadboard.webp?v=967f8d31",
+   "batten": "/images/house/panel/batten.webp?v=1eae0a6f",
+   "frame": "/images/house/panel/frame.webp?v=f924594c",
+   "raised": "/images/house/panel/raised.webp?v=e3b57f46",
+   "shiplap": "/images/house/panel/shiplap.webp?v=7640b55f"
+  },
+  "trim": {
+   "square": "/images/house/trim/square.webp?v=96af0a3f",
+   "22": "/images/house/trim/22.webp?v=c258d8db",
+   "45": "/images/house/trim/45.webp?v=31a1b552",
+   "cap": "/images/house/trim/cap.webp?v=f31cfc81",
+   "colonial": "/images/house/trim/colonial.webp?v=64a6219f",
+   "victorian": "/images/house/trim/victorian.webp?v=871b047b",
+   "frame": "/images/house/trim/frame.webp?v=19652983"
+  },
+  "crown": {
+   "none": "/images/house/crown/none.webp?v=d15f8b87",
+   "cove": "/images/house/crown/cove.webp?v=169235e8",
+   "colonial": "/images/house/crown/colonial.webp?v=f685f8e0",
+   "large": "/images/house/crown/large.webp?v=e2fde2ce",
+   "builtup": "/images/house/crown/builtup.webp?v=af0c1617"
+  },
+  "mantel": {
+   "beam": "/images/house/mantel/beam.webp?v=69f792e9",
+   "craftsman": "/images/house/mantel/craftsman.webp?v=648af532",
+   "colonial": "/images/house/mantel/colonial.webp?v=696448ad",
+   "overmantel": "/images/house/mantel/overmantel.webp?v=9e8f0f14"
+  },
+  "builtin": {
+   "open": "/images/house/builtin/open.webp?v=faef746c",
+   "cabinet": "/images/house/builtin/cabinet.webp?v=3e8b6bb0",
+   "glass": "/images/house/builtin/glass.webp?v=95a08598",
+   "floating": "/images/house/builtin/floating.webp?v=d71b7a3a",
+   "library": "/images/house/builtin/library.webp?v=7fb0d1a7"
+  },
+  "base": {
+   "modern": "/images/house/base/modern.webp?v=af13063b",
+   "colonial": "/images/house/base/colonial.webp?v=cb9b94a3",
+   "craftsman": "/images/house/base/craftsman.webp?v=782d3cca",
+   "tall": "/images/house/base/tall.webp?v=2698eccb",
+   "builtup": "/images/house/base/builtup.webp?v=eaafef4e"
+  },
+  "doors": {
+   "slab": "/images/house/doors/slab.webp?v=c1e46372",
+   "shaker2": "/images/house/doors/shaker2.webp?v=69b51123",
+   "shaker3": "/images/house/doors/shaker3.webp?v=0aa14b92",
+   "shaker5": "/images/house/doors/shaker5.webp?v=19166478",
+   "raised6": "/images/house/doors/raised6.webp?v=1e1ef68b",
+   "french": "/images/house/doors/french.webp?v=70cb1395"
+  },
+  "handles": {
+   "knob": "/images/house/handles/knob.webp?v=204133c0",
+   "lever": "/images/house/handles/lever.webp?v=6c361bfe",
+   "curved": "/images/house/handles/curved.webp?v=4b734b35",
+   "glass": "/images/house/handles/glass.webp?v=e25eb4ca",
+   "square": "/images/house/handles/square.webp?v=b300b503"
+  },
+  "finish": {
+   "black": "/images/house/finish/black.webp?v=3fa244aa",
+   "satinbrass": "/images/house/finish/satinbrass.webp?v=4ed2e704",
+   "brass": "/images/house/finish/brass.webp?v=2ee257f2",
+   "nickel": "/images/house/finish/nickel.webp?v=939ed6f9",
+   "chrome": "/images/house/finish/chrome.webp?v=ff897fb0",
+   "bronze": "/images/house/finish/bronze.webp?v=8f70e79b"
+  },
+  "decking": {
+   "cedar": "/images/house/decking/cedar.webp?v=63128edb",
+   "treated": "/images/house/decking/treated.webp?v=e665314e",
+   "grey": "/images/house/decking/grey.webp?v=70e3795b",
+   "brown": "/images/house/decking/brown.webp?v=5236c5e6",
+   "ipe": "/images/house/decking/ipe.webp?v=8744f0ef"
+  },
+  "railing": {
+   "metal": "/images/house/railing/metal.webp?v=22e33f08",
+   "picket": "/images/house/railing/picket.webp?v=6635c55b",
+   "cable": "/images/house/railing/cable.webp?v=399f3004",
+   "slat": "/images/house/railing/slat.webp?v=40d616bd",
+   "glass": "/images/house/railing/glass.webp?v=06ddea5c"
+  },
+  "fence": {
+   "privacy": "/images/house/fence/privacy.webp?v=307f7705",
+   "shadowbox": "/images/house/fence/shadowbox.webp?v=8903728b",
+   "horizontal": "/images/house/fence/horizontal.webp?v=ad4e24c9",
+   "picket": "/images/house/fence/picket.webp?v=2f647e3f",
+   "capped": "/images/house/fence/capped.webp?v=076152bc"
+  }
+ },
+ "walks": [
+  {
+   "from": "columns",
+   "to": "ceiling",
+   "forward": "/images/house/walk/00-columns-ceiling.mp4?v=d1e1fc5e",
+   "back": "/images/house/walk/00-columns-ceiling-back.mp4?v=4390861b"
+  },
+  {
+   "from": "ceiling",
+   "to": "panel",
+   "forward": "/images/house/walk/01-ceiling-panel.mp4?v=a1c84764",
+   "back": "/images/house/walk/01-ceiling-panel-back.mp4?v=c1fbea4b"
+  },
+  {
+   "from": "panel",
+   "to": "trim",
+   "forward": "/images/house/walk/02-panel-trim.mp4?v=4ae5a655",
+   "back": "/images/house/walk/02-panel-trim-back.mp4?v=11c7d205"
+  },
+  {
+   "from": "trim",
+   "to": "crown",
+   "forward": "/images/house/walk/03-trim-crown.mp4?v=f0f243a8",
+   "back": "/images/house/walk/03-trim-crown-back.mp4?v=805454ba"
+  },
+  {
+   "from": "crown",
+   "to": "mantel",
+   "forward": "/images/house/walk/04-crown-mantel.mp4?v=b91dc2bc",
+   "back": "/images/house/walk/04-crown-mantel-back.mp4?v=0c86558c"
+  },
+  {
+   "from": "mantel",
+   "to": "builtin",
+   "forward": "/images/house/walk/05-mantel-builtin.mp4?v=fb4f5902",
+   "back": "/images/house/walk/05-mantel-builtin-back.mp4?v=ea3e9cc6"
+  },
+  {
+   "from": "builtin",
+   "to": "base",
+   "forward": "/images/house/walk/06-builtin-base.mp4?v=bac88391",
+   "back": "/images/house/walk/06-builtin-base-back.mp4?v=28ed909a"
+  },
+  {
+   "from": "base",
+   "to": "doors",
+   "forward": "/images/house/walk/07-base-doors.mp4?v=db201fb0",
+   "back": "/images/house/walk/07-base-doors-back.mp4?v=136e80ca"
+  },
+  {
+   "from": "doors",
+   "to": "handles",
+   "forward": "/images/house/walk/08-doors-handles.mp4?v=571f82f3",
+   "back": "/images/house/walk/08-doors-handles-back.mp4?v=38b41b4a"
+  },
+  {
+   "from": "handles",
+   "to": "finish",
+   "forward": "/images/house/walk/09-handles-finish.mp4?v=ba2d6e1c",
+   "back": "/images/house/walk/09-handles-finish-back.mp4?v=0e0bb23e"
+  },
+  {
+   "from": "finish",
+   "to": "decking",
+   "forward": "/images/house/walk/10-finish-decking.mp4?v=462867f7",
+   "back": "/images/house/walk/10-finish-decking-back.mp4?v=dc9e5289"
+  },
+  {
+   "from": "decking",
+   "to": "railing",
+   "forward": "/images/house/walk/11-decking-railing.mp4?v=44c7445c",
+   "back": "/images/house/walk/11-decking-railing-back.mp4?v=f398d5e5"
+  },
+  {
+   "from": "railing",
+   "to": "fence",
+   "forward": "/images/house/walk/12-railing-fence.mp4?v=51d618ce",
+   "back": "/images/house/walk/12-railing-fence-back.mp4?v=cc48014d"
+  }
+ ]
+}

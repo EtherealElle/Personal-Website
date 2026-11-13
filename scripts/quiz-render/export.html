@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Quiz geometry export</title>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <script type="module">
+    // Hands the Blender house the same geometry the quiz renders were built from:
+    // every mesh of a scene in world space, in inches, y up, with what it's made of.
+    import * as THREE from "three";
+    import { buildScene, buildable, profiles } from "./scenes.js";
+    const r4 = (v) => Math.round(v * 1e4) / 1e4;
+    function kindOf(m) {
+      if (m.userData && m.userData.kind) return m.userData.kind;
+      if (m.isMeshBasicMaterial) return { kind: "backdrop" };
+      if (m.transparent || m.transmission > 0) return { kind: "glass" };
+      if (m.map && m.map.userData.key) return { kind: "textured", key: m.map.userData.key, rough: m.roughness, color: m.color.getHex() };
+      return { kind: "paint", color: m.color.getHex(), rough: m.roughness };
+    }
+    window.exportScene = (q, o) => {
+      const built = buildScene(q, o);
+      built.scene.updateMatrixWorld(true);
+      const meshes = [];
+      built.scene.traverse((ob) => {
+        if (!ob.isMesh) return;
+        const g = ob.geometry.clone().applyMatrix4(ob.matrixWorld);
+        const pos = Array.from(g.attributes.position.array, r4);
+        const uv = g.attributes.uv ? Array.from(g.attributes.uv.array, r4) : null;
+        const idx = g.index ? Array.from(g.index.array) : null;
+        meshes.push({ mat: kindOf(ob.material), pos, uv, idx });
+      });
+      const c = built.camera;
+      return { q, o, meshes, camera: { pos: c.position.toArray(), target: c.userData.target, fov: c.fov } };
+    };
+    window.buildable = buildable;
+    window.profiles = profiles;
+    window.EXPORT_READY = true;
+  </script>
+</body>
+</html>

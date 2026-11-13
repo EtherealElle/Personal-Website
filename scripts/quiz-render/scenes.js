@@ -1144,3 +1144,21 @@ export async function renderOne(q, o) {
   dispose(scene);
   return out;
 }
+
+/** The moulding profiles the Blender house runs along its walls, in (u, t) inches. */
+export function profiles() {
+  const out = { base: {}, crown: {}, chairRail: chairRail() };
+  BUILDERS.base.options.forEach((o) => { out.base[o] = baseProfiles(o).map(({ p, y, t = 0 }) => ({ p, y, t })); });
+  out.crown.none = [];
+  out.crown.cove = [{ p: [[0, 0], [2.25, 0], ...arc(2.25, 2.25, 2.25, -90, -180, 12).slice(1)], drop: 0 }];
+  out.crown.colonial = [{ p: crownProfile(3.625, 2.6), drop: 0 }];
+  out.crown.large = [{ p: crownProfile(5.25, 3.7), drop: 0 }];
+  out.crown.builtup = [
+    { p: crownProfile(5.25, 3.7), drop: 0 },
+    { p: flatProfile(5.5, 0.75, 0.05), drop: 5.25 },
+    { p: [[0, 0], [1.1, 0], ...arc(0.55, 0.75, 0.55, -90, 90, 10).map(([u, t]) => [u + 0.55, t]), [0, 0.75]], drop: 10.75 },
+  ];
+  out.houseBase = [{ p: flatProfile(5.25, 0.625, 0.06), y: 0 }, { p: capMoulding(1.1, 0.72), y: 5.25 }];
+  out.casing = { flat: flatProfile(3.5, 0.75), colonial: colonialCasing(2.5) };
+  return out;
+}

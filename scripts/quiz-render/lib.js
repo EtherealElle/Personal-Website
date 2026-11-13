@@ -252,6 +252,7 @@ function canvasTex(key, w, h, paint, { repeat = [1, 1], srgb = true } = {}) {
   t.repeat.set(...repeat);
   t.anisotropy = 8;
   if (srgb) t.colorSpace = THREE.SRGBColorSpace;
+  t.userData.key = key;          // so the Blender export knows what this texture was
   texCache.set(key, t);
   return t;
 }
@@ -455,12 +456,15 @@ export function grassTexture() {
 // ------------------------------------------------------------------ materials
 
 export function paint(color, rough = 0.42, opts = {}) {
-  return new THREE.MeshStandardMaterial({ color, roughness: rough, metalness: 0, envMapIntensity: 0.7, ...opts });
+  const m = new THREE.MeshStandardMaterial({ color, roughness: rough, metalness: 0, envMapIntensity: 0.7, ...opts });
+  m.userData.kind = { kind: "paint", color, rough };
+  return m;
 }
 
 export function wallPaint(color) {
   return new THREE.MeshStandardMaterial({
     map: paintTexture("wall-" + color.toString(16), color), roughness: 0.92, metalness: 0, envMapIntensity: 0.55,
+    userData: { kind: { kind: "wall", color } },
   });
 }
 
@@ -472,6 +476,7 @@ export function woodMat(tex, { rough = 0.55, tint = 0xffffff, repeat = null, rot
   const Mat = clear ? THREE.MeshPhysicalMaterial : THREE.MeshStandardMaterial;
   const m = new Mat({ map: t, color: tint, roughness: rough, metalness: 0, envMapIntensity: 0.6 });
   if (clear) { m.clearcoat = 0.6; m.clearcoatRoughness = 0.25; }
+  m.userData.kind = { kind: "wood", key: tex.userData.key, rough, clear };
   return m;
 }
 
@@ -485,7 +490,9 @@ export const METALS = {
 };
 
 export function metal(kind) {
-  return new THREE.MeshStandardMaterial({ ...METALS[kind], envMapIntensity: 1.25 });
+  const m = new THREE.MeshStandardMaterial({ ...METALS[kind], envMapIntensity: 1.25 });
+  m.userData.kind = { kind: "metal", name: kind };
+  return m;
 }
 
 // ------------------------------------------------------------------ geometry

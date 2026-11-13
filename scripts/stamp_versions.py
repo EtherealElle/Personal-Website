@@ -18,23 +18,6 @@ def fingerprint(path):
         return hashlib.sha1(f.read().replace(b"\r\n", b"\n")).hexdigest()[:8]
 
 
-def stamp_import(path, target, spec):
-    """Point an import in `path` at `spec` carrying the current fingerprint of `target`."""
-    with open(path, encoding="utf-8") as f:
-        src = f.read()
-    rx = re.compile(r"([\"'])" + re.escape(spec) + r"(?:\?v=[0-9a-f]+)?([\"'])")
-    new = rx.sub(lambda m: f"{m.group(1)}{spec}?v={fingerprint(target)}{m.group(2)}", src)
-    if new != src:
-        with open(path, "w", encoding="utf-8") as f:
-            f.write(new)
-        print(f"stamped {path}")
-
-
-# The 3D quiz loads its scenes as modules, which no HTML link names, so they're stamped
-# along the chain instead - innermost first, so each fingerprint covers the one inside it.
-stamp_import("scripts/quiz-render/scenes.js", "scripts/quiz-render/lib.js", "./lib.js")
-stamp_import("js/quiz3d.js", "scripts/quiz-render/scenes.js", "/scripts/quiz-render/scenes.js")
-
 for page in sorted(glob.glob("*.html")):
     with open(page, encoding="utf-8") as f:
         html = f.read()

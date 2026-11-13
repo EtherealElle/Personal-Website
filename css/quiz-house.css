@@ -1,6 +1,7 @@
-/* The 3D design quiz: one page, a house behind it. Panels scroll over a fixed canvas;
-   on a phone they sit along the bottom, on a wider screen down the left, and the camera
-   frames each room in whatever space is left. */
+/* The design quiz: one page, a house behind it. Panels scroll over a fixed stage of
+   rendered stills and the walks between them; on a phone they sit along the bottom, on
+   a wider screen down the left. The renders are square and composed with the subject
+   centred a little above the middle, so a cover crop keeps it in view either way. */
 :root {
   --bg: #f7f2f1;
   --ink: #171614;
@@ -29,22 +30,37 @@ img { display: block; max-width: 100%; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
 
 /* ---------------------------------------------------------------- the stage */
-.stage { position: fixed; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; touch-action: pan-y; }
-body.is-exploring .stage { touch-action: none; z-index: 20; }
-.veil { position: fixed; inset: 0; z-index: 1; background: #e9e4df; opacity: 0; pointer-events: none; transition: opacity 0.22s ease; }
-.veil.is-on { opacity: 1; }
-body.is-exploring .veil { z-index: 21; }
-
-.building {
-  position: fixed; z-index: 3; left: 50%; top: 18%; transform: translateX(-50%); margin: 0;
-  padding: 0.5rem 1rem; border-radius: 999px; background: var(--glass); backdrop-filter: blur(10px);
-  font-size: 0.82rem; color: var(--ink-soft); letter-spacing: 0.04em;
+.stage { position: fixed; inset: 0; overflow: hidden; z-index: 0; background: #d9d3cc; touch-action: pan-y; }
+body.is-exploring .stage { touch-action: none; z-index: 20; cursor: grab; }
+body.is-exploring .stage:active { cursor: grabbing; }
+/* Square layers, big enough to cover the screen whichever way round it is */
+.still, .walk {
+  --s: max(100vw, 100svh);
+  position: absolute; width: var(--s); height: var(--s); max-width: none;
+  left: calc(50% - var(--s) / 2); top: calc(50% - var(--s) / 2);
+  object-fit: cover; opacity: 0; transition: opacity 0.45s ease; user-select: none; -webkit-user-drag: none;
 }
+/* Wide screens: the panels run down the left, so the render fills the open area to their
+   right, sized to keep most of its height in view, and fades out behind the panels */
+@media (min-width: 900px) and (min-aspect-ratio: 1/1) {
+  .still, .walk {
+    --s: max(72vw, 115svh); left: calc(100% - var(--s));
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 24%);
+    mask-image: linear-gradient(to right, transparent, #000 24%);
+  }
+  body.is-exploring .still, body.is-exploring .walk {
+    --s: max(100vw, 100svh); left: calc(50% - var(--s) / 2); -webkit-mask-image: none; mask-image: none;
+  }
+}
+.still.is-on { opacity: 1; }
+.walk { z-index: 1; transition-duration: 0.28s; pointer-events: none; }
+.walk.is-on { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .still, .walk { transition: none; } }
 
 .progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 30; background: rgba(23,22,20,0.08); }
 .progress i { display: block; height: 100%; width: 0; background: var(--accent-ink); transition: width 0.3s var(--ease); }
 
-/* A style that's a photo rather than a model: framed in the space the room would fill */
+/* A style that's a photo rather than a render: framed over its spot in the house */
 .photo {
   position: fixed; z-index: 2; margin: 0; left: 50%; transform: translateX(-50%);
   top: calc(1.2rem + env(safe-area-inset-top)); width: min(78vw, 26rem);

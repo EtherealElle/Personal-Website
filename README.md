@@ -161,14 +161,20 @@ heart on an ink tile would match; ask when you want that done.
 
 ## Design quiz
 
-**It's a walk through a 3D house.** `/quiz` is one long page over a live 3D scene: each
-question is a room, and as the client scrolls, the camera glides into the next one.
-Tapping a style rebuilds that room with it in place. At the end, **Walk through your
-picks** lets them drag to look around each room and jump between rooms, with every
-choice they made in it. The rooms are built in the browser by the same code that makes
-the renders (`scripts/quiz-render/`), and on a phone with smaller textures and shadows.
-Phones without WebGL are sent to **`/quiz-classic`**, the same quiz as flat cards, with
-the same link. The code is `js/quiz3d.js` and `css/quiz3d.css`.
+**It's a walk through one house.** `/quiz` is one long page over a photoreal house,
+rendered in Blender: a porch out front, a living room, dining room and hall inside, a
+deck and yard out back. Every question has its spot in it. As the client scrolls, the
+camera **walks** from one spot to the next &mdash; up the steps, through the front door,
+down the hall, out onto the deck &mdash; and tapping a style changes it in place. At the
+end, **Walk through your picks** lets them drag to look around each spot and tap to walk
+between them, with every choice they made in it.
+
+Questions are always visited in the house's order (street to back yard), whatever order
+the link lists them in, so every move is a walk to a neighbour. A question added in
+Pages CMS that the house doesn't have a spot for still works: its styles are shown as
+framed photos. If anything fails to load, the page offers **`/quiz-classic`**, the same
+quiz as simple cards, with the same link. The code is `js/quiz-house.js` and
+`css/quiz-house.css`; what it shows is listed in `data/house.json`.
 
 `quiz.html` asks a client how they want the details built: one question per screen, a
 board of styles, tap the one you like. It is **not linked from the site** and carries a
@@ -227,37 +233,54 @@ The catalog is `data/quiz.json`, and it's editable in **Pages CMS under Design q
   client's room records where it was taken.
 - Don't change a **Link name** once a link using it has gone out.
 
-### The renders
+### The renders: `scripts/house/`
 
-Every built-in style is a 3D render, not a photo. Four photos of four different houses
+Every built-in style is a render, not a photo. Four photos of four different houses
 would differ in wall colour, window size and light, so the client would be choosing a
-room rather than a detail. Within a question these are the same room, the same light and
-the same lens, and only the thing being asked about changes.
+room rather than a detail. Here it's always the same house in the same afternoon light,
+and only the thing being asked about changes.
 
-They're built from real dimensions in inches &mdash; casings swept from actual moulding
-profiles with mitred corners, crown meeting in an inside corner, baseboards turning an
-outside corner so the profile shows end-on &mdash; then lit with a raking light and
-ambient occlusion and rendered in headless Chrome:
+The house is built by script in **Blender** (5.2, Cycles on the GPU) from real
+dimensions in inches. The joinery &mdash; casings, doors, wainscoting, built-ins, mantels
+&mdash; is the same geometry as before, exported from the old three.js builders in
+`scripts/quiz-render/`; baseboard and crown run round every wall of the rooms with true
+mitres; the porch, deck, railing, fence and hardware are built directly. Floors, brick,
+slate, roofing, grass, trees and furniture are free CC0 assets from
+[Poly Haven](https://polyhaven.com), and the light is a real sky (HDRI) coming in through
+the windows.
 
 ```
-node scripts/quiz-render/render.mjs              # everything
-node scripts/quiz-render/render.mjs trim doors   # some questions
-node scripts/quiz-render/render.mjs trim/22      # one style
+python scripts/house/fetch_assets.py                     # Poly Haven assets, ~250 MB, to ~/Tools/house-assets
+node scripts/quiz-render/export.mjs ~/Tools/house-export trim doors panel builtin mantel
+blender -b --factory-startup --python scripts/house/build.py -- house.blend
+blender -b house.blend --python scripts/house/render.py -- preview            # quick look at every spot
+blender -b house.blend --python scripts/house/render.py -- stills             # every style, 2048px
+blender -b house.blend --python scripts/house/render.py -- clips              # the walks, as frames
+blender -b --factory-startup --python scripts/house/encode.py -- <frames> <videos>
+python scripts/house/publish.py <stills> <videos>
 ```
 
-Each style is written as `images/quiz/<question>/<style>.webp` (1000&times;1250) and
-`<style>-sm.webp` (500&times;625). The scenes are in `scripts/quiz-render/scenes.js`, one
-builder per question; shared geometry, materials and textures are in `lib.js`. Adding a
-rendered style means a few lines in its builder, a render, and an entry in
-`data/quiz.json`. Needs Chrome and a network connection for three.js, which is pinned in
-`render.html`.
+- `stations.py` is where the camera stands for each question, the route through the
+  house, and the doorways each walk passes through.
+- `render.py stills trim/22` renders one style; `stills trim` one question.
+- `publish.py` writes `images/house/<question>/<style>.webp` (the square stage),
+  `images/house/walk/*.mp4` (each walk, forwards and backwards), and the 4:5
+  `images/quiz/<question>/<style>.webp` and `-sm.webp` the card quiz, the builder and
+  the style chips use &mdash; all cropped from the same render. `data/house.json` lists
+  them with a fingerprint each, so a re-render is never hidden behind a cached copy.
+- Only the finished images and videos are committed; the assets, the `.blend` and the
+  raw frames stay on your machine.
+
+Adding a rendered style: add it to its builder (or `build.py`), list it in `BUILT` in
+`stations.py`, add it to `data/quiz.json`, then build, `stills <question>`, publish.
 
 ### Removing it
 
-Delete `quiz.html`, `quiz-builder.html`, `css/quiz.css`, `js/quiz.js`,
-`js/quiz-builder.js`, `js/quiz-core.js`, `data/quiz.json`, `images/quiz/` and
-`scripts/quiz-render/`, and the `quiz` entries in `.pages.yml`. Nothing else refers to
-them.
+Delete `quiz.html`, `quiz-classic.html`, `quiz-builder.html`, `css/quiz.css`,
+`css/quiz-house.css`, `js/quiz.js`, `js/quiz-house.js`, `js/quiz-builder.js`,
+`js/quiz-core.js`, `data/quiz.json`, `data/house.json`, `images/quiz/`, `images/house/`,
+`scripts/quiz-render/` and `scripts/house/`, and the `quiz` entries in `.pages.yml`.
+Nothing else refers to them.
 
 It is separate from `/picks`, which is a head-to-head tournament for narrowing a long
 list of photos. Use the quiz for "which of these styles", and picks for "which of these
